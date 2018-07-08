@@ -1,10 +1,26 @@
-sol = []
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
+class Solution:
+    def zigzagLevelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        sol = []
+        if not root:
+            return sol
+        
         queue = []
         current_index = 0
         next_index = 1
         queue.append(root)
-
+        flag = False
+        
         while (next_index - current_index != 0):
             intermediate_sol = []
             tmp = next_index
@@ -21,6 +37,12 @@ sol = []
                     tmp += 1
             current_index = next_index
             next_index = tmp
+            if flag:
+                intermediate_sol.reverse()
+                flag = False
+            else:
+                flag = True
             print(intermediate_sol)
             sol.append(intermediate_sol)
+            
         return sol
