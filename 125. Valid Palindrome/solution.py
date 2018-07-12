@@ -7,30 +7,13 @@ class Solution:
         if not s:
             return True
         s = s.lower()
+        alnums = "abcdefghijklmnopqrstuvwxyz0123456789"
+        
+        string = "".join([t for t in s if t in alnums])
         i = 0
-        j = len(s) - 1
+        j = len(string) -1
         
-        while i < j:
-            if not self.isAlnum(s[i]):
-                i += 1
-                continue
-
-            if not self.isAlnum(s[j]):
-                j -= 1
-                continue
-            else:
-                if s[i] != s[j]:
-                    return False
-                else:
-                    i += 1
-                    j -= 1
-                
-        return True
-            
-        
-    def isAlnum(self, c):
-        o = ord(c)
-        if 90 >= o >= 65 or 122 >= o >= 97 or 57 >= o >= 48:
+        if string == string[::-1]:
             return True
         else:
             return False
