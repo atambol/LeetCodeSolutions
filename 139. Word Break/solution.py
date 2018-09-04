@@ -30,6 +30,3 @@ class Solution:
             return False
                     
         return backtracker()
-                    
-            
-        
