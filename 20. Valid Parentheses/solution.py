@@ -1,32 +1,27 @@
-class Solution:
+class Solution(object):
     def isValid(self, s):
         """
         :type s: str
         :rtype: bool
         """
-        from collections import deque
-        closing = "]})"
-        opening = "[({"
-        bracket = {
-            "[": "]",
+        stack = []
+        map = {
             "{": "}",
+            "[": "]",
             "(": ")"
-              }
-        d = deque()
-        for i in s:
-            if i in opening:
-                d.append(i)
-            elif i in closing:
-                try:
-                    j = d.pop()
-                    if i != bracket[j]:
-                        return False
-                except IndexError:
+        }
+        for i in range(len(s)):
+            if s[i] in "{([":
+                stack.append(s[i])
+            else:
+                if not stack:
                     return False
-        if len(d) > 0:
+                if map[stack[-1]] == s[i]:
+                    stack.pop()
+                else:
+                    return False
+        
+        if stack:
             return False
         else:
             return True
-                
-                
-        
