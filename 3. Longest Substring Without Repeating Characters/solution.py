@@ -4,14 +4,21 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        sol = ""
-        prevsol = ''
-        for x in s:
-            if x not in sol:
-                sol += x
+        i = 0
+        longestSubstringLength = -1
+        seen = {}
+        while i < len(s):
+            if s[i] in seen:
+                if len(seen.keys()) > longestSubstringLength:
+                    longestSubstringLength = len(seen.keys())
+                    
+                i = seen[s[i]] + 1
+                seen = {}
             else:
-                if len(sol) > len(prevsol):
-                    prevsol = sol
-                index_of_repeat = sol.index(x)
-                sol = sol[index_of_repeat+1:] + x
-        return max(len(prevsol), len(sol))
+                seen[s[i]] = i
+                i += 1
+        
+        if len(seen.keys()) > longestSubstringLength:
+            longestSubstringLength = len(seen.keys())
+            
+        return longestSubstringLength
