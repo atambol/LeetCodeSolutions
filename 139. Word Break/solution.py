@@ -1,32 +1,35 @@
-class Solution:
+class Solution(object):
     def wordBreak(self, s, wordDict):
         """
         :type s: str
         :type wordDict: List[str]
         :rtype: bool
         """
+        # print(s)
+        memo = set()
+        return self.memoWordBreak(s, wordDict, memo)
+        
 
-        if not s:
-            return False
-        l = len(s)
-        memo = [True]*l
-        wordDict = set(wordDict)
-        def backtracker(start = 0):
-            i = start+1
-            while i <= l:
-                if s[start:i] in wordDict:
-                    if i == l:
-                        return True
+    def memoWordBreak(self, s, wordDict, memo):
+        """
+        :type s: str
+        :type wordDict: List[str]
+        :type memo: set
+        :rtype: bool
+        """
+        for i in range(1, len(s)+1):
+            if s[:i] in wordDict:
+                if i == len(s):
+                    return True
+                else:
+                    index = len(s) + 1 - i
+                    if index in memo:
+                        continue
                     else:
-                        if memo[i]:
-                            res = backtracker(i)
-                            if res == True:
-                                return True
-                            else:
-                                memo[i] = False
+                        if self.memoWordBreak(s[i:], wordDict, memo):
+                            return True
                         else:
-                            pass
-                i+=1
-            return False
+                            memo.add(index)
                     
-        return backtracker()
+        return False
+              
