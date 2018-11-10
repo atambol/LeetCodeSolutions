@@ -1,21 +1,22 @@
-class Solution(object):
-    def dailyTemperatures(self, temperatures):
+class Solution:
+    def dailyTemperatures(self, T):
         """
-        :type temperatures: List[int]
+        :type T: List[int]
         :rtype: List[int]
         """
-        hash = {}
         stack = []
-        res = [0]*len(temperatures)
-        for i in range(len(temperatures)-1, -1, -1): 
-            while stack and stack[-1] <= temperatures[i]:
+        sol = []
+        for i in range(len(T)-1, -1, -1):
+            while stack and T[stack[-1]] <= T[i]:
                 stack.pop()
 
             if stack:
-                res[i] = hash[stack[-1]] - i
-            # else:
-            #     res[i] = 0
-            hash[temperatures[i]] = i
-            stack.append(temperatures[i])
-            # print(i, stack, hash)
-        return res
+                sol.append(stack[-1] - i)
+            else:
+                sol.append(0)
+                
+            stack.append(i)
+        sol.reverse()
+        return sol
+                
+        
