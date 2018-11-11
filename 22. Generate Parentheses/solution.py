@@ -4,14 +4,19 @@ class Solution:
         :type n: int
         :rtype: List[str]
         """
-        res = []
-        def backtracker(string = "", left = 0, right = 0):
-            if len(string) == 2*n:
-                res.append(string)
-                return
-            if left < n:
-                backtracker(string+"(", left+1, right)
-            if right < left:
-                backtracker(string+")", left, right+1)
-        backtracker()
-        return res
+        if n == 0:
+            return []
+        elif n == 1:
+            return ["()"]
+        else:
+            sol = ["()"]
+            for i in range(1, n):
+                tmp = set()
+                for s in sol:
+                    for j in range(len(s)):
+                        tmp.add(s[:j] + "()" + s[j:])
+                sol = list(tmp)
+                
+            return sol
+        
+            
