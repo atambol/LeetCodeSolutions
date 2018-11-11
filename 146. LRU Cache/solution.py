@@ -1,10 +1,32 @@
 class Node:
-    def __init__(self, key, val):
+    def __init__(self, key=None, value=None):
         self.key = key
-        self.val = val
+        self.value = value
+        self.prev = None
+        self.next = None
+    
+    # remove least recently used node
+    def remove(self):
+        self.next.prev = self.prev
+        self.prev.next = self.next
         self.next = None
         self.prev = None
-
+    
+    # insert a new node
+    def insert(self, nxt, prev):
+        self.next = nxt
+        nxt.prev = self
+        self.prev = prev
+        prev.next = self
+    
+    # update the node to most recent node
+    def update(self, head):
+        self.next.prev = self.prev
+        self.prev.next = self.next
+        self.next = head
+        self.prev = head.prev
+        head.prev = self
+        self.prev.next = self
         
 class LRUCache:
     def __init__(self, capacity):
@@ -12,37 +34,26 @@ class LRUCache:
         :type capacity: int
         """
         self.capacity = capacity
-        self.len = 0
-        self.head = Node(None, None)
-        self.tail = Node(None, None)
-        self.head.next = self.tail
-        self.tail.prev = self.head
-        self.map = {}
         
-        
-    def display(self):
-        node = self.head
-        while (node != self.tail):
-            print(node.val)
-            node = node.next
+        self.KeyNotFound = -1
+        self.head = Node()
+        self.tail = Node()
+        self.head.prev = self.tail
+        self.tail.next = self.head
+        self.records = {}
         
     def get(self, key):
         """
         :type key: int
         :rtype: int
         """
-        # self.display()
-        try:
-            node = self.map[key]
-            node.prev.next, node.next.prev = node.next, node.prev
-            node.next = self.head.next
-            node.prev = self.head
-            self.head.next = node
-            node.next.prev = node
-            return node.val
-        except KeyError:
-            return -1
-        
+        if key in self.records:
+            node = self.records[key]
+            # update the node as most recently used
+            node.update(self.head)
+            return node.value
+        else:
+            return self.KeyNotFound
 
     def put(self, key, value):
         """
@@ -50,31 +61,27 @@ class LRUCache:
         :type value: int
         :rtype: void
         """
-        # self.display()
-        try:
-            node = self.map[key]
-            node.val = value
-            node.prev.next, node.next.prev = node.next, node.prev
-            node.next = self.head.next
-            node.prev = self.head
-            self.head.next = node
-            node.next.prev = node
-        except KeyError:
-            if self.len < self.capacity:
-                self.len += 1
-            else:
-                node = self.tail.prev
-                self.tail.prev = node.prev
-                node.prev.next = self.tail
-                del self.map[node.key]
+        # check if the key already exists
+        if key in self.records:
+            node = self.records[key]
+            node.value = value
+            node.update(self.head)
+            
+        else:
+            # if the capacity of the cache is reached
+            if len(self.records) == self.capacity:
+                # remove the least recently used node
+                node = self.tail.next
+                self.records.pop(node.key, None)
+                node.remove()
 
+            # Create a new node
             node = Node(key, value)
-            node.prev = self.head
-            node.next = self.head.next
-            self.head.next = node
-            node.next.prev = node
-            self.map[key] = node
+            self.records[key] = node
 
+            # insert the new node next to head
+            node.insert(self.head, self.head.prev)
+            
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
 # param_1 = obj.get(key)
