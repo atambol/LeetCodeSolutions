@@ -1,4 +1,4 @@
-class Solution(object):
+class Solution:
     def searchMatrix(self, matrix, target):
         """
         :type matrix: List[List[int]]
@@ -8,17 +8,16 @@ class Solution(object):
         if not matrix:
             return False
         
-        ncol = len(matrix[0])
-        i = len(matrix)-1
-        j = 0
+        i = 0
+        j = len(matrix[i]) - 1
         
-        while i >= 0 and j < ncol:
+        while i < len(matrix) and j >= 0:
             if matrix[i][j] == target:
                 return True
-            elif matrix[i][j] < target:
-                j+=1
+            elif matrix[i][j] > target:
+                j -= 1
             else:
-                i-=1
+                i += 1
                 
         return False
-        
+                
