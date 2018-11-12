@@ -4,34 +4,30 @@ class Solution:
         :type s: str
         :rtype: List[str]
         """
-        permutations = self.getPermutations(s)
-        validIPs = []
-        for p in permutations:
-            validIP = True
-            for n in p:
-                if int(n) > 255:
-                    validIP = False
-                    break
-            if validIP:
-                validIPs.append(".".join(p))
-        return validIPs
-
-    def getPermutations(self, s):
-        permutations = []
-        for i in range(1, 4):
-            for j in range(1, 4):
-                for k in range(1, 4):
-                    if i+j+k >= len(s):
-                        continue
-                    p = [s[:i], s[i:i+j], s[i+j:i+j+k], s[i+j+k:]]
-                    skip = False
-                    for n in p:
-                        if n.startswith("0") and not n == "0":
-                            skip = True
-                            break
-                    if not skip:
-                        permutations.append(p)
-        # print(permutations)
-        return permutations
-                
         
+        sol = []
+        if not s:
+            return sol
+        
+        l = len(s)
+        for i in range(0, l):
+            if not s[:i+1] or int(s[:i+1]) > 255 or (s[:i+1][0] == "0" and len(s[:i+1]) > 1):
+                break
+            else:
+                for j in range(i+1, l):
+                    if not s[i+1:j+1] or int(s[i+1:j+1]) > 255 or (s[i+1:j+1][0] == "0" and len(s[i+1:j+1]) > 1):
+                        break
+                    else:
+                        for k in range(j+1, l):
+                            if not s[j+1:k+1] or int(s[j+1:k+1]) > 255 or (s[j+1:k+1][0] == "0" and len(s[j+1:k+1]) > 1):
+                                break
+                            else:
+                                if not s[k+1:] or int(s[k+1:]) > 255 or (s[k+1:][0] == "0" and len(s[k+1:]) > 1):
+                                    pass
+                                else:
+                                    ip = s[:i+1] + "." +\
+                                         s[i+1:j+1] + "." +\
+                                         s[j+1:k+1] + "." +\
+                                         s[k+1:]
+                                    sol.append(ip)
+        return sol
