@@ -1,34 +1,42 @@
-from collections import defaultdict
-
-class Solution(object):
+class Solution:
     def threeSum(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        res = []
-        added = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: False)))
-        l = len(nums)
-        if l < 3:
-            return res
-        
+        # sort and initialize seen set to not repeat the first element
         nums.sort()
-        repeat_count = defaultdict(lambda: 0)
-        for i in range(0, l-2):
-            if repeat_count[nums[i]] >= 3:
+        seen = set()
+        
+        # repeat contains string representations of previously added solutions
+        repeat = set()
+        
+        # final solution
+        sol = list()
+        
+        # Loop to get the first element
+        for i in range(len(nums)):
+            if nums[i] in seen:
                 continue
             else:
-                repeat_count[nums[i]] += 1
+                seen.add(nums[i])
+                
+            # Complement array stores previously seen elements in 2 sum
+            complement = set()
+            
+            # begin 2sum
+            for j in range(i+1, len(nums)):
+                target = (nums[i] + nums[j]) * -1
 
-            sum = 0 - nums[i]
-            seen = set()
-
-            for j in range(i+1, l):
-                complement = sum - nums[j]
-                if complement in seen:
-                    if not added[nums[i]][complement][nums[j]]:
-                        res.append([nums[i], complement, nums[j]])
-                        added[nums[i]][complement][nums[j]] = True
-                seen.add(nums[j])
-
-        return res
+                if target in complement:
+                    key = "{},{},{}".format(nums[i], target, nums[j])
+                    if key in repeat:
+                        continue
+                    else:
+                        repeat.add(key)
+                        sol.append([nums[i], target, nums[j]])
+                    
+                complement.add(nums[j])
+                    
+        return sol
+                    
