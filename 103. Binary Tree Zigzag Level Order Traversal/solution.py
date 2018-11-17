@@ -11,38 +11,36 @@ class Solution:
         :type root: TreeNode
         :rtype: List[List[int]]
         """
-        sol = []
-        if not root:
-            return sol
-        
         queue = []
-        current_index = 0
-        next_index = 1
-        queue.append(root)
-        flag = False
+        sol = []
+        rev = False
         
-        while (next_index - current_index != 0):
-            intermediate_sol = []
-            tmp = next_index
-            for i in range(current_index, next_index):
-                if not queue[i]:
-                    continue
-                intermediate_sol.append(queue[i].val)
-                if queue[i].left != None:
-                    queue.append(queue[i].left)
-                    tmp += 1
-
-                if queue[i].right != None:
-                    queue.append(queue[i].right)
-                    tmp += 1
-            current_index = next_index
-            next_index = tmp
-            if flag:
-                intermediate_sol.reverse()
-                flag = False
-            else:
-                flag = True
-            print(intermediate_sol)
-            sol.append(intermediate_sol)
+        if root:
+            queue.append(root)
             
+            while queue:
+                newQueue = []
+                levelSol = []
+                
+                # visit every node in current queue
+                for node in queue:
+                    # Add its value to solution and append its children for next level
+                    levelSol.append(node.val)
+                    if node.left:
+                        newQueue.append(node.left)
+                    if node.right:
+                        newQueue.append(node.right)
+
+                # reverse the solution to form zig zag
+                if levelSol:
+                    if rev:
+                        sol.append(levelSol[::-1])
+                        rev = False
+                    else:    
+                        sol.append(levelSol)
+                        rev = True
+                
+                # update queue for next order
+                queue = newQueue
+                    
         return sol
