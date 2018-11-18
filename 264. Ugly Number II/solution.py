@@ -14,9 +14,6 @@ class Solution:
         # maintain the ugly array
         uglies = [1]
         
-        # maintain the ugly set to check for duplicates
-        uglySet = set(uglies)
-        
         while n > 1:
             # get the smallest ugly number
             ugly = min(uglies[n1]*2, uglies[n2]*3, uglies[n3]*5)
@@ -30,11 +27,9 @@ class Solution:
                 n3 += 1
             
             # append it only if not a duplicate
-            if ugly not in uglySet:
+            if ugly != uglies[-1]:
                 uglies.append(ugly)
                 n -= 1
-                uglySet.add(ugly)
-                
-        # print(uglies)
+
         return uglies[-1]
                 
