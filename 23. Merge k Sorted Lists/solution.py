@@ -1,37 +1,38 @@
 # Definition for singly-linked list.
-# class ListNode:
+# class ListNode(object):
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
 
-class Solution:
+class Solution(object):
     def mergeKLists(self, lists):
         """
         :type lists: List[ListNode]
         :rtype: ListNode
         """
+        '''
+        This solution picks the node with least val from the top of each list and appends that to a new list. This solution takes a very long time.
+        '''
         head = ListNode(None)
+        node = head
+        listEmpty = False
         
-        res = head
-        l = len(lists)
-        while True:
-            smallest_i = None
-            for i in range(l):
-                if lists[i]:
-                    if smallest_i != None:
-                        if lists[smallest_i].val > lists[i].val:
-                            smallest_i = i
-                    else:
-                        smallest_i = i
-      
-            if smallest_i == None:
-                break
-            else:
-                res.next = lists[smallest_i]
-                lists[smallest_i] = lists[smallest_i].next
-                res = res.next
-                res.next = None
+        while not listEmpty:
+            n = -1
+            leastVal = sys.maxsize
             
+            for i in range(len(lists)):
+                if lists[i] and lists[i].val < leastVal:
+                    n = i
+                    leastVal = lists[i].val
+            
+            if n == -1:
+                listEmpty = True
+            else:
+                node.next = lists[n]
+                lists[n] = lists[n].next
+                node = node.next
+                node.next = None
+                
         return head.next
-
-        
+            
