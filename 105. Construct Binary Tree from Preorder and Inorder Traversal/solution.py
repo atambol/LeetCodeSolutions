@@ -12,20 +12,18 @@ class Solution:
         :type inorder: List[int]
         :rtype: TreeNode
         """
-
-        if not preorder:
+        # edge cases
+        if not inorder:
             return None
-
-        root = TreeNode(preorder[0]) 
-        index = self.getIndex(inorder, root.val)
-        root.left = self.buildTree(preorder[1:index+1], inorder[0:index])
-        root.right = self.buildTree(preorder[index+1:], inorder[index+1:])
+        
+        # the first node in preorder is root and obtain its index of in inorder
+        root = TreeNode(preorder[0])
+        indexOfRoot = inorder.index(root.val)
+        
+        # get the length of inorder and preorder array to operate on for left and right subtree
+        root.left = self.buildTree(preorder[1:1+indexOfRoot], inorder[:indexOfRoot])
+        root.right = self.buildTree(preorder[1+indexOfRoot:], inorder[indexOfRoot+1:])
+        
+        # return the root
         return root
-    
-    def getIndex(self, inorder, val):
-        if inorder == None:
-            return -1
-        for i in range(len(inorder)):
-            if inorder[i] == val:
-                return i
-        return -1
+        
