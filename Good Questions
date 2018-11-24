@@ -36,6 +36,7 @@ String/Array
 240. Search a 2D Matrix II
 15. 3Sum
 11. Container With Most Water
+692. Top K Frequent Words  -- look for custom comparator on multiple fields while sorting
 
 Dynamic Programming
 139. Word Break
