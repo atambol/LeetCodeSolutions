@@ -11,14 +11,19 @@ class Solution:
         :type root: TreeNode
         :rtype: int
         """
+        # edge case
         if not root:
             return 0
         
-        if root.right and root.left:
-            return 1 + min(self.minDepth(root.right), self.minDepth(root.left))
-        elif root.right and not root.left:
-            return 1 + self.minDepth(root.right)
-        elif root.left and not root.right:
-            return 1 + self.minDepth(root.left)
+        # get depth of children and pass on the min depth
+        left = self.minDepth(root.left)
+        right = self.minDepth(root.right)
+        if right and left:
+            return 1 + min(right, left)
+        elif not right:
+            return 1 + left
+        elif not left:
+            return 1 + right
         else:
             return 1
+        
