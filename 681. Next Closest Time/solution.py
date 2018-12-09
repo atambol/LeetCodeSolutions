@@ -1,65 +1,48 @@
-class Solution:
+class Solution(object):
+    def __init__(self):
+        self.map = None
+        
     def nextClosestTime(self, time):
         """
         :type time: str
         :rtype: str
         """
-        time_str = time[0] + time[1] + time[3] + time[4]
-        time_int = [int(x) for x in time_str]
-        time = self.get_next_time(time_int)
-        for t in time:
-            valid, f_t = self.validate_time(t)
-            if valid:
-                return f_t
-        
-    def get_next_time(self, time):
-        """
-        :returns an int time
-        """
-        next_number = self.get_next_number(time)
-        min_number = min(time)
-        l = len(time)
-        while True:
-            for i in range(l-1, -1, -1):
-                time[i] = next_number[time[i]]
-                if time[i] != min_number:
-                    break
+        self.map = self.getMap(time)
+        digits = [int(time[0]), int(time[1]), int(time[3]), int(time[4])]
+        digits = self.getNext(digits)
+        while not self.isValid(digits):
+            print(digits)
+            digits = self.getNext(digits)
             
-            rval = 0
-            for i in range(l):
-                rval = rval*10 + time[i]
-            yield rval
+        return "{}{}:{}{}".format(digits[0], digits[1], digits[2], digits[3])
         
-        
-    def get_next_number(self, numbers_int):
-        nums = sorted(numbers_int)
-        next_number = {}
-        for i in range(len(nums)-1):
-            next_number[nums[i]] = nums[i+1]
+    # get the cyclic clock for the given digits
+    def getMap(self, time):
+        time = set([int(time[0]), int(time[1]), int(time[3]), int(time[4])])
+        digits = sorted(list(time))
+        map = {}
+        l = len(digits)
+        for i, digit in enumerate(digits):
+            map[digit] = digits[(i+1)%l]
             
-        next_number[nums[len(nums)-1]] = nums[0]
-        return next_number
+        return map
     
-    def validate_time(self, time):
-        hours = int(time/100)
-        minutes = time%100
-        if hours < 24 and minutes < 60:
-            # return True, str(hours) + ":" + str(minutes)
-            if hours == 0:
-                h = "00"
-            elif hours < 10:
-                h = "0" + str(hours)
+    # check for time to be valid
+    def isValid(self, digits):
+        hours = digits[0]*10 + digits[1]
+        minutes = digits[2]*10 + digits[3]
+        return hours < 24 and minutes < 60
+    
+    # get the next time
+    def getNext(self, digits):
+        newDigits = []
+        carry = True
+        for digit in digits[::-1]:
+            if carry:
+                newDigits.append(self.map[digit])
+                if self.map[digit] > digit:
+                    carry = False
             else:
-                h = str(hours)
+                newDigits.append(digit)
                 
-            if minutes == 0:
-                m = "00"
-            elif minutes < 10:
-                m = "0" + str(minutes)
-            else:
-                m = str(minutes)
-            return True, h + ":" + m
-        else:
-            return False, ""
-        
-        
+        return newDigits[::-1]
