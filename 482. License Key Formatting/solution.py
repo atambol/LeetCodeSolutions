@@ -1,24 +1,31 @@
-class Solution:
+class Solution(object):
     def licenseKeyFormatting(self, S, K):
         """
         :type S: str
         :type K: int
         :rtype: str
         """
-        strings = []
+        sol = []
         count = 0
-        for s in S[::-1]:
-            if s == "-":
+        for i in range(len(S)-1, -1, -1):
+            s = S[i]
+            if s == '-':
                 continue
-            if count and count % K == 0:
-                strings.append("-")
-            asci = ord(s)
-            if asci >= 97:
-                strings.append(chr(asci - 32))
+            elif 48 <= ord(s) <= 57:
+                sol.append(s)
+                count += 1
+            elif 97 <= ord(s) <= 122:
+                sol.append(chr(ord(s)-32))
+                count += 1
             else:
-                strings.append(s)
-                
-            count+=1
+                sol.append(s)
+                count += 1
+            if count != 0 and count%K == 0:
+                sol.append("-")
 
-        return "".join(strings[::-1])
-                
+        if sol and sol[-1] == '-':
+            sol = sol[:-1]
+        
+        return "".join(sol[::-1])
+            
+        
