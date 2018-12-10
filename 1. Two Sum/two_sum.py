@@ -1,18 +1,13 @@
-class Solution:
+class Solution(object):
     def twoSum(self, nums, target):
         """
         :type nums: List[int]
         :type target: int
         :rtype: List[int]
         """
-        numtab = {}
-        for i, num1 in enumerate(nums):
-            try:
-                num2 = target - num1
-                if numtab[num2] >= 0:
-                    return [numtab[num2], i]
-            except KeyError as e:
-                numtab[num1] = i
-
-            
-        return []
+        complement = {}
+        for pos, num in enumerate(nums):
+            if target - num in complement:
+                return [complement[target - num], pos]
+            else:
+                complement[num] = pos
