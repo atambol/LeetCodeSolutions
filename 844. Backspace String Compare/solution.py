@@ -12,7 +12,6 @@ class Solution(object):
         
         equal = True
         while equal:
-            print(S[s], T[t])
             if s >= 0:
                 if S[s] == "#":
                     s -= 1
