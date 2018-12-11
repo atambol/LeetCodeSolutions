@@ -26,7 +26,7 @@ Graph
 Stack
 402. Remove K Digits
 
-String/Array
+Array
 3. Longest Substring Without Repeating Characters
 5. Longest Palindromic Substring
 22. Generate Parentheses
@@ -39,6 +39,7 @@ String/Array
 15. 3Sum
 11. Container With Most Water
 692. Top K Frequent Words  -- 1)look for custom comparator on multiple fields while sorting and 2) solution using heap
+489. Robot Room Cleaner
 
 Dynamic Programming
 139. Word Break
