@@ -11,19 +11,11 @@ class Solution:
             return max(nums)
         
         # loot will be calculated bottom up using dynamic programming
-        loot = [0]*len(nums)
+        loot1 = 0 # loot one cell behind
+        loot2 = 0 # loot two cells behind
         for i in range(len(nums)):
-            if i - 2 >= 0:
-                loot1 = loot[i-2]
-            else:
-                loot1 = 0
+            loot = max(loot1, nums[i] + loot2)
+            loot2, loot1 = loot1, loot
             
-            if i - 3 >= 0:
-                loot2 = loot[i-3]
-            else:
-                loot2 = 0                
-                
-            loot[i] = max(nums[i] + loot1, nums[i] + loot2)
-            
-        return max(loot[-1], loot[-2])
+        return loot1
         
