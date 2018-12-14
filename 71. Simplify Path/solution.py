@@ -4,17 +4,16 @@ class Solution:
         :type path: str
         :rtype: str
         """
-        vars = path.split("/")
-        useless_operations = ["", "."]
-        solution = []
-        for var in vars:
-            if var not in useless_operations:
-                if var == '..':
-                    try:
-                        solution.pop()
-                    except IndexError:
-                        continue
-                else:
-                    solution.append(var)
-                    
-        return "/" + "/".join(solution)
+        pathSplit = path.split("/")
+        stack = []
+        for p in pathSplit:
+            if not p or p == ".":
+                continue
+            elif p == "..":
+                if stack:
+                    stack.pop()
+            else:
+                stack.append(p)
+                
+        return "/" + "/".join(stack)
+                
