@@ -48,7 +48,8 @@
 - [ ] 692. Top K Frequent Words  -- 1)look for custom comparator on multiple fields while sorting and 2) solution using heap
 - [ ] 489. Robot Room Cleaner
 - [ ] 724. Find Pivot Index
-- [ ] 713. Subarray Product Less Than K/
+- [ ] 713. Subarray Product Less Than K
+- [x] 54. Spiral Matrix
 
 ## Dynamic Programming
 - [ ] 139. Word Break
