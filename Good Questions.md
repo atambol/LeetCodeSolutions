@@ -28,6 +28,7 @@
 - [ ] 133. Clone Graph
 - [ ] 399. Evaluate Division
 - [ ] 261. Graph Valid Tree
+- [x] 863. All Nodes Distance K in Binary Tree
 
 ## Stack
 - [ ] 402. Remove K Digits
