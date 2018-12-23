@@ -1,7 +1,7 @@
 ## Trees
 - [x] 669. Trim a Binary Search Tree
 - [x] 663. Equal Tree Partition
-- [ ] 230. Kth Smallest Element in a BST
+- [x] 230. Kth Smallest Element in a BST
 - [ ] 124. Binary Tree Maximum Path Sum
 - [ ] 776. Split BST
 - [x] 450. Delete Node in a BST
