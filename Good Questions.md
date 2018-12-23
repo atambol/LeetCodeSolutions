@@ -1,4 +1,4 @@
-Trees
+## Trees
 ~~669. Trim a Binary Search Tree~~
 ~~663. Equal Tree Partition~~
 230. Kth Smallest Element in a BST
@@ -14,7 +14,7 @@ Trees
 250. Count Univalue Subtrees
 545. Boundary of Binary Tree
 
-Linked list
+## Linked list
 2. Add Two Numbers
 19. Remove Nth Node From End of List
 92. Reverse Linked List II
@@ -22,17 +22,17 @@ Linked list
 142. Linked List Cycle II
 234. Palindrome Linked List
 
-Graph
+## Graph
 210. Course Schedule II
 547. Friend Circles
 133. Clone Graph
 399. Evaluate Division
 261. Graph Valid Tree
 
-Stack
+## Stack
 402. Remove K Digits
 
-Array
+## Array
 3. Longest Substring Without Repeating Characters
 5. Longest Palindromic Substring
 22. Generate Parentheses
@@ -49,7 +49,7 @@ Array
 724. Find Pivot Index
 713. Subarray Product Less Than K/
 
-Dynamic Programming
+## Dynamic Programming
 139. Word Break
 322. Coin Change
 53. Maximum Subarray
@@ -61,8 +61,8 @@ Dynamic Programming
 264. Ugly Number II
 213. House Robber II
 
-Heap
+## Heap
 703. Kth Largest Element in a Stream
 
-Design
+## Design
 362. Design Hit Counter
