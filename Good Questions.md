@@ -2,7 +2,7 @@
 - [x] 669. Trim a Binary Search Tree
 - [x] 663. Equal Tree Partition
 - [x] 230. Kth Smallest Element in a BST
-- [ ] 124. Binary Tree Maximum Path Sum
+- [x] 124. Binary Tree Maximum Path Sum
 - [ ] 776. Split BST
 - [x] 450. Delete Node in a BST
 - [ ] 145. Binary Tree Postorder Traversal - iterative method
