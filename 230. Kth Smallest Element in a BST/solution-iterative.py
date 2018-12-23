@@ -12,25 +12,21 @@ class Solution:
         :type k: int
         :rtype: int
         """
-        visited = []
+        # perform inorder traversal
         stack = []
         node = root
-        
-        # Use inorder traversal
         while node or stack:
-            # break if the kth element is found
-            if len(visited) == k:
-                break
             if node:
-                # check left
                 stack.append(node)
                 node = node.left
             else:
-                # check self
                 node = stack.pop()
-                visited.append(node.val)
+                # decrement the count
+                k -= 1
                 
-                # check right
+                # the kth node is found when k = 0
+                if not k:
+                    return node.val
+                
+                # keep searching
                 node = node.right
-        
-        return visited[-1]
