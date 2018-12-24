@@ -10,7 +10,7 @@
 - [ ] 285. Inorder Successor in BST
 - [x] 449. Serialize and Deserialize BST
 - [x] 297. Serialize and Deserialize Binary Tree
-- [ ] 404. Sum of Left Leaves
+- [x] 404. Sum of Left Leaves
 - [ ] 250. Count Univalue Subtrees
 - [ ] 545. Boundary of Binary Tree
 
