@@ -5,11 +5,11 @@
 - [x] 124. Binary Tree Maximum Path Sum
 - [ ] 776. Split BST
 - [x] 450. Delete Node in a BST
-- [ ] 145. Binary Tree Postorder Traversal - iterative method
-- [ ] 144. Binary Tree Preorder Traversal - iterative method
+- [x] 145. Binary Tree Postorder Traversal - iterative method
+- [x] 144. Binary Tree Preorder Traversal - iterative method
 - [ ] 285. Inorder Successor in BST
-- [ ] 449. Serialize and Deserialize BST
-- [ ] 297. Serialize and Deserialize Binary Tree
+- [x] 449. Serialize and Deserialize BST
+- [x] 297. Serialize and Deserialize Binary Tree
 - [ ] 404. Sum of Left Leaves
 - [ ] 250. Count Univalue Subtrees
 - [ ] 545. Boundary of Binary Tree
