@@ -15,12 +15,10 @@
 - [ ] 545. Boundary of Binary Tree
 
 ## Linked list
-- [ ] 2. Add Two Numbers
-- [ ] 19. Remove Nth Node From End of List
-- [ ] 92. Reverse Linked List II
-- [ ] 25. Reverse Nodes in k-Group
-- [ ] 142. Linked List Cycle II
-- [ ] 234. Palindrome Linked List
+- [x] 19. Remove Nth Node From End of List
+- [x] 92. Reverse Linked List II
+- [x] 25. Reverse Nodes in k-Group
+- [x] 142. Linked List Cycle II
 
 ## Graph
 - [ ] 210. Course Schedule II
