@@ -21,10 +21,10 @@
 - [x] 142. Linked List Cycle II
 
 ## Graph
-- [ ] 210. Course Schedule II
-- [ ] 547. Friend Circles
+- [x] 210. Course Schedule II
+- [x] 547. Friend Circles
 - [x] 133. Clone Graph
-- [ ] 399. Evaluate Division
+- [x] 399. Evaluate Division
 - [ ] 261. Graph Valid Tree
 - [x] 863. All Nodes Distance K in Binary Tree
 
