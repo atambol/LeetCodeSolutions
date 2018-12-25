@@ -52,8 +52,9 @@
 
 ## Dynamic Programming
 - [ ] 139. Word Break
-- [ ] 322. Coin Change
-- [ ] 53. Maximum Subarray
+- [x] 322. Coin Change
+- [x] 53. Maximum Subarray
+- [x] 152. Maximum Product Subarray
 - [ ] 121. Best Time to Buy and Sell Stock
 - [ ] 122. Best Time to Buy and Sell Stock II
 - [ ] 338. Counting Bits
