@@ -21,6 +21,7 @@
 - [x] 142. Linked List Cycle II
 
 ## Graph
+- [x] 207. Course Schedule
 - [x] 210. Course Schedule II
 - [x] 547. Friend Circles
 - [x] 133. Clone Graph
