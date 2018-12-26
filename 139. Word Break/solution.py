@@ -5,31 +5,30 @@ class Solution(object):
         :type wordDict: List[str]
         :rtype: bool
         """
-        # print(s)
-        memo = set()
-        return self.memoWordBreak(s, wordDict, memo)
+        # create a set for O(1) get operation
+        words = set(wordDict)
         
-
-    def memoWordBreak(self, s, wordDict, memo):
-        """
-        :type s: str
-        :type wordDict: List[str]
-        :type memo: set
-        :rtype: bool
-        """
-        for i in range(1, len(s)+1):
-            if s[:i] in wordDict:
-                if i == len(s):
-                    return True
-                else:
-                    index = len(s) + 1 - i
-                    if index in memo:
-                        continue
-                    else:
-                        if self.memoWordBreak(s[i:], wordDict, memo):
-                            return True
-                        else:
-                            memo.add(index)
-                    
-        return False
-              
+        # DP to keep track of indices that have been already explored
+        searched = [False]*len(s)
+        def search(i):
+            # if the i is more than the length of s, then search is successful
+            if i >= len(s):
+                return True
+            # if i is already visited, dont do it again
+            elif searched[i]:
+                return False
+            else:
+                # mark i visited
+                searched[i] = True
+                
+                # try out each word that can be formed from this index onwards
+                for j in range(i, len(s)):
+                    # if the word is valid, perform search on the rest of the substring
+                    if s[i:j+1] in words:
+                        sol = search(j+1)
+                        if sol:
+                            return sol
+                        
+                # if nothing works out, search is unsuccessful
+                return False
+        return search(0)
