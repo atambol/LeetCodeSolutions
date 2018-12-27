@@ -3,16 +3,16 @@
 - [x] 663. Equal Tree Partition
 - [x] 230. Kth Smallest Element in a BST
 - [x] 124. Binary Tree Maximum Path Sum
-- [ ] 776. Split BST
+- [x] 776. Split BST
 - [x] 450. Delete Node in a BST
 - [x] 145. Binary Tree Postorder Traversal - iterative method
 - [x] 144. Binary Tree Preorder Traversal - iterative method
-- [ ] 285. Inorder Successor in BST
+- [x] 285. Inorder Successor in BST
 - [x] 449. Serialize and Deserialize BST
 - [x] 297. Serialize and Deserialize Binary Tree
 - [x] 404. Sum of Left Leaves
-- [ ] 250. Count Univalue Subtrees
-- [ ] 545. Boundary of Binary Tree
+- [x] 250. Count Univalue Subtrees
+- [x] 545. Boundary of Binary Tree
 - [x] 337. House Robber III
 
 ## Linked list
