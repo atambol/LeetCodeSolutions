@@ -22,7 +22,7 @@
 
 ## Graph
 - [x] 207. Course Schedule
-- [ ] 210. Course Schedule II
+- [x] 210. Course Schedule II
 - [x] 547. Friend Circles
 - [x] 133. Clone Graph
 - [x] 399. Evaluate Division
@@ -49,27 +49,24 @@
 - [ ] 724. Find Pivot Index
 - [ ] 713. Subarray Product Less Than K
 - [x] 54. Spiral Matrix
+- [x] 731. My Calendar II
+- [x] 239. Sliding Window Maximum
 
 ## Dynamic Programming
-- [ ] 139. Word Break
+- [x] 139. Word Break
 - [x] 322. Coin Change
 - [x] 53. Maximum Subarray
 - [x] 152. Maximum Product Subarray
-- [ ] 121. Best Time to Buy and Sell Stock
-- [ ] 122. Best Time to Buy and Sell Stock II
-- [ ] 338. Counting Bits
-- [ ] 309. Best Time to Buy and Sell Stock with Cooldown
-- [ ] 279. Perfect Squares
-- [ ] 264. Ugly Number II
-- [ ] 213. House Robber II
+- [x] 121. Best Time to Buy and Sell Stock
+- [x] 122. Best Time to Buy and Sell Stock II
+- [x] 338. Counting Bits
+- [x] 309. Best Time to Buy and Sell Stock with Cooldown
+- [x] 279. Perfect Squares
+- [x] 264. Ugly Number II
+- [x] 213. House Robber II
 
 ## Heap
 - [ ] 703. Kth Largest Element in a Stream
 
 ## Design
 - [ ] 362. Design Hit Counter
-
-## Todo
-210. Course Schedule II
-731. My Calendar II
-239. Sliding Window Maximum
