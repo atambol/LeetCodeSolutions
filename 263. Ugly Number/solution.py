@@ -4,28 +4,16 @@ class Solution:
         :type num: int
         :rtype: bool
         """
-        # use three pointers to track indices corresponding to 2, 3 and 5
-        n1 = 0
-        n2 = 0
-        n3 = 0
+        if num == 0:
+            return False
+        if num == 1:
+            return True
         
-        # maintain the ugly array
-        uglies = [1]
-        
-        while uglies[-1] < num:
-            # get the smallest ugly number
-            ugly = min(uglies[n1]*2, uglies[n2]*3, uglies[n3]*5)
+        while num % 2 == 0:
+            num = num/2
+        while num % 3 == 0:
+            num = num/3
+        while num % 5 == 0:
+            num = num/5
             
-            # update the pointers
-            if ugly == uglies[n1]*2:
-                n1 += 1
-            elif ugly == uglies[n2]*3:
-                n2 += 1
-            elif ugly == uglies[n3]*5:
-                n3 += 1
-            
-            # append it only if not a duplicate
-            if ugly != uglies[-1]:
-                uglies.append(ugly)
-
-        return uglies[-1] == num
+        return num == 1
