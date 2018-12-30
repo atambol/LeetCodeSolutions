@@ -2,7 +2,7 @@
 # This is the robot's control interface.
 # You should not implement it, or speculate about its implementation
 # """
-#class Robot(object):
+#class Robot:
 #    def move(self):
 #        """
 #        Returns true if the cell in front is open and robot moves into the cell.
@@ -30,8 +30,11 @@
 #        :rtype void
 #        """
 
-class Solution(object):
+class Solution:
     def __init__(self):
+        # keep track of the movements with first position as origin
+        self.x = 0
+        self.y = 0
         self.visited = set()
         
     def cleanRoom(self, robot):
@@ -39,55 +42,62 @@ class Solution(object):
         :type robot: Robot
         :rtype: None
         """
-        self.dfs(robot, 0, 0)
+        # check visited status
+        if (self.x, self.y) in self.visited:
+            return
+        else:
+            self.visited.add((self.x, self.y))
         
-    def dfs(self, robot, x, y):
-        # clean
+        # clean this cell
         robot.clean()
-        
-        # mark visited
-        self.visited.add((x,y))
-        
-        # find immediate cells around in anti-clockwise direction
-        # always orient the robot facing up after moving to a cell
-        # check top
-        if not (x,y+1) in self.visited and robot.move():
-            self.dfs(robot, x, y+1)
-            robot.turnLeft()
-            robot.turnLeft()
-            robot.move()
-            robot.turnRight()
-        else:
-            robot.turnLeft()
-        
-        # check left
-        if not (x-1,y) in self.visited and robot.move():
-            robot.turnRight()
-            self.dfs(robot, x-1, y)
-            robot.turnRight()
-            robot.move()
-            robot.turnRight()
-        else:
-            robot.turnLeft()
-        
-        # checkt down
-        if not (x, y-1) in self.visited and robot.move():
-            robot.turnRight()
-            robot.turnRight()
-            self.dfs(robot, x, y-1)
-            robot.move()
-            robot.turnRight()
-        else:    
-            robot.turnLeft()
-        
-        # check right
-        if not (x+1, y) in self.visited and robot.move():
-            robot.turnLeft()
-            self.dfs(robot, x+1, y)
-            robot.turnLeft()
-            robot.move()
-            robot.turnRight()
-        else:
-            robot.turnLeft()
 
-        # robot is back to the same cell facing up
+        # clean above
+        if robot.move():
+            self.y += 1
+            self.cleanRoom(robot)
+            robot.turnRight()
+            robot.turnRight()
+            robot.move()
+            robot.turnLeft()
+            robot.turnLeft()
+            self.y -= 1
+        
+        # clean left
+        robot.turnLeft()
+        if robot.move():
+            self.x -= 1
+            robot.turnRight()
+            self.cleanRoom(robot)
+            robot.turnRight()
+            robot.move()
+            robot.turnLeft()
+            self.x += 1
+        else:
+            robot.turnRight()
+        
+        # clean below
+        robot.turnLeft()
+        robot.turnLeft()
+        if robot.move():
+            self.y -= 1
+            robot.turnLeft()
+            robot.turnLeft()
+            self.cleanRoom(robot)
+            robot.move()
+            self.y += 1
+        else:
+            robot.turnRight()
+            robot.turnRight()
+            
+        # clean right
+        robot.turnRight()
+        if robot.move():
+            self.x += 1
+            robot.turnLeft()
+            self.cleanRoom(robot)
+            robot.turnLeft()
+            robot.move()
+            robot.turnRight()
+            self.x -= 1
+        else:
+            robot.turnLeft()
