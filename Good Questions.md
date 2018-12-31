@@ -14,6 +14,7 @@
 - [x] 250. Count Univalue Subtrees
 - [x] 545. Boundary of Binary Tree
 - [x] 337. House Robber III
+- [x] 222. Count Complete Tree Nodes
 
 ## Linked list
 - [x] 19. Remove Nth Node From End of List
