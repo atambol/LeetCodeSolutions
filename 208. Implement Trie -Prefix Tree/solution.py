@@ -1,4 +1,7 @@
-from collections import defaultdict
+class Node:
+    def __init__(self):
+        self.char = {}
+        self.ends = False
 
 class Trie:
 
@@ -6,8 +9,7 @@ class Trie:
         """
         Initialize your data structure here.
         """
-        self.chars = {}
-        self.eow = False
+        self.map = Node()
 
     def insert(self, word):
         """
@@ -15,13 +17,16 @@ class Trie:
         :type word: str
         :rtype: void
         """
-        if not word[0] in self.chars:
-            self.chars[word[0]] = Trie()
-            
-        if len(word) == 1:
-            self.chars[word[0]].eow = True
-        else:
-            self.chars[word[0]].insert(word[1:])
+        ptr = self.map
+        for w in word:
+            if w in ptr.char:
+                ptr = ptr.char[w]
+            else:
+                node = Node()
+                ptr.char[w] = node
+                ptr = ptr.char[w]
+        ptr.ends = True
+        
 
     def search(self, word):
         """
@@ -29,13 +34,13 @@ class Trie:
         :type word: str
         :rtype: bool
         """
-        if not word:
-            return self.eow
-        else:
-            if word[0] in self.chars:
-                return self.chars[word[0]].search(word[1:])
+        ptr = self.map
+        for w in word:
+            if w in ptr.char:
+                ptr = ptr.char[w]
             else:
                 return False
+        return ptr.ends
 
     def startsWith(self, prefix):
         """
@@ -43,16 +48,13 @@ class Trie:
         :type prefix: str
         :rtype: bool
         """
-        if len(prefix) == 1:
-            if prefix[0] in self.chars:
-                return True
+        ptr = self.map
+        for w in prefix:
+            if w in ptr.char:
+                ptr = ptr.char[w]
             else:
                 return False
-        else:
-            if prefix[0] in self.chars:
-                return self.chars[prefix[0]].startsWith(prefix[1:])
-            else:
-                return False
+        return True
 
 
 # Your Trie object will be instantiated and called as such:
