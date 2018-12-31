@@ -66,6 +66,7 @@
 - [x] 279. Perfect Squares
 - [x] 264. Ugly Number II
 - [x] 213. House Robber II
+- [x] 62. Unique Paths
 
 ## Heap
 - [ ] 703. Kth Largest Element in a Stream
