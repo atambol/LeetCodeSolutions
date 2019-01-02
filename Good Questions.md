@@ -52,7 +52,8 @@
 - [ ] 713. Subarray Product Less Than K
 - [x] 54. Spiral Matrix
 - [x] 731. My Calendar II
-- [x] 239. Sliding Window Maximum
+- [ ] 239. Sliding Window Maximum
+- [x] 939. Minimum Area Rectangle
 
 ## Dynamic Programming
 - [x] 139. Word Break
