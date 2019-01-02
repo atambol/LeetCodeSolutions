@@ -4,21 +4,21 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        i = 0
-        longestSubstringLength = -1
-        seen = {}
-        while i < len(s):
-            if s[i] in seen:
-                if len(seen.keys()) > longestSubstringLength:
-                    longestSubstringLength = len(seen.keys())
-                    
-                i = seen[s[i]] + 1
-                seen = {}
-            else:
-                seen[s[i]] = i
-                i += 1
+        # edge case
+        if not s:
+            return 0
         
-        if len(seen.keys()) > longestSubstringLength:
-            longestSubstringLength = len(seen.keys())
-            
-        return longestSubstringLength
+        # pointers initialized
+        i = 0
+        j = 0
+        seen = {}
+        maxLen = 0
+        
+        # loop over each char
+        for j, char in enumerate(s):
+            if char in seen:
+                # move the first pointer to the max position - either after the repeating char or the new i
+                i = max(seen[char] + 1, i)
+            seen[char] = j
+            maxLen = max(maxLen, j-i+1)
+        return maxLen
