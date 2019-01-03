@@ -33,28 +33,29 @@
 - [x] 863. All Nodes Distance K in Binary Tree
 
 ## Stack
-- [ ] 402. Remove K Digits
+- [x] 402. Remove K Digits
 
 ## Array
-- [ ] 3. Longest Substring Without Repeating Characters
-- [ ] 5. Longest Palindromic Substring
-- [ ] 22. Generate Parentheses
-- [ ] 56. Merge Intervals
-- [ ] 448. Find All Numbers Disappeared in an Array
-- [ ] 463. Island Perimeter
-- [ ] 33. Search in Rotated Sorted Array
-- [ ] 739. Daily Temperatures
-- [ ] 240. Search a 2D Matrix II
-- [ ] 15. 3Sum
-- [ ] 11. Container With Most Water
-- [ ] 692. Top K Frequent Words  -- 1)look for custom comparator on multiple fields while sorting and 2) solution using heap
-- [ ] 489. Robot Room Cleaner
-- [ ] 724. Find Pivot Index
-- [ ] 713. Subarray Product Less Than K
+- [x] 3. Longest Substring Without Repeating Characters
+- [x] 5. Longest Palindromic Substring
+- [x] 22. Generate Parentheses
+- [x] 56. Merge Intervals
+- [x] 448. Find All Numbers Disappeared in an Array
+- [x] 463. Island Perimeter
+- [x] 33. Search in Rotated Sorted Array
+- [x] 739. Daily Temperatures
+- [x] 240. Search a 2D Matrix II
+- [x] 15. 3Sum
+- [x] 11. Container With Most Water
+- [x] 692. Top K Frequent Words  -- 1)look for custom comparator on multiple fields while sorting and 2) solution using heap
+- [x] 489. Robot Room Cleaner
+- [x] 724. Find Pivot Index
+- [x] 713. Subarray Product Less Than K
 - [x] 54. Spiral Matrix
 - [x] 731. My Calendar II
 - [ ] 239. Sliding Window Maximum
 - [x] 939. Minimum Area Rectangle
+- [x] 42. Trapping Rain Water
 
 ## Dynamic Programming
 - [x] 139. Word Break
@@ -71,7 +72,8 @@
 - [x] 62. Unique Paths
 
 ## Heap
-- [ ] 703. Kth Largest Element in a Stream
+- [x] 703. Kth Largest Element in a Stream
 
 ## Design
-- [ ] 362. Design Hit Counter
+- [x] 362. Design Hit Counter
+- [x] 211. Add and Search Word - Data structure design
