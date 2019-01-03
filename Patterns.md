@@ -11,3 +11,6 @@
 ## Strings
 * Check case sensitivity
 * Check encoding
+
+## Arrays
+* two pointer technique (i = 0, j = n-1)
