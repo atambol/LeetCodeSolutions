@@ -1,19 +1,19 @@
-class Solution(object):
+class Solution:
     def findDisappearedNumbers(self, nums):
         """
         :type nums: List[int]
         :rtype: List[int]
         """
-        # Mutliply a number at that index with -1
-        for i in range(len(nums)):
-            index = abs(nums[i]) -1
+        # mark indices with -ve sign if the element is found
+        for num in nums:
+            index = abs(num) - 1
             if nums[index] > 0:
-                nums[index] *= -1
+                nums[index] = -nums[index]
         
-        # Any number at index i that is not negative will be in solution
-        res = []
-        for i in range(len(nums)):
-            if nums[i] >= 0:
-                res.append(i+1)
+        # look for positive elements to get missing elements
+        sol = []
+        for i, num in enumerate(nums):
+            if num > 0:
+                sol.append(i+1)
                 
-        return res
+        return sol
