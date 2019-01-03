@@ -1,57 +1,57 @@
-class Solution(object):
-    def __init__(self):
-        self.graph = {}
-        self.visited = set()
-        self.unvisited = None
-
+class Solution:
     def validTree(self, n, edges):
         """
         :type n: int
         :type edges: List[List[int]]
         :rtype: bool
         """
-        # construct a graph from the given list
-        self.createGraph(n, edges)
+        graph = self.createGraph(edges, n)
+        start_vertices = list(graph)
+        visited = set()
         
-        # maintain an unvisited set - this catches the case when edges form a forest
-        self.unvisited = set(range(n))
+        # perform dfs from one vertex
+        cycle = self.dfs(start_vertices[0], graph, visited)
         
-        # parent and child node for initial iteration
-        parent = None
-        node = 0
-        
-        # perform dfs
-        allVisited = self.dfs(node, parent)
-        
-        # all nodes should be visited exactly once
-        return allVisited and len(self.unvisited) == 0
-
-    # create an undirected graph in the form of a dictionary
-    def createGraph(self, n, edges):
-        for i in range(n):
-            self.graph[i] = set()
-            
-        for edge in edges:
-            a = edge[0]
-            b = edge[1]
-            
-            self.graph[a].add(b)
-            self.graph[b].add(a)
-        
-    # dfs from node
-    def dfs(self, node, parent):
-        # if the node is already visited, there is a cycle
-        if node in self.visited:
-            print(node, parent, False)
+        # no cycle should be present
+        if cycle:
             return False
         
-        self.visited.add(node)
-        self.unvisited.remove(node)
-        allVisited = True
-
-        # visit every neighbour other than the parent
-        for neighbour in self.graph[node]:
-            if neighbour != parent:
-                allVisited = allVisited and self.dfs(neighbour, node)
+        # all vertices should have been visited (no forest allowed)
+        for vertex in range(n):
+            if vertex not in visited:
+                return False
             
-        return allVisited
+        return True
+        
+    def dfs(self, vertex, graph, visited):
+        # catch cycle
+        if vertex in visited:
+            return True
+        
+        # mark visited
+        visited.add(vertex)
+        cycle = False
+        
+        # visit neighbours
+        for neigh in graph[vertex]:
+            # prevent it from coming back
+            graph[neigh].remove(vertex)
+            # dfs on neighbour
+            cycle = self.dfs(neigh, graph, visited)
+            if cycle:
+                return cycle
+        return cycle
+        
+    # create a graph from the edges
+    def createGraph(self, edges, n):
+        graph = {}
+        for v in range(n):
+            graph[v] = set()
+            
+        for e in edges:
+            a = e[0]
+            b = e[1]
+            graph[a].add(b)
+            graph[b].add(a)
+            
+        return graph
