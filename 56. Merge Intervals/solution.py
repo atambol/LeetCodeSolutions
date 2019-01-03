@@ -10,18 +10,20 @@ class Solution(object):
         :type intervals: List[Interval]
         :rtype: List[Interval]
         """
-        # Sort by second key and then first key
-        intervals.sort(key=lambda interval: interval.start)
-
-        # Check and merge
-        sol = []
-        for interval in intervals:
-            if sol:
-                if sol[-1].end >= interval.start:
-                    sol[-1].end = max(sol[-1].end, interval.end)
-                else:
-                    sol.append(interval)
+        # edge case
+        if not intervals:
+            return []
+        
+        # sort the intervals by start and end time
+        intervals.sort(key=lambda interval: (interval.start, interval.end))
+        
+        # merge into final solution
+        sol = [intervals[0]]
+        for i in intervals[1:]:
+            if i.start <= sol[-1].end:
+                # take the longer end
+                sol[-1].end = max(sol[-1].end, i.end)
             else:
-                sol.append(interval)
+                sol.append(i)
                 
         return sol
