@@ -1,29 +1,32 @@
-class Solution:
+class Solution(object):
     def generateParenthesis(self, n):
         """
         :type n: int
         :rtype: List[str]
         """
-        # Edge case
+        sol = []
         if n == 0:
-            return []
-        else:
-            # for i = 0
-            sol = ["()"]
-            
-            # for i = 1 .. n-1
-            for i in range(1, n):
-                tmp = set()
-                # for every combination found until now
-                for s in sol:
-                    # for every point between adjacent characters in the combination
-                    for j in range(len(s)):
-                        # insert a paranthesis
-                        tmp.add(s[:j] + "()" + s[j:])
-                        
-                # Take care of repetitions due to symmetrical strings
-                sol = list(tmp)
-                
             return sol
         
+        sol.append("()")
+        if n == 1:
+            return sol
+        
+        # sol should be a set to disallow any repeated sequences
+        sol = set(sol)
+        
+        # loop n-1 times more
+        for i in range(1, n):
             
+            # construct new solutions by using existing solutions
+            newsol = set()
+            for s in sol:
+                
+                # pick every single string, and insert parenthesis around every index in it
+                for j in range(n):
+                    newsol.add(s[:j] + "()" + s[j:])
+                    
+            sol = newsol
+            
+        # return a list
+        return list(sol)
