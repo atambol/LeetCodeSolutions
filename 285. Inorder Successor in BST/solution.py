@@ -13,11 +13,21 @@ class Solution(object):
         :rtype: TreeNode
         """
         succ = None
-        while root:
-            if root.val <= p.val:
-                root = root.right
+        node = root
+        # reach p in O(log n)
+        while node != p:
+            if node.val > p.val:
+                succ = node
+                node = node.left
             else:
-                succ = root.val
-                root = root.left
-                
-        return succ
+                node = node.right
+        
+        # if the node has a right subtree, successor is subtree's left most node
+        if node.right:
+            node = node.right
+            while node.left:
+                node = node.left
+            return node
+        # if node doesnt have right subtree, successor is succ
+        else:
+            return succ
