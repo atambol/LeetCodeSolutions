@@ -13,4 +13,7 @@
 * Check encoding
 
 ## Arrays
-* two pointer technique (i = 0, j = n-1)
+* Two pointer technique (i = 0, j = n-1)
+
+## Dynamic programming
+* Tabulate the previous results and construct new results using them
