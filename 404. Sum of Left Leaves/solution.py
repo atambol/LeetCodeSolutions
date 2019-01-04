@@ -11,31 +11,12 @@ class Solution:
         :type root: TreeNode
         :rtype: int
         """
-        # edge cases
-        if not root or (not root.left and not root.right):
+        if not root:
             return 0
         
-        x, y = self.mySumOfLeftLeaves(root)
-        return x
-
-    def mySumOfLeftLeaves(self, root):
-        # edge case
-        if not root:
-            return 0, False
-        
-        # found a leaf node
-        if not root.left and not root.right:
-            return root.val, True
-        
-        # check left and right
-        lval, lcond = self.mySumOfLeftLeaves(root.left)
-        rval, rcond = self.mySumOfLeftLeaves(root.right)
-        
-        # if right node is not leaf, add its contribution
-        if not rcond:
-            return lval + rval, False
-        # add contribution of left always
+        total = 0
+        if root.left and not root.left.left and not root.left.right:
+            total = root.left.val
+            return total + self.sumOfLeftLeaves(root.right)
         else:
-            return lval, False
-                
-            
+            return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
