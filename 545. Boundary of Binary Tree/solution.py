@@ -11,70 +11,50 @@ class Solution:
         :type root: TreeNode
         :rtype: List[int]
         """
-        leaves = []
-        # edge case
+        sol = []
         if not root:
-            return leaves
+            return sol
         
-        # add root
-        leaves.append(root.val)
+        sol.append(root.val)
         
-        # add left edges
-        self.leftLeaves(root.left, leaves)
-        
-        # add bottom leaves
-        self.bottomLeaves(root, leaves)
-        
-        # add right edges
-        self.rightLeaves(root.right, leaves)
-        return leaves
-    
-    def leftLeaves(self, root, leaves):
-        node = root
-        lleaves = []
-        
-        # iterative traversal
-        while node:
-            lleaves.append(node.val)            
-            if node.left:
-                node = node.left
-            else:
-                node = node.right
-        
-        # remove one node that repeats with bottom leaves at the end
-        if len(lleaves) > 1:
-            leaves.extend(lleaves[:-1])
-            
-    def bottomLeaves(self, root, leaves):
-        stack = [root.right]
+        # left
         node = root.left
-        
-        # iterative traversal
-        while node or stack:
-            if node:
-                if not node.left and not node.right:
-                    leaves.append(node.val)
+        if node:
+            while node:
+                sol.append(node.val)
+                if node.left:
                     node = node.left
                 else:
-                    stack.append(node.right)
-                    node = node.left
+                    node = node.right
+
+            sol.pop()
+                
+        # bottom
+        node = root.left
+        stack = [root.right]
+        while stack or node:
+            if node:
+                if not node.left and not node.right:
+                    sol.append(node.val)
+                stack.append(node.right)
+                node = node.left
             else:
                 node = stack.pop()
-    
-    def rightLeaves(self, root, leaves):
-        node = root
-        rleaves = []
-        # iterative traversal
-        while node:
-            rleaves.append(node.val)            
-            if node.right:
-                node = node.right
-            else:
-                node = node.left  
-                
-        # remove the final node on right edge that repeats in bottom leaves
-        rleaves = rleaves[:-1]
+
         
-        # reverse and extend
-        leaves.extend(rleaves[::-1])
+        # right
+        node = root.right
+        sol2 = []
+        if node:
+            while node:
+                sol2.append(node.val)
+                if node.right:
+                    node = node.right
+                else:
+                    node = node.left
+
+            sol2.pop()
+            sol.extend(sol2[::-1])
+
+        return sol
             
