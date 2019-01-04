@@ -4,30 +4,30 @@ class Solution:
         :type points: List[List[int]]
         :rtype: int
         """
-        mapx = {}
-
-        for point in points:
-            x = point[0]
-            y = point[1]
+        # create a map from x values to list of y values
+        cols = {}
+        for x,y in points:
             try:
-                mapx[x].append(y)
-            except:
-                mapx[x] = [y]
-        
-        seen = {}
+                cols[x].append(y)
+            except KeyError:
+                cols[x] = [y]
+                
         minArea = sys.maxsize
-        Xs = sorted(list(mapx))
-        for i, x1 in enumerate(Xs):
-            mapx[x1].sort()
-            for j, y1 in enumerate(mapx[x1]):
-                for k, y2 in enumerate(mapx[x1][j+1:]):
-                    if (y1, y2) in seen:
-                        x2 = seen[(y1, y2)]
-                        minArea = min(minArea, abs((x2-x1)*(y2-y1)))
-                    seen[(y1, y2)] = x1
+        seen = {}
+        X = sorted(list(cols))
+        for x in X:
+            cols[x].sort()
+            y = cols[x]
+            for i in range(len(y)):
+                for j in range(i+1, len(y)):
+                    # look for previously seen pairs of y and calculate area
+                    if (y[i], y[j]) in seen:
+                        area = (x - seen[(y[i], y[j])])*(y[j] - y[i])
+                        minArea = min(area, minArea)
+                    seen[(y[i], y[j])] = x
                     
-        if sys.maxsize == minArea:
+        if minArea == sys.maxsize:
             return 0
-        else:
-            return minArea
-            
+        return minArea
+                    
+        
