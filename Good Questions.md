@@ -77,3 +77,4 @@
 ## Design
 - [x] 362. Design Hit Counter
 - [x] 211. Add and Search Word - Data structure design
+- [x] 146. LRU Cache
