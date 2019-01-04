@@ -12,34 +12,63 @@ class Solution:
         :type key: int
         :rtype: TreeNode
         """
-        if not root:
-            return root
+        # attach a dummy root
+        node = TreeNode(sys.maxsize)
+        node.left = root
+        root = node
         
-        # if current node is to be removed
-        if root.val == key:
-            left = root.left
-            right = root.right
-            
-            # the right subtree is empty, just attach the left subtree as it is
-            if not right:
-                return left
+        # search the target node
+        node = root
+        left = True
+        prev = None
+        while node and node.val != key:
+            if node.val < key:
+                prev = node
+                left = False
+                node = node.right
             else:
-                # find the left most empty node on the right subtree
-                if right.left:
-                    root = right.left
-                    while root and root.left:
-                        root = root.left
-                    root.left = left
-                else:
-                    right.left = left
-                return right
-            
-        # look on the left side 
-        elif root.val > key:
-            root.left = self.deleteNode(root.left, key)
-            return root
+                prev = node
+                left = True
+                node = node.left
         
-        # look on the right side
+        # node not found, return as it is
+        if not node:
+            return root.left
+        
+        # remove the node and adjust its subtrees
+        # if both subtrees are None
+        if not node.left and not node.right:
+            if left:
+                prev.left = None
+            else:
+                prev.right = None
+        # if left subtree exists
+        elif node.left and not node.right:
+            if left:
+                prev.left = node.left
+            else:
+                prev.right = node.left
+        # if right subtree exists
+        elif not node.left and node.right:
+            if left:
+                prev.left = node.right
+            else:
+                prev.right = node.right
+        # if both exist
         else:
-            root.right = self.deleteNode(root.right, key)
-            return root
+            # replace node by its left child
+            if left:
+                prev.left = node.left
+            else:
+                prev.right = node.left
+        
+            # take the right child and push it to the right most position left child's subtree
+            right = node.right
+            node = node.left
+            while node.right:
+                node = node.right
+            
+            node.right = right
+        
+        return root.left
+        
