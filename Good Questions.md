@@ -1,21 +1,21 @@
 ## Trees
-- [x] 669. Trim a Binary Search Tree
-- [x] 663. Equal Tree Partition
-- [x] 230. Kth Smallest Element in a BST
-- [x] 124. Binary Tree Maximum Path Sum
-- [x] 776. Split BST
-- [x] 450. Delete Node in a BST
-- [x] 145. Binary Tree Postorder Traversal - iterative method
-- [x] 144. Binary Tree Preorder Traversal - iterative method
-- [x] 285. Inorder Successor in BST
-- [x] 449. Serialize and Deserialize BST
-- [x] 297. Serialize and Deserialize Binary Tree
-- [x] 404. Sum of Left Leaves
-- [x] 250. Count Univalue Subtrees
-- [x] 545. Boundary of Binary Tree
-- [x] 337. House Robber III
-- [x] 222. Count Complete Tree Nodes
-- [x] 208. Implement Trie -Prefix Tree
+- [ ] 669. Trim a Binary Search Tree
+- [ ] 663. Equal Tree Partition
+- [ ] 230. Kth Smallest Element in a BST
+- [ ] 124. Binary Tree Maximum Path Sum
+- [ ] 776. Split BST
+- [ ] 450. Delete Node in a BST
+- [ ] 145. Binary Tree Postorder Traversal - iterative method
+- [ ] 144. Binary Tree Preorder Traversal - iterative method
+- [ ] 285. Inorder Successor in BST
+- [ ] 404. Sum of Left Leaves
+- [ ] 250. Count Univalue Subtrees
+- [ ] 545. Boundary of Binary Tree
+- [ ] 337. House Robber III
+- [ ] 222. Count Complete Tree Nodes
+- [ ] 208. Implement Trie -Prefix Tree
+- [ ] 449. Serialize and Deserialize BST
+- [ ] 297. Serialize and Deserialize Binary Tree
 
 ## Linked list
 - [x] 19. Remove Nth Node From End of List
@@ -47,7 +47,7 @@
 - [x] 240. Search a 2D Matrix II
 - [x] 15. 3Sum
 - [x] 11. Container With Most Water
-- [x] 692. Top K Frequent Words  -- 1)look for custom comparator on multiple fields while sorting and 2) solution using heap
+- [x] 692. Top K Frequent Words  -- 1) custom comparator on multiple fields while sorting and 2) solution using heap
 - [x] 489. Robot Room Cleaner
 - [x] 724. Find Pivot Index
 - [x] 713. Subarray Product Less Than K
