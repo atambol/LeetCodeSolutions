@@ -5,44 +5,33 @@ class Solution:
         :type target: int
         :rtype: int
         """
+        # edge cases
         if not nums:
             return -1
         
-        def binSearch(nums, i, j):
-            nonlocal target
+        return self.mySearch(nums, target, 0, len(nums)-1)
+        
+    def mySearch(self, nums, target, i, j):
+        # base case - length less than equal to 3
+        if j-i <= 2:
+            for k in range(i, j+1):
+                if target == nums[k]:
+                    return k
+            return -1
+        else:
+            # check if mid is the target
+            mid = (i+j)//2
+            if nums[mid] == target:
+                return mid
             
-            # Base condition 1
-            if abs(i-j) == 1:
-                print()
-                if target == nums[i]:
-                    return i
-                elif target == nums[j]:
-                    return j
+            # pick the appropriate side
+            if nums[mid] < nums[j]:
+                if nums[mid] < target <= nums[j]:
+                    return self.mySearch(nums, target, mid+1, j)
                 else:
-                    return -1
-
-            # Base condition 2
-            if i == j:
-                if target == nums[i]:
-                    return i
-                else:
-                    return -1
-            
-            # Find the mid point
-            mid = (i + j)//2
-
-            # Check for irregularity on either sides on mid
-            if nums[mid] <= nums[j]:
-                if nums[mid] <= target and target <= nums[j]:
-                    return binSearch(nums, mid, j)
-                else:
-                    return binSearch(nums, i, mid)
+                    return self.mySearch(nums, target, i, mid-1)
             else:
-                if nums[i] <= target and target <= nums[mid]:
-                    return binSearch(nums, i, mid)
+                if nums[i] <= target < nums[mid]:
+                    return self.mySearch(nums, target, i, mid-1)
                 else:
-                    return binSearch(nums, mid, j)
-                    
-        return binSearch(nums, 0, len(nums)-1)
-
-            
+                    return self.mySearch(nums, target, mid+1, j)
