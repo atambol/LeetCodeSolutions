@@ -5,53 +5,51 @@ class Solution:
         :type edges: List[List[int]]
         :rtype: bool
         """
-        graph = self.createGraph(edges, n)
-        start_vertices = list(graph)
-        visited = set()
-        
-        # perform dfs from one vertex
-        cycle = self.dfs(start_vertices[0], graph, visited)
-        
-        # no cycle should be present
-        if cycle:
+        # edge case
+        if n <= 1:
+            return True
+            
+        if not edges:
             return False
         
-        # all vertices should have been visited (no forest allowed)
-        for vertex in range(n):
-            if vertex not in visited:
-                return False
-            
-        return True
-        
-    def dfs(self, vertex, graph, visited):
-        # catch cycle
-        if vertex in visited:
-            return True
-        
-        # mark visited
-        visited.add(vertex)
-        cycle = False
-        
-        # visit neighbours
-        for neigh in graph[vertex]:
-            # prevent it from coming back
-            graph[neigh].remove(vertex)
-            # dfs on neighbour
-            cycle = self.dfs(neigh, graph, visited)
-            if cycle:
-                return cycle
-        return cycle
-        
-    # create a graph from the edges
-    def createGraph(self, edges, n):
+        # create a graph
         graph = {}
         for v in range(n):
             graph[v] = set()
             
-        for e in edges:
-            a = e[0]
-            b = e[1]
-            graph[a].add(b)
-            graph[b].add(a)
+        for v1, v2 in edges:
+            graph[v1].add(v2)
+            graph[v2].add(v1)
             
-        return graph
+        # dfs
+        def dfs(visited, v):  
+            if visited[v] == 1:
+                return False
+            
+            # mark visited
+            visited[v] = 1
+            
+            for neigh in graph[v]:
+                # prevent cycling back to the parent
+                graph[neigh].remove(v)
+                
+                # visit children
+                if not dfs(visited, neigh):
+                    return False
+
+            return True
+        
+        # start from one vertex and dfs should visit all of them
+        visited = [0]*n
+        start = edges[0][0]
+        if not dfs(visited, start):
+            # cycle detected
+            return False
+        
+        if sum(visited) != n:
+            # forest detected
+            return False
+        
+        return True
+        
+            
