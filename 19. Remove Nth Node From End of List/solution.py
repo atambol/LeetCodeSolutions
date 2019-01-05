@@ -11,29 +11,25 @@ class Solution:
         :type n: int
         :rtype: ListNode
         """
-        # edge cases
-        if not head:
-            return head
-        
-        # insert a false head at the front to remove edge cases due to removal of first node
+        # attach a dummy head
         node = ListNode(None)
-        node.next = head
+        node.next= head
         head = node
         
-        # move fptr for n + 1 iterations
-        i = 0
-        fptr = head
-        while i <= n:
-            i += 1
+        # run a pointer for n iterations
+        fptr = head.next
+        while n > 0:
             fptr = fptr.next
-            
-        # move sptr until fptr reaches the end
+            n -= 1
+        
+        # run another pointer to reach the node to be delete
         sptr = head
         while fptr:
-            fptr = fptr.next
             sptr = sptr.next
+            fptr = fptr.next
         
-        # remove the node
+        # delete
         sptr.next = sptr.next.next
+        
         return head.next
         
