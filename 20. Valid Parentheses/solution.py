@@ -1,4 +1,4 @@
-class Solution(object):
+class Solution:
     def isValid(self, s):
         """
         :type s: str
@@ -6,22 +6,20 @@ class Solution(object):
         """
         stack = []
         map = {
-            "{": "}",
-            "[": "]",
-            "(": ")"
+            "{":"}",
+            "(":")",
+            "[":"]"
         }
-        for i in range(len(s)):
-            if s[i] in "{([":
-                stack.append(s[i])
+
+        for t in s:
+            if t in map:
+                stack.append(t)
             else:
                 if not stack:
                     return False
-                if map[stack[-1]] == s[i]:
-                    stack.pop()
                 else:
-                    return False
-        
-        if stack:
-            return False
-        else:
-            return True
+                    para = stack.pop()
+                    if map[para] != t:
+                        return False
+                    
+        return not stack
