@@ -11,50 +11,40 @@ class Solution:
         :type k: int
         :rtype: ListNode
         """
-        # edge cases
-        if not head:
-            return 
-        
-        # create a dummy head for ease of modification
+        # dummy head
         node = ListNode(None)
         node.next = head
         head = node
         
-        # get the length of the list and batch count
-        l = 0
+        # get length of list
+        n = 0
         node = head.next
         while node:
-            l += 1
             node = node.next
-        batchCount = l//k
-        
-        # reverse nodes in batches of k
-        # maintain tail of prev batch and tail after the current batch is reversed to connect batched together
+            n += 1
+            
+        # reverse nodes in iterations
+        i = n//k
+        tail1 = head
         node = head.next
-        prev = None
-        tailOfPrevK = head
-        batchesDone = 0
-        # this prevents reversal of last batch that neednt be reversed
-        while batchesDone < batchCount:
-            i = 0
-            tailAfterReverse = node
-            # batch size is k
-            while i < k:
-                i += 1
+        tail2 = node
+        while i:
+            prev = None
+            
+            # reverse
+            for j in range(k):
                 tmp = node.next
                 node.next = prev
                 prev = node
                 node = tmp
-                
-            # reconnect the newly reversed batch with previous batch
-            # prepare for next reversal
-            tailOfPrevK.next = prev
-            tailOfPrevK = tailAfterReverse
-            prev = tailAfterReverse
-            prev.next = node
-            batchesDone += 1
-            
+                            
+            # tie up the ends
+            tail1.next = prev
+            tail1 = tail2
+            tail2 = node
+            i -= 1
+        
+        # final loose end
+        tail1.next = node
+        
         return head.next
-                
-        
-        
