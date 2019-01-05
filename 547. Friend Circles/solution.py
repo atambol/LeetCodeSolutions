@@ -1,22 +1,29 @@
-class Solution:
+
+class Solution(object):
     def findCircleNum(self, M):
         """
         :type M: List[List[int]]
         :rtype: int
         """
+        n = len(M)
+        visited = [False]*n
         count = 0
-        visited = [False]*len(M)
-        # visit each person if it has not yet been visted
-        for i in range(len(M)):
-            if not visited[i]:
+        
+        # dfs over a user
+        def dfs(friends, user, visited):
+            if visited[user]:
+                return
+            visited[user] = True
+            for friend, friendship in enumerate(friends[user]):
+                if friendship:
+                    dfs(friends, friend, visited)
+                    
+        # visit every user and mark it's circle
+        for user in range(n):
+            if not visited[user]:
                 count += 1
-                # visit his friends
-                self.dfs(M, i, visited)
-        return count
+                dfs(M, user, visited)
                 
-    def dfs(self, M, i, visited):
-        visited[i] = True
-        for j in range(len(M)):
-            # visit his friend's friend
-            if M[i][j] == 1 and not visited[j]:
-                self.dfs(M, j, visited)
+        return count
+            
+        
