@@ -1,46 +1,38 @@
-class Solution(object):
+class Solution:
     def totalFruit(self, tree):
         """
         :type tree: List[int]
         :rtype: int
         """
-        # max count of fruits in basket
-        maxCount = 0 
-        
-        # count of fruits of two types in basket
-        basketCount = 0
-        
-        # count of previously seen fruit occurance
+        prevFruit = None
         prevCount = 0
-        
-        # previous fruit
-        prev = None
-        
-        # basket that holds two unique fruits
+        maxCount = 0
+        curCount = 0
         basket = set()
         
+        # pick a fruit
         for fruit in tree:
-            # if the fruit is already in basket then just update prevCount
+            # if it is in basket
             if fruit in basket:
-                if prev == fruit:
+                # update the prevFruit and prevCount
+                if prevFruit == fruit:
                     prevCount += 1
                 else:
+                    prevFruit = fruit
                     prevCount = 1
-                basketCount += 1
-            # the fruit is not in the basket, update the basket
+                curCount += 1
             else:
-                if len(basket) < 2:
-                    basketCount += 1
-                else:
-                    if basketCount > maxCount:
-                        maxCount = basketCount
-                    for b in basket:
-                        if b != prev:
-                            basket.remove(b)
-                            break
-                    basketCount = 1 + prevCount
+                # if not update maxCount
+                maxCount = max(maxCount, curCount)
+                curCount = prevCount + 1
+                
+                # update the basket
+                for somefruit in basket:
+                    if somefruit != prevFruit:
+                        basket.remove(somefruit)
+                        break
                 basket.add(fruit)
+                prevFruit = fruit
                 prevCount = 1
-            prev = fruit
-            
-        return max(maxCount, basketCount)
+                
+        return max(maxCount, curCount)
