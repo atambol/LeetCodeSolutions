@@ -5,28 +5,24 @@
 #         self.neighbors = []
 
 class Solution:
+    def __init__(self):
+        self.visited = {}
     # @param node, a undirected graph node
     # @return a undirected graph node
-    def __init__(self):
-        # initialize a visited dictionary
-        self.visited = {}
-    
     def cloneGraph(self, node):
         # edge case
         if not node:
-            return node
+            return None
         
-        # if node was already visited, just return its clone
-        if node in self.visited:
-            return self.visited[node]
-        else:
-            # otherwise create a clone
-            clone = UndirectedGraphNode(node.label)
-            self.visited[node] = clone
-            
-            # visit node's neighbors
-            for neigh in node.neighbors:
-                clone.neighbors.append(self.cloneGraph(neigh))
+        # add to visited
+        clone = UndirectedGraphNode(node.label)
+        self.visited[node] = clone
+        
+        # get the neighbors
+        for neighbor in node.neighbors:
+            if neighbor in self.visited:
+                clone.neighbors.append(self.visited[neighbor])
+            else:
+                clone.neighbors.append(self.cloneGraph(neighbor))
                 
-            # return the clone
-            return clone
+        return clone
