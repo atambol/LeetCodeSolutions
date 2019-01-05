@@ -13,34 +13,45 @@ class Solution:
         :type K: int
         :rtype: List[int]
         """
-        # dfs to construct a graph from the tree
-        graph = collections.defaultdict(list)
+        # edge case
+        if not K:
+            return [target.val]
+        
+        # convert the tree into a graph
+        graph = {}
         stack = []
         node = root
-        while node or stack:
+        graph[root.val] = set()
+        while stack or node:
             if node:
                 if node.left:
-                    graph[node.val].append(node.left.val)
-                    graph[node.left.val].append(node.val)
+                    graph[node.val].add(node.left.val)
+                    graph[node.left.val] = set([node.val])
+                
                 if node.right:
-                    graph[node.val].append(node.right.val)
-                    graph[node.right.val].append(node.val)       
+                    graph[node.val].add(node.right.val)
+                    graph[node.right.val] = set([node.val])
+                    
                 stack.append(node.right)
                 node = node.left
             else:
                 node = stack.pop()
+                
+        # dfs
+        def dfs(graph, node, parent, dist):
+            if not dist:
+                return [node]
             
-        # bfs from target node to other nodes in graph
-        queue = [target.val]
-        visited = set()
-        while queue and K:
-            newqueue = []
-            for node in queue:
-                for neigbour in graph[node]:
-                    if neigbour not in visited:
-                        newqueue.append(neigbour)
-                visited.add(node)
-            queue = newqueue
-            K -= 1
+            solsubset = []
+            for neighbour in graph[node]:
+                if neighbour != parent:
+                    solsubset.extend(dfs(graph, neighbour, node, dist-1))
+                
+            return solsubset
+        
+        # count the distance in dfs and collect nodes
+        sol = []
+        for neigh in graph[target.val]:
+            sol.extend(dfs(graph, neigh, target.val, K-1))
             
-        return queue
+        return sol
