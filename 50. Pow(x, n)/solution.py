@@ -5,46 +5,30 @@ class Solution:
         :type n: int
         :rtype: float
         """
-        # handle edge cases
+        # edge cases
         if n == 0:
             return 1
-        if n == 1:
-            return x
+        if n < 0 and x == 0:
+            return None
+        if x == 0:
+            return 0
         
-        # handle negative powers
-        if n < 0:
-            x = 1/x
-            n = abs(n)
-            
-        # get the power split
-        powers = self.getPowerSplit(n)
-        maxPower = max(powers)
+        # if negative power
+        neg = n < 0
+        n = abs(n)
         
-        # Calculate the powers of x upto the max power in powers (dynamic programming)
-        p = 1
-        num = x
-        map = {}
-        while p <= maxPower:
-            map[p] = num
-            p *= 2
-            num *= num
-            
-        # Multiply all the necessary powers to get x^n
-        sol = 1
-        for power in powers:
-            sol *= map[power]
-            
-        return sol
+        # calculate the powers 
+        dp = x
+        pw = 1
         
-    # get the power split of n in terms of multiple of 2, for eg: if n = 10, powers = [8,2]
-    def getPowerSplit(self, n):
-        powers = []
-        while n > 0:
-            p = 1
-            while p*2 <= n:
-                p *= 2
-            
-            powers.append(p)
-            n = n - p
-        return powers
-            
+        while n:
+            m = (n>>1)<< 1
+            if m != n:
+                pw *= dp
+            dp = dp*dp
+            n = n >> 1
+        
+        if not neg:
+            return pw
+        else:
+            return 1/pw
