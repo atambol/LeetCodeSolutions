@@ -1,32 +1,23 @@
-class Solution(object):
+class Solution:
     def generateParenthesis(self, n):
         """
         :type n: int
         :rtype: List[str]
         """
-        sol = []
-        if n == 0:
-            return sol
+        # edge case
+        if not n:
+            return []
         
-        sol.append("()")
+        sol = set(["()"])
         if n == 1:
-            return sol
+            return list(sol)
         
-        # sol should be a set to disallow any repeated sequences
-        sol = set(sol)
-        
-        # loop n-1 times more
-        for i in range(1, n):
-            
-            # construct new solutions by using existing solutions
+        for i in range(n-1):
             newsol = set()
             for s in sol:
-                
-                # pick every single string, and insert parenthesis around every index in it
-                for j in range(n):
+                for j in range(len(s)):
                     newsol.add(s[:j] + "()" + s[j:])
                     
             sol = newsol
             
-        # return a list
         return list(sol)
