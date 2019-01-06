@@ -3,33 +3,33 @@
 - [ ] 663. Equal Tree Partition
 - [ ] 230. Kth Smallest Element in a BST
 - [ ] 124. Binary Tree Maximum Path Sum
-- [ ] 776. Split BST
-- [ ] 450. Delete Node in a BST
-- [ ] 145. Binary Tree Postorder Traversal - iterative method
+- [x] 776. Split BST
+- [x] 450. Delete Node in a BST
+- [x] 145. Binary Tree Postorder Traversal - iterative method
 - [ ] 144. Binary Tree Preorder Traversal - iterative method
-- [ ] 285. Inorder Successor in BST
+- [x] 285. Inorder Successor in BST
 - [ ] 404. Sum of Left Leaves
 - [ ] 250. Count Univalue Subtrees
-- [ ] 545. Boundary of Binary Tree
-- [ ] 337. House Robber III
+- [x] 545. Boundary of Binary Tree
+- [x] 337. House Robber III
 - [ ] 222. Count Complete Tree Nodes
 - [ ] 208. Implement Trie -Prefix Tree
-- [ ] 449. Serialize and Deserialize BST
-- [ ] 297. Serialize and Deserialize Binary Tree
+- [x] 449. Serialize and Deserialize BST
+- [x] 297. Serialize and Deserialize Binary Tree
 
 ## Linked list
 - [x] 19. Remove Nth Node From End of List
-- [x] 92. Reverse Linked List II
+- [ ] 92. Reverse Linked List II
 - [x] 25. Reverse Nodes in k-Group
-- [x] 142. Linked List Cycle II
+- [ ] 142. Linked List Cycle II
 
 ## Graph
 - [x] 207. Course Schedule
 - [x] 210. Course Schedule II
-- [x] 547. Friend Circles
-- [x] 133. Clone Graph
+- [ ] 547. Friend Circles
+- [ ] 133. Clone Graph
 - [x] 399. Evaluate Division
-- [ ] 261. Graph Valid Tree
+- [x] 261. Graph Valid Tree
 - [x] 863. All Nodes Distance K in Binary Tree
 
 ## Stack
@@ -58,18 +58,18 @@
 - [x] 42. Trapping Rain Water
 
 ## Dynamic Programming
-- [x] 139. Word Break
-- [x] 322. Coin Change
-- [x] 53. Maximum Subarray
+- [ ] 139. Word Break
+- [ ] 322. Coin Change
+- [ ] 53. Maximum Subarray
 - [x] 152. Maximum Product Subarray
-- [x] 121. Best Time to Buy and Sell Stock
-- [x] 122. Best Time to Buy and Sell Stock II
-- [x] 338. Counting Bits
-- [x] 309. Best Time to Buy and Sell Stock with Cooldown
+- [ ] 338. Counting Bits
 - [x] 279. Perfect Squares
 - [x] 264. Ugly Number II
-- [x] 213. House Robber II
-- [x] 62. Unique Paths
+- [ ] 213. House Robber II
+- [ ] 62. Unique Paths
+- [ ] 121. Best Time to Buy and Sell Stock
+- [x] 122. Best Time to Buy and Sell Stock II
+- [x] 309. Best Time to Buy and Sell Stock with Cooldown
 
 ## Heap
 - [x] 703. Kth Largest Element in a Stream
@@ -77,4 +77,4 @@
 ## Design
 - [x] 362. Design Hit Counter
 - [x] 211. Add and Search Word - Data structure design
-- [x] 146. LRU Cache
+- [ ] 146. LRU Cache
