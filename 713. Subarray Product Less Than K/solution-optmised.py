@@ -5,21 +5,27 @@ class Solution:
         :type k: int
         :rtype: int
         """
-        # edge case
+        # edge cases
+        n = len(nums)
+        if not n:
+            return 0
+        
         if k < 2:
             return 0
         
-        # using the sliding window technique
+        # two pointers
+        i = 0 
+        j = 0
         prod = 1
         count = 0
-        i = 0
         
-        # loop over each set
-        for j, num in enumerate(nums):
-            prod *= num
+        while j < n:
+            prod *= nums[j]
             while prod >= k:
-                prod = prod/nums[i]
+                prod /= nums[i]
                 i += 1
             count += j - i + 1
+            j += 1
             
         return count
+            
