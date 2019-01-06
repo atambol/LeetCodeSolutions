@@ -1,18 +1,21 @@
-class Solution(object):
+class Solution:
     def maxProfit(self, prices):
         """
         :type prices: List[int]
         :rtype: int
         """
+        # edge case
         profit = 0
-        # edge cases
-        if not prices or len(prices) < 2:
+        if not prices:
             return profit
-
-        # loop over each price
-        # add to profit if previous price is less than current price
-        for i in range(1, len(prices)):
-            if prices[i] > prices[i-1]:
-                profit += prices[i] - prices[i-1]
         
+        # dp
+        minPrice = prices[0]
+        
+        for price in prices[1:]:
+            if minPrice < price:
+                profit += price - minPrice
+                
+            minPrice = price
+            
         return profit
