@@ -4,13 +4,10 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
-        if not nums:
-            return 0
-        
-        maxSum = nums[0]
-        curSum = 0
-        for num in nums[1:]:
-            curSum = max(num, num+curSum)
-            maxSum = max(curSum, maxSum)
+        total = -sys.maxsize - 1
+        maxtotal = -sys.maxsize - 1
+        for num in nums:
+            total = max(num, num + total)
+            maxtotal = max(total, maxtotal)
             
-        return maxSum
+        return maxtotal
