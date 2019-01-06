@@ -14,6 +14,7 @@
 
 ## Arrays
 * Two pointer technique (i = 0, j = n-1)
+* DFS
 
 ## Dynamic programming
 * Tabulate the previous results and construct new results using them
