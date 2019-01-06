@@ -4,23 +4,20 @@ class Solution:
         :type height: List[int]
         :rtype: int
         """
-        # edge cases
-        n = len(height)
-        maxArea = 0
-        if n < 2:
-            return maxArea
+        # edge case
+        if len(height) < 2:
+            return 0
         
-        # two pointer technique
+        # two pointer
         i = 0
-        j = n - 1
+        j = len(height) - 1
+        vol = 0
+        
         while i < j:
-            area = min(height[i], height[j])*(j-i)
-            if area > maxArea:
-                maxArea = area
-            if height[i] > height[j]:
-                j -= 1
-            else:
+            vol = max(vol, (j-i)*min(height[i], height[j]))
+            if height[i] < height[j]:
                 i += 1
+            else:
+                j -= 1
                 
-        return maxArea
-                
+        return vol
