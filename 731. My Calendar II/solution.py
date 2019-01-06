@@ -1,11 +1,8 @@
-class MyCalendarTwo:
+class MyCalendarTwo(object):
 
     def __init__(self):
-        # save events
         self.events = []
-        
-        # save previous overlaps
-        self.doubles = []
+        self.overlaps = []
 
     def book(self, start, end):
         """
@@ -13,20 +10,21 @@ class MyCalendarTwo:
         :type end: int
         :rtype: bool
         """
-        # check if this event overlaps with any of the previous overlaps (triple booking)
-        for s, e in self.doubles:
-             if s < end and start < e:
-                    return False
-        
-        # add new overlaps
+        # check for overlap
+        for s, e in self.overlaps:
+            if end > s and e > start:   # condition of overlap
+                return False
+            
+        # find new overlaps
         for s, e in self.events:
-            if s < end and start < e:
-                self.doubles.append((max(s, start), min(e, end)))
-                
-        # store this event
+            if end > s and e > start:
+                self.overlaps.append((max(start, s), min(end, e)))
+        
+        # add events
         self.events.append((start, end))
         return True
-    
+        
+
 # Your MyCalendarTwo object will be instantiated and called as such:
 # obj = MyCalendarTwo()
 # param_1 = obj.book(start,end)
