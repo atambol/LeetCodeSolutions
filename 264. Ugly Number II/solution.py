@@ -1,33 +1,27 @@
-class Solution(object):
+class Solution:
     def nthUglyNumber(self, n):
         """
         :type n: int
         :rtype: int
         """
-        # default case of uglies is 1
+        if n == 1:
+            return 1
+        
         uglies = [1]
+        p2 = 0
+        p3 = 0
+        p5 = 0
         
-        # pointers to numbers next in line for multiplication
-        i2 = 0
-        i3 = 0
-        i5 = 0
-        
-        # until we done find the nth ugly number
-        while len(uglies) < n:
-            # find out all the candidate uglies
-            candidates = [uglies[i2]*2, uglies[i3]*3, uglies[i5]*5]
-            
-            # get the minimum
-            ugly = min(candidates)
-            if ugly == candidates[0]:
-                i2 += 1
-            elif ugly == candidates[1]:
-                i3 += 1
-            else:
-                i5 += 1
+        while len(uglies) != n:
+            ugly = min(2*uglies[p2], 3*uglies[p3], 5*uglies[p5])
+            if 2*uglies[p2] == ugly:
+                p2 += 1
+            elif 3*uglies[p3] == ugly:
+                p3 += 1
+            elif 5*uglies[p5] == ugly:
+                p5 += 1
                 
-            # if the ugly is new, add it to the list
             if ugly > uglies[-1]:
                 uglies.append(ugly)
-            
+                
         return uglies[-1]
