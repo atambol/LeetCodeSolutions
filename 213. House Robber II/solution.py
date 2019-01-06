@@ -4,20 +4,24 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
-        # edge cases
         if not nums:
             return 0
-        if len(nums) < 3:
+        if len(nums) <= 3:
+            return max(nums)
+            
+        rob1 = self.myrob(nums[:-1])
+        rob2 = self.myrob(nums[1:])
+        return max(rob1, rob2)
+        
+    def myrob(self, nums):
+        if len(nums) <= 2:
             return max(nums)
         
-        return max(self.linearRob(nums[1:]), self.linearRob(nums[:-1]))
+        p1 = nums[0]
+        p2 = nums[1]
+        p3 = nums[2] + p1
         
-    def linearRob(self, nums):
-        # loot will be calculated bottom up using dynamic programming
-        loot1 = 0   # loot one cell back
-        loot2 = 0   # loot two cells back
-        for i in range(len(nums)):
-            loot = max(loot1, loot2+nums[i]) # max loot in current cell
-            loot2, loot1 = loot1, loot
+        for num in nums[3:]:
+            p3, p2, p1 = num + max(p1, p2), p3, p2
             
-        return loot1
+        return max(p3, p2)
