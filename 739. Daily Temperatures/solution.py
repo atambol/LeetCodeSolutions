@@ -5,22 +5,15 @@ class Solution:
         :rtype: List[int]
         """
         stack = []
-        index = {}
         sol = []
-        
-        # use a stack to keep track of previous temperatures
-        # use a dictionary to keep track of the index of prev temperatures
-        for i in range(len(T)-1, -1, -1):
-            t = T[i]
-            while stack and stack[-1] <= t:
+        for i, t in enumerate(T[::-1]):
+            while stack and stack[-1][0] <= t:
                 stack.pop()
-                
-            if not stack:
-                sol.append(0)
+            if stack:
+                sol.append(i-stack[-1][1])
             else:
-                sol.append(index[stack[-1]] - i)
-                
-            index[t] = i
-            stack.append(t)
-        
-        return sol[::-1]
+                sol.append(0)
+            stack.append((t, i))
+            
+        sol.reverse()
+        return sol
