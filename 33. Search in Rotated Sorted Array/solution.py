@@ -9,29 +9,30 @@ class Solution:
         if not nums:
             return -1
         
-        return self.mySearch(nums, target, 0, len(nums)-1)
+        i = 0
+        j = len(nums) - 1
         
-    def mySearch(self, nums, target, i, j):
-        # base case - length less than equal to 3
-        if j-i <= 2:
-            for k in range(i, j+1):
-                if target == nums[k]:
-                    return k
-            return -1
-        else:
-            # check if mid is the target
+        while j-i+1 > 3:
             mid = (i+j)//2
             if nums[mid] == target:
                 return mid
             
-            # pick the appropriate side
             if nums[mid] < nums[j]:
                 if nums[mid] < target <= nums[j]:
-                    return self.mySearch(nums, target, mid+1, j)
+                    i = mid + 1
                 else:
-                    return self.mySearch(nums, target, i, mid-1)
+                    j = mid - 1
             else:
-                if nums[i] <= target < nums[mid]:
-                    return self.mySearch(nums, target, i, mid-1)
+                if nums[mid] > target >= nums[i]:
+                    j = mid - 1
                 else:
-                    return self.mySearch(nums, target, mid+1, j)
+                    i = mid + 1
+                
+            
+        for k in range(i, j+1):
+            if nums[k] == target:
+                return k
+            
+        return -1
+        
+        
