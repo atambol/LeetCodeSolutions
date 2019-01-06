@@ -4,38 +4,29 @@ class Solution:
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        # sort the input
+        # edge cases
+        sol = set()
+        n = len(nums)
+        if not n:
+            return []
+        
         nums.sort()
-        
-        # do not allow repeated solutions
-        repeat = set()
-        
-        # add element once it is pointed to by i
         seen = set()
         
-        # final sol
-        sol = []
-        
-        n = len(nums)
-        
-        # loop over every index
+        # 3 sum
         for i in range(n):
-            # save time by not going over repeat elements
             if nums[i] in seen:
                 continue
-            else:
-                seen.add(nums[i])
-                
-            # begin 2sum
+            
+            seen.add(nums[i])
+            target = - nums[i]
+            # 2 sum
             complement = set()
             for j in range(i+1, n):
-                target = -nums[i] -nums[j]
-                if target in complement and (nums[i], target, nums[j]) not in repeat:
-                        sol.append([nums[i], target, nums[j]])
-                        repeat.add((nums[i], target, nums[j]))
+                if target - nums[j] in complement:
+                    sol.add((nums[i], target - nums[j], nums[j]))
                 complement.add(nums[j])
-                    
-            seen.add(nums[i])
-                        
-        return sol
+                
+        return list(sol)
+                
         
