@@ -1,49 +1,36 @@
-class Solution(object):
+class Solution:
     def longestPalindrome(self, s):
         """
         :type s: str
         :rtype: str
         """
-        # edge case
-        if len(s) < 2:
+        # edge cases
+        n = len(s)
+        if n <= 1:
             return s
         
-        n = len(s)
-        # expand around an index
-        maxStr = ""
+        maxLen = 0
+        sol = ""
+        # grow around an index
         for i in range(n):
-            k = i - 1
-            j = i + 1
+            j = i - 1
+            k = i + 1
+            while k < n and j >= 0 and s[k] == s[j]:
+                k += 1
+                j -= 1
+            if k - j - 1 > maxLen:
+                sol = s[j+1:k]
+            maxLen = max(maxLen, k-j-1)
             
-            # keep expanding until fault
-            while k >= 0 and j < n and s[k] == s[j]:
-                j += 1
-                k -= 1
-            
-            # recover
-            k += 1
-            j -= 1
-            
-            # calculate the expansion
-            if j-k+1 > len(maxStr):
-                maxStr = s[k:j+1]
-                
-        # expand between indices
+        # grow between an index
         for i in range(n-1):
-            k = i
-            j = i + 1
+            j = i
+            k = i + 1
+            while k < n and j >= 0 and s[k] == s[j]:
+                k += 1
+                j -= 1
+            if k - j - 1 > maxLen:
+                sol = s[j+1:k]
+            maxLen = max(maxLen, k-j-1)
             
-            # keep expanding until fault
-            while k >= 0 and j < n and s[k] == s[j]:
-                j += 1
-                k -= 1
-            
-            # recover
-            k += 1
-            j -= 1
-            
-            # calculate the expansion
-            if j-k+1 > len(maxStr):
-                maxStr = s[k:j+1]
-                
-        return maxStr
+        return sol
