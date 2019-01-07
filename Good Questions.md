@@ -38,24 +38,23 @@
 ## Array
 - [x] 3. Longest Substring Without Repeating Characters
 - [x] 5. Longest Palindromic Substring
-- [x] 22. Generate Parentheses
-- [x] 56. Merge Intervals
-- [x] 448. Find All Numbers Disappeared in an Array
-- [x] 463. Island Perimeter
+- [ ] 22. Generate Parentheses
+- [ ] 56. Merge Intervals
+- [ ] 448. Find All Numbers Disappeared in an Array
+- [ ] 463. Island Perimeter
 - [x] 33. Search in Rotated Sorted Array
 - [x] 739. Daily Temperatures
-- [x] 240. Search a 2D Matrix II
+- [ ] 240. Search a 2D Matrix II
 - [x] 15. 3Sum
 - [x] 11. Container With Most Water
 - [x] 692. Top K Frequent Words  -- 1) custom comparator on multiple fields while sorting and 2) solution using heap
 - [x] 489. Robot Room Cleaner
 - [x] 724. Find Pivot Index
-- [x] 713. Subarray Product Less Than K
 - [x] 54. Spiral Matrix
 - [x] 731. My Calendar II
-- [ ] 239. Sliding Window Maximum
 - [x] 939. Minimum Area Rectangle
 - [x] 42. Trapping Rain Water
+- [ ] 239. Sliding Window Maximum
 
 ## Dynamic Programming
 - [ ] 139. Word Break
@@ -67,6 +66,7 @@
 - [x] 264. Ugly Number II
 - [ ] 213. House Robber II
 - [ ] 62. Unique Paths
+- [x] 713. Subarray Product Less Than K
 - [ ] 121. Best Time to Buy and Sell Stock
 - [x] 122. Best Time to Buy and Sell Stock II
 - [x] 309. Best Time to Buy and Sell Stock with Cooldown
