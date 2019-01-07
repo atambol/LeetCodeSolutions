@@ -32,31 +32,27 @@
 
 class Solution:
     def __init__(self):
-        # keep track of the movements with first position as origin
+        self.visited = set()
         self.x = 0
         self.y = 0
-        self.visited = set()
-        
+    
     def cleanRoom(self, robot):
         """
         :type robot: Robot
         :rtype: None
         """
-        # check visited status
         if (self.x, self.y) in self.visited:
             return
-        else:
-            self.visited.add((self.x, self.y))
         
-        # clean this cell
         robot.clean()
-
-        # clean above
+        self.visited.add((self.x, self.y))
+        
+        # clean up
         if robot.move():
             self.y += 1
             self.cleanRoom(robot)
-            robot.turnRight()
-            robot.turnRight()
+            robot.turnLeft()
+            robot.turnLeft()
             robot.move()
             robot.turnLeft()
             robot.turnLeft()
@@ -75,20 +71,20 @@ class Solution:
         else:
             robot.turnRight()
         
-        # clean below
+        # clean down
         robot.turnLeft()
         robot.turnLeft()
         if robot.move():
             self.y -= 1
-            robot.turnLeft()
-            robot.turnLeft()
+            robot.turnRight()
+            robot.turnRight()
             self.cleanRoom(robot)
             robot.move()
             self.y += 1
         else:
             robot.turnRight()
             robot.turnRight()
-            
+        
         # clean right
         robot.turnRight()
         if robot.move():
@@ -101,3 +97,5 @@ class Solution:
             self.x -= 1
         else:
             robot.turnLeft()
+            
+        
