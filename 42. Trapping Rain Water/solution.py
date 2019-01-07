@@ -4,32 +4,37 @@ class Solution:
         :type height: List[int]
         :rtype: int
         """
-        s1 = []
-        s2 = []
+        # edge case
+        if len(height) <= 2:
+            return 0
         
-        # calculate the volume contained from left
-        tallest = 0
-        for h in height:
-            if h > tallest:
-                s1.append(0)
-                tallest = h
+        # calculate from the left 
+        maxHeight = height[0]
+        right = [0]
+        for h in height[1:]:
+            if maxHeight > h:
+                right.append(maxHeight - h)
             else:
-                s1.append(tallest-h)
+                right.append(0)
+                maxHeight = h
+
+        # calculate from the right
+        height.reverse()
+        maxHeight = height[0]
+        left = [0]
+        for h in height[1:]:
+            if maxHeight > h:
+                left.append(maxHeight - h)
+            else:
+                left.append(0)
+                maxHeight = h
                 
-        # calculate the volume contained from right
-        tallest  = 0
-        for h in height[::-1]:
-            if h > tallest:
-                s2.append(0)
-                tallest = h
-            else:
-                s2.append(tallest-h)
-        s2.reverse()
+        left.reverse()
         
-        # calculate the total volume
+        # calculate the vol
         vol = 0
-        for i, j in zip(s1, s2):
-            vol += min(i, j)
-            
+        for l, r in zip(left, right):
+            vol += min(l, r)
+        print(left, right)
         return vol
-        
+                
