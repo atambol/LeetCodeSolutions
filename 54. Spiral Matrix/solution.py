@@ -1,49 +1,52 @@
 class Solution:
-    def spiralOrder(self, matrix):
-        """
-        :type matrix: List[List[int]]
-        :rtype: List[int]
-        """
-        spiral = []
-        
-        # edge case
-        if not matrix:
-            return spiral
-
-        # maintain a map of direction to transition
-        direction = {
+    def __init__(self):
+        # direction transition
+        self.nextDir = {
             (0, 1): (1, 0),
             (1, 0): (0, -1),
             (0, -1): (-1, 0),
             (-1, 0): (0, 1)
         }
         
-        # visited set of i,j indices
-        visited = set()
-        d = (0, 1)
+    def spiralOrder(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[int]
+        """
+        sol = []
+        
+        # edge case
+        if not matrix or not matrix[0]:
+            return sol
+        
+        # starting points and direction
         i = 0
         j = 0
+        dir = (0, 1)
         
-        # total number of visited indices
-        count = len(matrix) * len(matrix[0])
+        # constraints
+        seen = set()
+        m = len(matrix)
+        n = len(matrix[0])
+        count = m*n
         
-        # loop until all indices are not visited
-        while len(visited) < count:
-            # loop until the indices are valid and unvisited
-            while 0 <= i < len(matrix) and 0 <= j < len(matrix[0]) and (i, j) not in visited:
-                spiral.append(matrix[i][j])
-                visited.add((i,j))
-                i += d[0]
-                j += d[1]
+        # spiral in
+        while len(seen) != count:
+            # change direction if constrained
+            if i < 0 or i >= m or j < 0 or j >= n or (i, j) in seen:
+                i = i-dir[0]
+                j = j-dir[1]
+                
+                dir = self.nextDir[dir]
+                i = i+dir[0]
+                j = j+dir[1]    
             
-            # go back one step
-            i -= d[0]
-            j -= d[1]
+            # record the spiral and mark the cells seen
+            sol.append(matrix[i][j])
+            seen.add((i, j))
             
-            # get new direction
-            d = direction[d]
+            # next cell
+            i = i+dir[0]
+            j = j+dir[1] 
             
-            # change direction
-            i += d[0]
-            j += d[1]
-        return spiral
+        return sol
