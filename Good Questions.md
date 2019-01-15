@@ -33,9 +33,6 @@
 - [x] 863. All Nodes Distance K in Binary Tree
 - [x] 310. Minimum Height Trees
 
-## Stack
-- [x] 402. Remove K Digits
-
 ## Array
 - [x] 3. Longest Substring Without Repeating Characters
 - [x] 5. Longest Palindromic Substring
@@ -56,6 +53,7 @@
 - [x] 939. Minimum Area Rectangle
 - [x] 42. Trapping Rain Water
 - [ ] 239. Sliding Window Maximum
+- [x] 402. Remove K Digits
 
 ## Dynamic Programming
 - [ ] 139. Word Break
