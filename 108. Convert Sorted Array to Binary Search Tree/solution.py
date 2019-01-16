@@ -13,10 +13,19 @@ class Solution:
         """
         if not nums:
             return None
+        return self.mySortedArrayToBST(nums, 0, len(nums)-1)
         
-        mid = int(len(nums)/2)
+    def mySortedArrayToBST(self, nums, i, j):
+        if i == j:
+            return TreeNode(nums[i])
+        
+        if i == j - 1:
+            root = TreeNode(nums[j])
+            root.left = TreeNode(nums[i])
+            return root
+        
+        mid = i + (j - i + 1)//2
         root = TreeNode(nums[mid])
-        root.left = self.sortedArrayToBST(nums[:mid])
-        root.right = self.sortedArrayToBST(nums[mid+1:])
-        
+        root.left = self.mySortedArrayToBST(nums, i, mid - 1)
+        root.right = self.mySortedArrayToBST(nums, mid + 1, j)
         return root
