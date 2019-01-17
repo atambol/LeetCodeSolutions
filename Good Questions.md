@@ -13,7 +13,6 @@
 - [x] 545. Boundary of Binary Tree
 - [x] 337. House Robber III
 - [ ] 222. Count Complete Tree Nodes
-- [ ] 208. Implement Trie -Prefix Tree
 - [x] 449. Serialize and Deserialize BST
 - [x] 297. Serialize and Deserialize Binary Tree
 
@@ -52,7 +51,7 @@
 - [x] 731. My Calendar II
 - [x] 939. Minimum Area Rectangle
 - [x] 42. Trapping Rain Water
-- [ ] 239. Sliding Window Maximum
+- [x] 239. Sliding Window Maximum
 - [x] 402. Remove K Digits
 
 ## Dynamic Programming
@@ -69,7 +68,7 @@
 - [x] 72. Edit Distance
 - [ ] 121. Best Time to Buy and Sell Stock
 - [x] 122. Best Time to Buy and Sell Stock II
-- [x] 309. Best Time to Buy and Sell Stock with Cooldown
+- [ ] 309. Best Time to Buy and Sell Stock with Cooldown
 
 ## Heap
 - [x] 703. Kth Largest Element in a Stream
@@ -78,3 +77,4 @@
 - [x] 362. Design Hit Counter
 - [x] 211. Add and Search Word - Data structure design
 - [ ] 146. LRU Cache
+- [ ] 208. Implement Trie -Prefix Tree
