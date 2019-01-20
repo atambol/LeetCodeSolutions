@@ -73,6 +73,9 @@
 ## Heap
 - [x] 703. Kth Largest Element in a Stream
 
+## Backtracking
+- [x] 51. N-Queens
+
 ## Design
 - [x] 362. Design Hit Counter
 - [x] 211. Add and Search Word - Data structure design
