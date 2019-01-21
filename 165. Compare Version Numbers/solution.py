@@ -5,21 +5,29 @@ class Solution:
         :type version2: str
         :rtype: int
         """
-        version1 = version1.split('.')
-        version2 = version2.split('.')
-            
-        diff = len(version1) - len(version2)
-        if diff < 0:
-            version1.extend(["0"]*abs(diff))
-        elif diff > 0:
-            version2.extend(["0"]*diff)
+        sol = []
+        for v in version1.split("."):
+            sol.append(int(v))
+        version1 = sol
         
-        result = 0
-        print(version1, version2)
-        for i in range(len(version1)):
-            if int(version1[i]) > int(version2[i]):
+        sol = []    
+        for v in version2.split("."):
+            sol.append(int(v))
+        version2 = sol
+        
+        m = len(version1)
+        n = len(version2)
+        
+        if m > n:
+            version2.extend([0] * (m-n))
+        elif n > m:
+            version1.extend([0] * (n-m))
+        
+        l = max(m, n)
+        for i in range(l):
+            if version1[i] > version2[i]:
                 return 1
-            elif int(version1[i]) < int(version2[i]):
+            elif version1[i] < version2[i]:
                 return -1
-        
-        return result
+
+        return 0
