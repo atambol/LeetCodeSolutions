@@ -1,11 +1,11 @@
 # Definition for a binary tree node.
-# class TreeNode(object):
+# class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
+class Solution:
     def flatten(self, root):
         """
         :type root: TreeNode
@@ -13,17 +13,25 @@ class Solution(object):
         """
         if not root:
             return
-        self.flatten(root.right)
-        self.flatten(root.left)
-        self.attach(root.left, root.right)
-        if root.left:
-            root.right = root.left
+        
+        self.myFlatten(root)
+        
+    def myFlatten(self, root):
+        if not root.right and not root.left:
+            return root, root
+        elif root.right and not root.left:
+            rhead, rtail = self.myFlatten(root.right)
+            root.right = rhead
+            return root, rtail
+        elif not root.right and root.left:
+            lhead, ltail = self.myFlatten(root.left)
             root.left = None
-        
-        
-    def attach(self, root, subtree):
-        if root:
-            if not root.right:
-                root.right = subtree
-            else:
-                self.attach(root.right, subtree)
+            root.right = lhead
+            return root, ltail
+        else:
+            lhead, ltail = self.myFlatten(root.left)
+            rhead, rtail = self.myFlatten(root.right)
+            root.left = None
+            root.right = lhead
+            ltail.right = rhead
+            return root, rtail
