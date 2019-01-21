@@ -5,36 +5,36 @@ class Solution:
         :type k: int
         :rtype: List[int]
         """
-        # edge cases
-        if not nums:
-            return []
-        
-        if not k:   # if window size is 0, then every num is sol
+        # edge case
+        if not nums or not k or k == 1:
             return nums
         
-        # main flow
+        # use a dequeue
         deq = collections.deque()
+        deq.append(0)
         sol = []
         
-        # store the index of num largest in the first window
-        for i in range(k):
+        # run the logic for the first window
+        for i in range(1, k):
+            while deq and nums[deq[-1]] < nums[i]:
+                deq.pop()
+            deq.append(i)
+        sol.append(nums[deq[0]])
+        
+        # loop over each window and recalculate max num
+        for i in range(k, len(nums)):
+            # remove deq elements that are outside the window
+            while deq and i - deq[0] >= k:
+                deq.popleft()
+            
+            # remove deq elements that are smaller than nums[i]
             while deq and nums[deq[-1]] < nums[i]:
                 deq.pop()
                 
+            # store the newest index
             deq.append(i)
-            
-        # store the index of each num in next window
-        for i in range(k, len(nums)):
+                    
+            # append the largest element
             sol.append(nums[deq[0]])
-            
-            if deq[0] < i - k + 1:
-                deq.popleft()
-            
-            while deq and nums[deq[-1]] < nums[i]:
-                deq.pop()
-            deq.append(i) 
-        
-        # the last window
-        sol.append(nums[deq[0]])     
         
         return sol
