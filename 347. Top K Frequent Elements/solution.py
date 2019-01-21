@@ -1,27 +1,20 @@
-from collections import defaultdict
-import heapq
-
 class Solution:
-    def topKFrequent(self, nums, k):
+    def topKFrequent(self, nums, K):
         """
         :type nums: List[int]
         :type k: int
         :rtype: List[int]
         """
-        # Get the count of numbers
-        counts = defaultdict(int)
+        freq = {}
         for num in nums:
-            counts[num] += 1
+            try:
+                freq[num] += 1
+            except KeyError:
+                freq[num] = 1
+                
+        heap = []
+        for k, v in freq.items():
+            heapq.heappush(heap, (-v, k))
             
-        # Create a list out of it
-        arr = []
-        for num in counts:
-            arr.append([counts[num], num])    
-        
-        # Heapify and Extract the k largest 
-        res = heapq.nlargest(k, arr)
-        
-        # Return the elements only
-        return list(x[1] for x in res)
-
-            
+        sol = [k for v, k in heapq.nsmallest(K, heap)]
+        return sol
