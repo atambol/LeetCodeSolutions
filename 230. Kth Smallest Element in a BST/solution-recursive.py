@@ -4,7 +4,7 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-# Beats 99%
+
 class Solution:
     def kthSmallest(self, root, k):
         """
@@ -12,23 +12,29 @@ class Solution:
         :type k: int
         :rtype: int
         """
-        val, found = self.mykthSmallest(root, k, 0)
-        return val
+        k, node = self.mykthSmallest(root, k)
+        return node.val
         
-    def mykthSmallest(self, root, k, n):
-        # Null node condition
+    def mykthSmallest(self, root, k):
+        """
+        :type root: TreeNode
+        :type k: int
+        :rtype: int, int
+        """
+        # edge case
         if not root:
-            return n, False
+            return k, None
         
-        # check the left subtree
-        n, found = self.mykthSmallest(root.left, k, n)
-        if found:
-            return n, found
-        else:
-            # check self
-            if n + 1 == k:
-                return root.val, True
-            else:
-                # check the right subtree
-                return self.mykthSmallest(root.right, k, n+1)
+        # look left
+        k, node = self.mykthSmallest(root.left, k)
+        if node:
+            return k, node
         
+        # look at root
+        k -= 1
+        
+        if not k:
+            return k, root
+        
+        # look right
+        return self.mykthSmallest(root.right, k)
