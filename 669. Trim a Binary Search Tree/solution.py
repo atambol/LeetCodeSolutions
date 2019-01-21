@@ -1,11 +1,11 @@
 # Definition for a binary tree node.
-# class TreeNode(object):
+# class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
+class Solution:
     def trimBST(self, root, L, R):
         """
         :type root: TreeNode
@@ -14,23 +14,13 @@ class Solution(object):
         :rtype: TreeNode
         """
         if not root:
-            return root
+            return None
         
-        if root.val > R:
-            return self.trimBST(root.left, L, R)
+        if L <= root.val <= R:
+            root.right = self.trimBST(root.right, L, R)
+            root.left = self.trimBST(root.left, L, R)
+            return root
         elif root.val < L:
             return self.trimBST(root.right, L, R)
         else:
-            if root.left:
-                if root.left.val < L:
-                    root.left = self.trimBST(root.left, L, R)
-                else:
-                    self.trimBST(root.left, L, R)
-            if root.right:
-                if root.right.val > R:
-                    root.right = self.trimBST(root.right, L, R)
-                else:
-                    self.trimBST(root.right, L, R)
-                
-            return root
-            
+            return self.trimBST(root.left, L, R)
