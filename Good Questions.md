@@ -72,6 +72,7 @@
 
 ## Heap
 - [x] 703. Kth Largest Element in a Stream
+- [x] 621. Task Scheduler
 
 ## Backtracking
 - [x] 51. N-Queens
