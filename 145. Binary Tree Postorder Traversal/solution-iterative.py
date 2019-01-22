@@ -9,37 +9,25 @@ class Solution:
     def postorderTraversal(self, root):
         """
         :type root: TreeNode
-        :rtype: List[int]   
+        :rtype: List[int]
         """
-        # Mainain two stacks - one to hold the node and, the
-        # other to store if its right child has been visited or not
         stack = []
-        seen = []
-        visit = []
-        
+        visited = 1
+        visiting = 0
+        sol = []
         node = root
         while node or stack:
-            # if the node exists, push it to stack and update it to its left child
             if node:
-                stack.append(node)
-                seen.append(False)
+                stack.append((node, visiting))
                 node = node.left
-            # if not, pop the node stack and the seen stack
             else:
-                node = stack.pop()
-                rightSeen = seen.pop()
-                # if the node's right child was not seen, visit it first
-                # push the node back to stack, store that its right subtree has been visited
-                # and update the node to its right child                
-                if not rightSeen:
-                    stack.append(node)
-                    seen.append(True)
+                node, status = stack.pop()
+                if status == visiting:
+                    stack.append((node, visited))
                     node = node.right
-                # if the node's right child was seen, visit the node
                 else:
-                    visit.append(node.val)
+                    sol.append(node.val)
                     node = None
-                
-        return visit
-            
-            
+                    
+        return sol
+                    
