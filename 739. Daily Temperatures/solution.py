@@ -4,16 +4,17 @@ class Solution:
         :type T: List[int]
         :rtype: List[int]
         """
-        stack = []
         sol = []
-        for i, t in enumerate(T[::-1]):
-            while stack and stack[-1][0] <= t:
+        stack = []
+        for i in range(len(T)-1, -1, -1):
+            while stack and T[stack[-1]] <= T[i]:
                 stack.pop()
-            if stack:
-                sol.append(i-stack[-1][1])
-            else:
-                sol.append(0)
-            stack.append((t, i))
             
-        sol.reverse()
-        return sol
+            if not stack:
+                sol.append(0)
+            else:
+                sol.append(stack[-1] - i)
+                
+            stack.append(i)
+            
+        return sol[::-1]
