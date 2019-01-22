@@ -5,27 +5,38 @@ class Solution:
         :type amount: int
         :rtype: int
         """
+        # edge cases
+        if not coins:
+            return -1
+        
         if not amount:
             return 0
         
-        noSolution = -1
-        firstDenomination = min(coins)
-        coinCountMax = amount + 1
-        if amount < firstDenomination:
-            return noSolution
+        if amount < 0:
+            return -1
         
-        dp = [-1] * (amount + 1)
+        minDeno = min(coins)
+        if minDeno > amount:
+            return -1
+        
+        # dynamic programming
+        dp = [-1]*(minDeno)
         dp[0] = 0
-        for amt in range(firstDenomination, amount + 1):
-            count = coinCountMax
-            for coin in coins:
-                prev = amt - coin
-                if prev >= 0 and dp[prev] != -1 and dp[prev] + 1 < count:
-                    count = dp[prev] + 1
-                
-            if count != coinCountMax:
-                dp[amt] = count
-            else:
-                dp[amt] = noSolution
+        
+        for i in range(minDeno, amount+1):
+            change = sys.maxsize
+            for c in coins:
+                if i - c == 0:
+                    change = 1
+                    break
+                else:
+                    if i -c >= 0 and dp[i-c] > 0:
+                        change = min(change, dp[i-c] + 1)
                     
-        return dp[amt]
+            if change == sys.maxsize:
+                dp.append(-1)
+            else:
+                dp.append(change)
+                
+        return dp[-1]
+        
