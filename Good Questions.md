@@ -52,6 +52,7 @@
 - [ ] 402. Remove K Digits
 
 ## Dynamic Programming
+- [x] 516. Longest Palindromic Subsequence
 - [x] 139. Word Break
 - [x] 322. Coin Change
 - [x] 518. Coin Change 2
