@@ -6,37 +6,36 @@ class Solution:
         :type n: int
         :rtype: ListNode
         """
-        # dummy head
+        # attach a dummy head
         node = ListNode(None)
         node.next = head
         head = node
-        
-        # count from 0
-        m -= 1
-        
-        # iterate until m ceases
-        prev = head
         node = head.next
-        while m:
-            n -= 1
-            m -= 1
+        prev = head
+        
+        # find the mth node
+        l = 0
+        while m > 1:
             prev = node
             node = node.next
-        
-        # reverse the nodes
-        tail1 = prev
-        prev.next = None
-        prev = None
-        tail2 = node
-        while n:
+            m -= 1
             n -= 1
+            
+        # break the list here
+        tail1 = prev
+        head2 = node
+        
+        # reverse the next n - m nodes
+        prev = None
+        while n >= 1:
             tmp = node.next
             node.next = prev
             prev = node
             node = tmp
+            n -= 1
             
-        # tie up loose ends
+        # join the lists
         tail1.next = prev
-        tail2.next = node
+        head2.next = node
         
         return head.next
