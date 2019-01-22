@@ -10,15 +10,19 @@ class Solution:
         :type intervals: List[Interval]
         :rtype: List[Interval]
         """
+        # edge case
         if not intervals:
             return intervals
         
-        intervals.sort(key=lambda i: (i.start, i.end))
-        sol = [intervals[0]]
+        # sort by start time
+        intervals.sort(key=lambda x: x.start)
         
+        # merge overlaps
+        sol = [intervals[0]]
         for i in intervals[1:]:
-            if sol[-1].end >= i.start:
-                sol[-1].end = max(sol[-1].end, i.end)
+            if i.start <= sol[-1].end:
+                sol[-1].end = max(i.end, sol[-1].end)
             else:
                 sol.append(i)
+                
         return sol
