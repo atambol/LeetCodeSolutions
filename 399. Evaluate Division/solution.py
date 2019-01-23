@@ -1,4 +1,7 @@
-class Solution:
+class Solution(object):
+    def __init__(self):
+        self.graph = {}
+        
     def calcEquation(self, equations, values, queries):
         """
         :type equations: List[List[str]]
@@ -6,47 +9,41 @@ class Solution:
         :type queries: List[List[str]]
         :rtype: List[float]
         """
-        nil = -1.0
-        
-        # create a graphical representation of equations
-        graph = {}
-        for e, v in zip(equations, values):
-            x = e[0]
-            y = e[1]
-            if not x in graph:
-                graph[x] = {}
-                
-            if not y in graph:
-                graph[y] = {}
-                
-            graph[x][y] = v
-            graph[y][x] = 1/v
+        # create a graph representation
+        for x, y in equations:
+            self.graph[x] = {x:1.0}
+            self.graph[y] = {y:1.0}
             
-            graph[x][x] = 1.0
-            graph[y][y] = 1.0
+        for i in range(len(equations)):
+            x = equations[i][0]
+            y = equations[i][1]
+            self.graph[x][y] = values[i]
+            self.graph[y][x] = 1/values[i]
             
-        # dfs
-        def dfs(graph, a, b, visited):
-            if b in graph[a]:
-                return graph[a][b]
-            if a in visited:
-                return nil
-            visited.add(a)
-            for c in graph[a]:
-                ans = dfs(graph, c, b, visited)
-                if ans != nil:
-                    ans *= graph[a][c]
-                    graph[a][b] = ans
-                    return ans
-            return nil
-        
-        # solve the queries
+        # perform dfs for each query
         sol = []
         for x, y in queries:
-            visited = set()
-            if x not in graph or y not in graph:
-                sol.append(nil)
+            if not x in self.graph or not y in self.graph:
+                sol.append(-1.0)
             else:
-                sol.append(dfs(graph, x, y, visited))
-            
+                visited = set()
+                tmp = self.dfs(visited, x, y)
+                if tmp == None:
+                    sol.append(-1.0)
+                else:
+                    sol.append(tmp)
         return sol
+    
+    def dfs(self, visited, x, y):
+        visited.add(x)
+        if y in self.graph[x]:
+            return self.graph[x][y]
+        
+        for z in self.graph[x]:
+            if not z in visited:
+                sol = self.dfs(visited, z, y)
+                if sol != None:
+                    self.graph[x][y] = sol*self.graph[x][z]
+                    return self.graph[x][y]
+                
+        return None
