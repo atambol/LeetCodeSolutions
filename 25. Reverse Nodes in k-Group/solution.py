@@ -11,40 +11,37 @@ class Solution:
         :type k: int
         :rtype: ListNode
         """
-        # dummy head
+        # insert dummy node
         node = ListNode(None)
         node.next = head
         head = node
-        
-        # get length of list
-        n = 0
         node = head.next
+        
+        # count the number nodes
+        count = 0
         while node:
             node = node.next
-            n += 1
+            count += 1
             
-        # reverse nodes in iterations
-        i = n//k
-        tail1 = head
+        # count the iterations
+        n = count // k
+        
+        # reverse the nodes in groups of k
         node = head.next
-        tail2 = node
-        while i:
+        prev = head
+        while n:
+            tail1 = prev
+            tail2 = node
             prev = None
-            
-            # reverse
-            for j in range(k):
+            for i in range(k):
                 tmp = node.next
                 node.next = prev
                 prev = node
                 node = tmp
-                            
-            # tie up the ends
+                
             tail1.next = prev
-            tail1 = tail2
-            tail2 = node
-            i -= 1
-        
-        # final loose end
-        tail1.next = node
-        
+            prev = tail2
+            n -= 1
+        prev.next = node
         return head.next
+            
