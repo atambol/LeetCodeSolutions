@@ -1,55 +1,44 @@
 class Solution:
+    def __init__(self):
+        self.graph = {}
+        self.visited = None
     def validTree(self, n, edges):
         """
         :type n: int
         :type edges: List[List[int]]
         :rtype: bool
         """
-        # edge case
-        if n <= 1:
+        # create a graph representation
+        for i in range(n):
+            self.graph[i] = set()
+            
+        for x, y in edges:
+            self.graph[x].add(y)
+            self.graph[y].add(x)
+            
+        # create a visited set
+        self.visited = [False]*n
+        
+        # perform dfs from one node
+        isCycle = self.dfs(0, None)
+        
+        # check for cycle
+        if isCycle:
+            return False
+        
+        # check for forest
+        if self.visited.count(True) == n:
             return True
-            
-        if not edges:
+        else:
             return False
         
-        # create a graph
-        graph = {}
-        for v in range(n):
-            graph[v] = set()
-            
-        for v1, v2 in edges:
-            graph[v1].add(v2)
-            graph[v2].add(v1)
-            
-        # dfs
-        def dfs(visited, v):  
-            if visited[v] == 1:
-                return False
-            
-            # mark visited
-            visited[v] = 1
-            
-            for neigh in graph[v]:
-                # prevent cycling back to the parent
-                graph[neigh].remove(v)
-                
-                # visit children
-                if not dfs(visited, neigh):
-                    return False
-
-            return True
-        
-        # start from one vertex and dfs should visit all of them
-        visited = [0]*n
-        start = edges[0][0]
-        if not dfs(visited, start):
-            # cycle detected
-            return False
-        
-        if sum(visited) != n:
-            # forest detected
-            return False
-        
-        return True
-        
-            
+    def dfs(self, node, parent):
+        self.visited[node] = True
+        for neigh in self.graph[node]:
+            if neigh != parent:
+                if self.visited[neigh]:
+                    return True
+                else:
+                    self.dfs(neigh, node)
+                    
+        return False
