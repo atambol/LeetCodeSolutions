@@ -4,13 +4,13 @@ class Solution:
         :type prices: List[int]
         :rtype: int
         """
+        if len(prices) < 2:
+            return 0
         profit = 0
-        if not prices:
-            return profit
-        
-        minPrice = prices[0]
-        for price in prices:
-            profit = max(profit, price - minPrice)
-            minPrice = min(minPrice, price)
-
+        minprice = prices[0]
+        for price in prices[1:]:
+            profit = max(profit, price - minprice)
+            minprice = min(price, minprice)
+            
         return profit
+    
