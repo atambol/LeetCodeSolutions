@@ -4,18 +4,10 @@ class Solution:
         :type prices: List[int]
         :rtype: int
         """
-        # edge case
         profit = 0
-        if not prices:
-            return profit
         
-        # dp
-        minPrice = prices[0]
+        for i in range(1, len(prices)):
+            if prices[i] > prices[i-1]:
+                profit += prices[i] - prices[i-1]
         
-        for price in prices[1:]:
-            if minPrice < price:
-                profit += price - minPrice
-                
-            minPrice = price
-            
         return profit
