@@ -15,13 +15,11 @@ class Solution:
         if not root:
             return [None, None]
         
-        if root.val > V:
-            sol = self.splitBST(root.left, V)
-            root.left = sol[1]
-            return [sol[0], root]
+        if root.val <= V:
+            left, right = self.splitBST(root.right, V)
+            root.right = left
+            return root, right
         else:
-            sol = self.splitBST(root.right, V)
-            root.right = sol[0]
-            return [root, sol[1]]
-            
-            
+            left, right = self.splitBST(root.left, V)
+            root.left = right
+            return left, root
