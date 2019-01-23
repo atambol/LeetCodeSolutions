@@ -1,13 +1,13 @@
 ## Trees
 - [x] 669. Trim a Binary Search Tree
-- [ ] 663. Equal Tree Partition
+- [x] 663. Equal Tree Partition
 - [x] 230. Kth Smallest Element in a BST
 - [x] 124. Binary Tree Maximum Path Sum
-- [ ] 776. Split BST
+- [x] 776. Split BST
 - [x] 450. Delete Node in a BST
 - [x] 145. Binary Tree Postorder Traversal - iterative method
-- [ ] 285. Inorder Successor in BST
-- [ ] 404. Sum of Left Leaves
+- [x] 285. Inorder Successor in BST
+- [x] 404. Sum of Left Leaves
 - [ ] 250. Count Univalue Subtrees
 - [ ] 545. Boundary of Binary Tree
 - [ ] 337. House Robber III
@@ -18,7 +18,7 @@
 ## Linked list
 - [ ] 19. Remove Nth Node From End of List
 - [x] 92. Reverse Linked List II
-- [ ] 25. Reverse Nodes in k-Group
+- [x] 25. Reverse Nodes in k-Group
 - [ ] 142. Linked List Cycle II
 
 ## Graph
