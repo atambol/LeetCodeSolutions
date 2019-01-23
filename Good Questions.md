@@ -26,8 +26,8 @@
 - [x] 210. Course Schedule II
 - [x] 547. Friend Circles
 - [x] 133. Clone Graph
-- [ ] 399. Evaluate Division
-- [ ] 261. Graph Valid Tree
+- [x] 399. Evaluate Division
+- [x] 261. Graph Valid Tree
 - [ ] 863. All Nodes Distance K in Binary Tree
 - [ ] 310. Minimum Height Trees
 
@@ -38,13 +38,13 @@
 - [x] 56. Merge Intervals
 - [x] 33. Search in Rotated Sorted Array
 - [x] 739. Daily Temperatures
-- [ ] 240. Search a 2D Matrix II
-- [ ] 15. 3Sum
-- [ ] 11. Container With Most Water
+- [x] 15. 3Sum
+- [x] 16. 3Sum Closest
+- [x] 11. Container With Most Water
 - [x] 692. Top K Frequent Words
 - [ ] 489. Robot Room Cleaner
 - [ ] 724. Find Pivot Index
-- [ ] 54. Spiral Matrix
+- [x] 54. Spiral Matrix
 - [ ] 731. My Calendar II
 - [ ] 939. Minimum Area Rectangle
 - [ ] 42. Trapping Rain Water
@@ -63,10 +63,10 @@
 - [ ] 264. Ugly Number II
 - [ ] 213. House Robber II
 - [ ] 63. Unique Paths II
-- [ ] 713. Subarray Product Less Than K
+- [x] 713. Subarray Product Less Than K
 - [ ] 72. Edit Distance
-- [ ] 121. Best Time to Buy and Sell Stock
-- [ ] 122. Best Time to Buy and Sell Stock II
+- [x] 121. Best Time to Buy and Sell Stock
+- [x] 122. Best Time to Buy and Sell Stock II
 
 ## Heap
 - [x] 703. Kth Largest Element in a Stream
