@@ -14,9 +14,7 @@ class Solution:
         if not root:
             return 0
         
-        total = 0
-        if root.left and not root.left.left and not root.left.right:
-            total = root.left.val
-            return total + self.sumOfLeftLeaves(root.right)
+        if root.left and not root.left.right and not root.left.left:
+            return root.left.val + self.sumOfLeftLeaves(root.right)
         else:
             return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
