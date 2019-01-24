@@ -12,8 +12,9 @@
 - [ ] 545. Boundary of Binary Tree
 - [ ] 337. House Robber III
 - [ ] 222. Count Complete Tree Nodes
-- [ ] 449. Serialize and Deserialize BST
-- [ ] 297. Serialize and Deserialize Binary Tree
+- [x] 449. Serialize and Deserialize BST
+- [x] 297. Serialize and Deserialize Binary Tree
+- [x] 426. Convert Binary Search Tree to Sorted Doubly Linked List
 
 ## Linked list
 - [ ] 19. Remove Nth Node From End of List
@@ -45,10 +46,10 @@
 - [ ] 489. Robot Room Cleaner
 - [ ] 724. Find Pivot Index
 - [x] 54. Spiral Matrix
-- [ ] 731. My Calendar II
+- [x] 731. My Calendar II
 - [ ] 939. Minimum Area Rectangle
 - [ ] 42. Trapping Rain Water
-- [ ] 239. Sliding Window Maximum
+- [x] 239. Sliding Window Maximum
 - [ ] 402. Remove K Digits
 
 ## Dynamic Programming
