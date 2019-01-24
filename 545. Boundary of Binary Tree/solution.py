@@ -11,50 +11,52 @@ class Solution:
         :type root: TreeNode
         :rtype: List[int]
         """
-        sol = []
+        boundary = []
         if not root:
-            return sol
+            return boundary
         
-        sol.append(root.val)
+        # add root
+        boundary.append(root.val)
         
-        # left
+        # add left side
         node = root.left
-        if node:
-            while node:
-                sol.append(node.val)
-                if node.left:
-                    node = node.left
-                else:
-                    node = node.right
-
-            sol.pop()
-                
-        # bottom
-        node = root.left
-        stack = [root.right]
-        while stack or node:
-            if node:
-                if not node.left and not node.right:
-                    sol.append(node.val)
-                stack.append(node.right)
+        while node:
+            boundary.append(node.val)
+            if node.left:
                 node = node.left
             else:
-                node = stack.pop()
-
+                node = node.right
+                
+        if len(boundary) > 1:
+            boundary.pop()
         
-        # right
-        node = root.right
-        sol2 = []
-        if node:
-            while node:
-                sol2.append(node.val)
-                if node.right:
-                    node = node.right
+        # add the bottom
+        stack = [root.right]
+        preorder = []
+        node = root.left
+        while node or stack:
+            if node:
+                if not node.left and not node.right:
+                    boundary.append(node.val)
+                    node = None
                 else:
+                    stack.append(node.right)
                     node = node.left
-
-            sol2.pop()
-            sol.extend(sol2[::-1])
-
-        return sol
-            
+            else:
+                node = stack.pop()
+        
+        # add the right side
+        sol = []
+        node = root.right
+        while node:
+            sol.append(node.val)
+            if node.right:
+                node = node.right
+            else:
+                node = node.left
+        if sol:
+            sol.pop()
+        sol.reverse()
+        boundary.extend(sol)
+        
+        return boundary
