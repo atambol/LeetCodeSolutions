@@ -10,20 +10,20 @@
 - [x] 404. Sum of Left Leaves
 - [ ] 250. Count Univalue Subtrees
 - [ ] 545. Boundary of Binary Tree
-- [ ] 337. House Robber III
+- [x] 337. House Robber III
 - [ ] 222. Count Complete Tree Nodes
 - [x] 449. Serialize and Deserialize BST
 - [x] 297. Serialize and Deserialize Binary Tree
 - [x] 426. Convert Binary Search Tree to Sorted Doubly Linked List
 
 ## Linked list
-- [ ] 19. Remove Nth Node From End of List
+- [x] 19. Remove Nth Node From End of List
 - [x] 92. Reverse Linked List II
 - [x] 25. Reverse Nodes in k-Group
-- [ ] 142. Linked List Cycle II
+- [x] 142. Linked List Cycle II
 
 ## Graph
-- [ ] 207. Course Schedule
+- [x] 207. Course Schedule
 - [x] 210. Course Schedule II
 - [x] 547. Friend Circles
 - [x] 133. Clone Graph
