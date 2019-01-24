@@ -11,25 +11,21 @@ class Solution:
         :type n: int
         :rtype: ListNode
         """
-        # attach a dummy head
         node = ListNode(None)
-        node.next= head
+        node.next = head
         head = node
         
-        # run a pointer for n iterations
-        fptr = head.next
-        while n > 0:
-            fptr = fptr.next
+        # run the pointer for n times
+        while n:
+            node = node.next
             n -= 1
-        
-        # run another pointer to reach the node to be delete
-        sptr = head
-        while fptr:
-            sptr = sptr.next
-            fptr = fptr.next
-        
-        # delete
-        sptr.next = sptr.next.next
-        
+            
+        # run another pointer behind it
+        prev = head
+        while node.next:
+            prev = prev.next
+            node = node.next
+            
+        # remove the node
+        prev.next = prev.next.next
         return head.next
-        
