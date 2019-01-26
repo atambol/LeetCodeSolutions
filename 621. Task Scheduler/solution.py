@@ -5,43 +5,45 @@ class Solution:
         :type n: int
         :rtype: int
         """
-        # edge case
-        if n == 0:
-            return len(tasks)
-        
-        # count the tasks
-        count = {}
+        # calculate frequency
+        f = {}
         for task in tasks:
             try:
-                count[task] += 1
+                f[task] += 1
             except KeyError:
-                count[task] = 1
-        
-        # create a min heap from the tasks and their counts
+                f[task] = 1
+                
+        # create a heap
         heap = []
-        for k, v in count.items():
-            heapq.heappush(heap, (-v, k))
-        
-        # count the number of intervals involved
-        intervals = 0
+        for task, freq in f.items():
+            heapq.heappush(heap, (-freq, task))
+            
+        # print(heap)
+        # consume tasks
+        count = 0
         while heap:
             aux = []
             i = 0
             
-            # remove the elements from heap upto n times
-            while i <= n and heap:
-                v, k = heapq.heappop(heap)
-                if v + 1 < 0:
-                    aux.append((v+1, k))
+            # consume top priority tasks first
+            while heap and i <= n:
+                f, t = heapq.heappop(heap)
+                if f + 1 < 0:
+                    aux.append((f+1, t))
                 i += 1
-                intervals += 1
             
-            # update the intervals
-            if not heap and aux:
-                intervals += n - i + 1
-
-            # readjust the heap
-            for v, k in aux:
-                heapq.heappush(heap, (v, k))
-
-        return intervals
+            if not aux:
+                count += i
+            else:
+                count += n + 1
+                
+            # rearrange tasks from aux to heap
+            for tup in aux:
+                heapq.heappush(heap, tup)
+                
+        return count
+                
+            
+                
+            
+            
