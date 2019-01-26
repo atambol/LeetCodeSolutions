@@ -51,6 +51,7 @@
 - [ ] 42. Trapping Rain Water
 - [x] 239. Sliding Window Maximum
 - [ ] 402. Remove K Digits
+- [x] 826. Most Profit Assigning Work
 
 ## Dynamic Programming
 - [x] 516. Longest Palindromic Subsequence
