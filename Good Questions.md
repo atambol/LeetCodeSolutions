@@ -11,7 +11,7 @@
 - [ ] 250. Count Univalue Subtrees
 - [ ] 545. Boundary of Binary Tree
 - [x] 337. House Robber III
-- [ ] 222. Count Complete Tree Nodes
+- [x] 222. Count Complete Tree Nodes
 - [x] 449. Serialize and Deserialize BST
 - [x] 297. Serialize and Deserialize Binary Tree
 - [x] 426. Convert Binary Search Tree to Sorted Doubly Linked List
