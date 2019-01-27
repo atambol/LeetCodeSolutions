@@ -52,6 +52,7 @@
 - [x] 239. Sliding Window Maximum
 - [ ] 402. Remove K Digits
 - [x] 826. Most Profit Assigning Work
+- [x] 215. Kth Largest Element in an Array
 
 ## Dynamic Programming
 - [x] 516. Longest Palindromic Subsequence
