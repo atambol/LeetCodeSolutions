@@ -74,6 +74,7 @@
 ## Heap
 - [x] 703. Kth Largest Element in a Stream
 - [x] 621. Task Scheduler
+- [ ] 218. The Skyline Problem
 
 ## Backtracking
 - [x] 51. N-Queens
@@ -83,4 +84,4 @@
 - [x] 211. Add and Search Word - Data structure design
 - [ ] 146. LRU Cache
 - [ ] 208. Implement Trie -Prefix Tree
-- [x] 208. 722. Remove Comments
+- [x] 722. Remove Comments
