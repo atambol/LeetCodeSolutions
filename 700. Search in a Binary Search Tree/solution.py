@@ -15,14 +15,13 @@ class Solution:
         if not root:
             return None
         
-        if root.val == val:
-            return root
-        else:
-            left = self.searchBST(root.left, val)
-            right = self.searchBST(root.right, val)
-            if right:
-                return right
-            elif left:
-                return left
+        node = root
+        while node:
+            if node.val == val:
+                return node
+            elif node.val > val:
+                node = node.left
             else:
-                return None
+                node = node.right
+                
+        return None
