@@ -70,6 +70,7 @@
 - [ ] 72. Edit Distance
 - [x] 122. Best Time to Buy and Sell Stock II
 - [x] 123. Best Time to Buy and Sell Stock III
+- [x] 84. Largest Rectangle in Histogram
 
 ## Heap
 - [x] 703. Kth Largest Element in a Stream
