@@ -77,6 +77,7 @@
 - [x] 621. Task Scheduler
 - [ ] 218. The Skyline Problem
 - [x] 272. Closest Binary Search Tree Value II
+- [x] 253. Meeting Rooms II
 
 ## Backtracking
 - [x] 51. N-Queens
