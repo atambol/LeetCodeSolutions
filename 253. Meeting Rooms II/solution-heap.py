@@ -10,26 +10,18 @@ class Solution:
         :type intervals: List[Interval]
         :rtype: int
         """
-        max_count = 0
-        count = 0
-        ends = []
+        if not intervals:
+            return 0
         
-        # sort the intervals
-        intervals.sort(key=lambda i: (i.start, i.end))
+        heap = []
+        intervals.sort(key=lambda x: x.start)
         
-        # traverse each interval and update count
+        rooms = 0
         for i in intervals:
-            # pop expired intervals
-            while ends and ends[0] <= i.start:
-                heapq.heappop(ends)
-                count -= 1
+            while heap and heap[0] <= i.start:
+                heapq.heappop(heap)
                 
-            # insert the new interval
-            count += 1
-            heapq.heappush(ends, i.end)
+            heapq.heappush(heap, i.end)
+            rooms = max(rooms, len(heap))
             
-            # calculate maxcount
-            max_count = max(max_count, count)
-            
-        return max_count
-            
+        return rooms
