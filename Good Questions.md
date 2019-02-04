@@ -1,4 +1,5 @@
 ## Trees
+- [x] 99. Recover Binary Search Tree
 - [x] 669. Trim a Binary Search Tree
 - [x] 663. Equal Tree Partition
 - [x] 230. Kth Smallest Element in a BST
