@@ -54,6 +54,7 @@
 - [ ] 402. Remove K Digits
 - [x] 826. Most Profit Assigning Work
 - [x] 215. Kth Largest Element in an Array
+- [x] 452. Minimum Number of Arrows to Burst Balloons
 
 ## Dynamic Programming
 - [x] 516. Longest Palindromic Subsequence
