@@ -90,3 +90,13 @@
 - [ ] 146. LRU Cache
 - [ ] 208. Implement Trie -Prefix Tree
 - [x] 722. Remove Comments
+
+## Algorithms
+- [ ] Prim's algorithm
+- [ ] Kruskal's algorithm
+- [ ] Dijikstra's algorithm
+- [ ] Insertion sort
+- [ ] Selection sort
+- [ ] Quick sort
+- [ ] Merge sort
+- [ ] R-Select algorithm
