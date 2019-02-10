@@ -32,6 +32,7 @@
 - [x] 261. Graph Valid Tree
 - [ ] 863. All Nodes Distance K in Binary Tree
 - [ ] 310. Minimum Height Trees
+- [x] 323. Number of Connected Components in an Undirected Graph
 
 ## Array
 - [x] 3. Longest Substring Without Repeating Characters
