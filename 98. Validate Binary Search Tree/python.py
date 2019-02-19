@@ -4,28 +4,17 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-import sys
 
 class Solution:
-    def isValidBST(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
-        maxVal = sys.maxsize
-        minVal = -1 - sys.maxsize
-        return self.myIsValidBST(root, maxVal, minVal)
+    def isValidBST(self, root: 'TreeNode') -> 'bool':
+        return self.validate(root, -sys.maxsize-1, sys.maxsize)
         
-    def myIsValidBST(self, root, maxVal, minVal):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
+    def validate(self, root, low, high):
         if not root:
             return True
         else:
-            if minVal < root.val < maxVal:
-                return self.myIsValidBST(root.left, root.val, minVal) and \
-                        self.myIsValidBST(root.right, maxVal, root.val) 
+            if low < root.val < high:
+                return self.validate(root.left, low, root.val) and self.validate(root.right, root.val, high)
             else:
                 return False
+            
