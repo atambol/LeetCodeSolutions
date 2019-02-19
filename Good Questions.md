@@ -37,6 +37,7 @@
 - [x] 684. Redundant Connection
 
 ## Array
+- [x] 34. Find First and Last Position of Element in Sorted Array
 - [x] 3. Longest Substring Without Repeating Characters
 - [x] 5. Longest Palindromic Substring
 - [x] 22. Generate Parentheses
