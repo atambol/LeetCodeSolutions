@@ -88,6 +88,7 @@
 
 ## Backtracking
 - [x] 51. N-Queens
+- [x] 267. Palindrome Permutation II
 
 ## Design
 - [x] 362. Design Hit Counter
