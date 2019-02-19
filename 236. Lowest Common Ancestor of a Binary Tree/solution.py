@@ -1,11 +1,11 @@
 # Definition for a binary tree node.
-# class TreeNode(object):
+# class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
+class Solution:
     def lowestCommonAncestor(self, root, p, q):
         """
         :type root: TreeNode
@@ -13,29 +13,30 @@ class Solution(object):
         :type q: TreeNode
         :rtype: TreeNode
         """
-        # Base condition
-        if root == None:
-            return None
+        lca, _ = self.LCA(root, p, q)
+        return lca
         
-        # Check the left and right subtree 
-        left = self.lowestCommonAncestor(root.left, p, q)
-        right = self.lowestCommonAncestor(root.right, p, q)
+    def LCA(self, root, p, q):
+        if not root:
+            return None, False
         
-        # If the LCA is already found, pass it on as such
-        if left not in (None, p, q):
-            return left
-        if right not in (None, p, q):
-            return right
+        # look left and right
+        left, lstatus = self.LCA(root.left, p, q)
+        right, rstatus = self.LCA(root.right, p, q)
         
-        # If the LCA is not found, check the situation at this node
-        found_p = p in [root, left, right]
-        found_q = q in [root, left, right]
+        # if already found, pass along
+        if lstatus:
+            return left, lstatus
+        if rstatus:
+            return right, rstatus
         
-        if found_p and found_q:
-            return root
-        elif found_p:
-            return p
-        elif found_q:
-            return q
+        # check if p and q found in this subtree
+        cand = set([left, right, root])
+        if p in cand and q in cand:
+            return root, True
+        elif (p in cand and not q in cand):
+            return p, False
+        elif not p in cand and q in cand:
+            return q, False
         else:
-            return None
+            return None, False
