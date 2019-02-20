@@ -16,6 +16,10 @@
 - [x] 449. Serialize and Deserialize BST
 - [x] 297. Serialize and Deserialize Binary Tree
 - [x] 426. Convert Binary Search Tree to Sorted Doubly Linked List
+- [x] 742. Closest Leaf in a Binary Tree
+- [x] 536. Construct Binary Tree from String
+- [x] 366. Find Leaves of Binary Tree
+- [x] 662. Maximum Width of Binary Tree
 
 ## Linked list
 - [x] 19. Remove Nth Node From End of List
@@ -59,7 +63,7 @@
 - [x] 239. Sliding Window Maximum
 - [ ] 402. Remove K Digits
 - [x] 826. Most Profit Assigning Work
-- [x] 215. Kth Largest Element in an Array
+- [x] 215. Kth Element in an Array
 - [x] 452. Minimum Number of Arrows to Burst Balloons
 
 ## Dynamic Programming
@@ -106,4 +110,4 @@
 - [ ] Selection sort
 - [ ] Quick sort
 - [ ] Merge sort
-- [ ] R-Select algorithm
+- [ ] Quick Select algorithm
