@@ -1,41 +1,43 @@
-class Solution(object):
-    def findRedundantConnection(self, edges):
-        """
-        :type edges: List[List[int]]
-        :rtype: List[int]
-        """
-        # count the number of vertices
-        # essentially implemented using disjoint set data structure
-        # create the representative and components map
-        rep = {}
-        comp = {}
-        for v, w in edges:
-            if v not in rep:
-                rep[v] = v
-                comp[v] = set([v])
-            if w not in rep:
-                rep[w] = w
-                comp[w] = set([w])
+class Solution:
+    def __init__(self):
+        self.parent = {}
+        self.child = {}
         
-        # find the edge where both vertices have same representative element
+    def findRedundantConnection(self, edges: 'List[List[int]]') -> 'List[int]':
+        # Disjoint set data structure
         for edge in edges:
-            v, w = edge[0], edge[1]
-            if v in rep and w in rep and rep[v] == rep[w]:
-                return edge
-            else:
-                rep_v = rep[v]
-                rep_w = rep[w]
-                if rep_v < rep_w:
-                    rep[v] = rep_w
-                    for c in comp[rep_v]:
-                        comp[rep_w].add(c)
-                        rep[c] = rep_w
-                    comp.pop(rep_v)
-                else:
-                    rep[w] = rep_v
-                    for c in comp[rep_w]:
-                        comp[rep_v].add(c)
-                        rep[c] = rep_v
-                    comp.pop(rep_w)
+            for v in edge:
+                if v not in self.parent:
+                    self.makeset(v)
                     
+        for u, v in edges:
+            parent_u = self.findset(u)
+            parent_v = self.findset(v)
             
+            if parent_u == parent_v:
+                return [u, v]
+            else:
+                self.union(u, v)
+        
+    def makeset(self, v):    
+        self.parent[v] = v
+        self.child[v] = set([v])
+        
+    def findset(self, v):
+        return self.parent[v]
+    
+    def union(self, u, v):
+        parent_u = self.findset(u)
+        parent_v = self.findset(v)
+        
+        if len(self.child[parent_u]) > len(self.child[parent_v]):
+            self.updateParent(self.child[parent_v], parent_u)
+            self.child.pop(parent_v)
+        else:
+            self.updateParent(self.child[parent_u], parent_v)
+            self.child.pop(parent_u)
+            
+    def updateParent(self, children, parent):
+        for child in children:
+            self.parent[child] = parent
+            self.child[parent].add(child)
