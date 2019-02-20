@@ -6,34 +6,39 @@
 #         self.right = None
 
 class Solution:
+    def __init__(self):
+        self.min = -sys.maxsize-1
+        self.max = sys.maxsize
     def largestBSTSubtree(self, root: 'TreeNode') -> 'int':
         if not root:
             return 0
         
-        count, _, _, _ = self.myLargestBSTSubtree(root)
+        _, _, count = self.myLargestBSTSubtree(root)
         return count
-        
+    
     def myLargestBSTSubtree(self, root):
-        if root.left and root.right:
-            lcount, lnode, lmin, lmax = self.myLargestBSTSubtree(root.left)
-            rcount, rnode, rmin, rmax = self.myLargestBSTSubtree(root.right)
-            if lnode == root.left and rnode == root.right and lmax < root.val < rmin:
-                    return 1 + lcount + rcount, root, lmin, rmax
-            elif lcount > rcount:
-                return lcount, lnode, lmin, lmax
+        if root.right and root.left:
+            llow, lhigh, lcount = self.myLargestBSTSubtree(root.left)
+            rlow, rhigh, rcount = self.myLargestBSTSubtree(root.right)
+            if llow <= lhigh < root.val < rlow <= rhigh:
+                return llow, rhigh, lcount + rcount + 1
             else:
-                return rcount, rnode, rmin, rmax
-        elif not root.left and root.right:
-            rcount, rnode, rmin, rmax = self.myLargestBSTSubtree(root.right)
-            if rnode == root.right and root.val < rmin:
-                return 1 + rcount, root, root.val, rmax
+                if lcount > rcount:
+                    return self.max, self.min, lcount
+                else:
+                    return self.max, self.min, rcount
+        elif not root.right and root.left:
+            llow, lhigh, lcount = self.myLargestBSTSubtree(root.left)
+            if llow <= lhigh < root.val:
+                return llow, root.val, lcount + 1
             else:
-                return rcount, rnode, rmin, rmax
-        elif root.left and not root.right:
-            lcount, lnode, lmin, lmax = self.myLargestBSTSubtree(root.left)
-            if lnode == root.left and lmax < root.val:
-                return 1 + lcount, root, lmin, root.val
+                return self.max, self.min, lcount
+        elif root.right and not root.left:
+            rlow, rhigh, rcount = self.myLargestBSTSubtree(root.right)
+            if root.val < rlow <= rhigh:
+                return root.val, rhigh, rcount + 1
             else:
-                return lcount, lnode, lmin, lmax
+                return self.max, self.min, rcount
         else:
-            return 1, root, root.val, root.val
+            return root.val, root.val, 1
+                    
