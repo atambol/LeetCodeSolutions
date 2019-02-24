@@ -1,25 +1,13 @@
-class Solution(object):
-    def findMin(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        return self.myFindMin(nums, 0, len(nums)-1)
         
-        def binSearch(nums, i, j):
-            # Base condition
-            if abs(i-j) == 1:
-                return min(nums[i], nums[j])
-            if i == j:
-                return nums[i]
-            
-            # Find the mid point
-            mid = (i + j)/2
-
-            # Check for irregularity on either sides on mid
-            if nums[mid] > nums[j]:
-                return binSearch(nums, mid, j)
+    def myFindMin(self, nums, i, j):
+        if j-i <= 1:
+            return min(nums[i:j+1])
+        else:
+            mid = (i+j)//2
+            if nums[mid] < nums[j]:
+                return min(nums[mid], self.myFindMin(nums, i, mid-1))
             else:
-                return binSearch(nums, i, mid)
-                    
-        return binSearch(nums, 0, len(nums)-1)
-        
+                return min(nums[i], self.myFindMin(nums, mid+1, j))
