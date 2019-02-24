@@ -65,6 +65,7 @@
 - [x] 826. Most Profit Assigning Work
 - [x] 215. Kth Element in an Array
 - [x] 452. Minimum Number of Arrows to Burst Balloons
+- [x] 154. Find Minimum in Rotated Sorted Array II
 
 ## Dynamic Programming
 - [x] 516. Longest Palindromic Subsequence
