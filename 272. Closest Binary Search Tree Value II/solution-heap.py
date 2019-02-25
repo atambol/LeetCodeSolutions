@@ -6,22 +6,25 @@
 #         self.right = None
 
 class Solution:
-    def closestKValues(self, root, target, k):
-        """
-        :type root: TreeNode
-        :type target: float
-        :type k: int
-        :rtype: List[int]
-        """
+    def closestKValues(self, root: TreeNode, target: float, k: int) -> List[int]:
         heap = []
         stack = []
-        while stack or root:
-            if root:
-                heapq.heappush(heap, (abs(root.val-target), root.val))
-                stack.append(root.right)
-                root = root.left
+        node = root
+        while stack or node:
+            if node:
+                if len(heap) < k:
+                    heapq.heappush(heap, (-abs(target-node.val), node.val))
+                else:
+                    if -heap[0][0] > abs(node.val - target):
+                        heapq.heappushpop(heap, (-abs(target-node.val), node.val))
+                        
+                stack.append(node.right)
+                node = node.left
             else:
-                root = stack.pop()
-                
-        kSmallest = heapq.nsmallest(k, heap)
-        return [x[1] for x in kSmallest]
+                node = stack.pop()
+        
+        sol = []
+        for tup in heap:
+            sol.append(tup[1])
+            
+        return sol
