@@ -1,47 +1,39 @@
 class Solution:
-    def removeKdigits(self, num, k):
-        """
-        :type num: str
-        :type k: int
-        :rtype: str
-        """
-        # edge cases
-        if k >= len(num):
+    def removeKdigits(self, num: str, j: int) -> str:
+        # edge case : remove all digits
+        if j == len(num):
             return "0"
         
-        # create a stack
-        stack = []
-        for digit in num[::-1]:
-            stack.append(int(digit))
-
-        # use an auxillary stack to store partial solution
+        # create a stack from the string
+        stack = [int(n) for n in num]
+        stack.reverse()
         aux = []
         
-        # remove elements until k is not 0 or stack runs out
-        while k and stack: 
-            if aux and stack[-1] < aux[-1]:
-                k -= 1
+        # maintain an auxilary stack
+        # check if the top of aux is greater than top of stack
+        # basically check for the a decreasing order in the string
+        while stack:
+            if aux and j > 0 and stack[-1] < aux[-1]:
                 aux.pop()
+                j -= 1
             else:
                 aux.append(stack.pop())
         
-        # push back elements to stack
-        while aux:
-            stack.append(aux.pop())
+        # remove remaining j numbers from aux
+        while j:
+            aux.pop()
+            j -= 1
         
-        # remove any leading zeroes
-        while stack and stack[-1] == 0:
-            stack.pop()
-            
-        stack.reverse()
-        
-        # remove any remaining numbers 
-        if k:
-            stack = stack[:-k]
-        
-        # return the solution
-        if stack:
-            return "".join([str(e) for e in stack])
-        else:
+        # check if all numbers left are 0s
+        if aux.count(0) == len(aux):
             return "0"
-        
+        else:
+            # remove any leading 0s
+            i = 0
+            while aux[i] == 0:
+                i+= 1
+            
+            aux = aux[i:]
+            
+            # return the final string
+            return "".join([str(n) for n in aux])
