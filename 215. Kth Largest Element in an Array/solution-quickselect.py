@@ -1,40 +1,24 @@
 class Solution:
-    def findKthLargest(self, nums, K):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-        """
-        # find n - Kth smallest element
-        n = len(nums) - 1
-        K = n - K + 1
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        return self.quickselect(nums, 0, len(nums)-1, len(nums)-k)
         
-        # quick select algorithm
-        i = 0
-        j = n
+    def quickselect(self, nums, low, high, k):
+        if low == high:
+            return nums[low]
         
-        while i <= j:
-            k = i   # pivot element index
-            pivot = nums[i]
+        pivot = nums[low]
+        i = low
+        j = i + 1
+        while j <= high:
+            if nums[j] < pivot:
+                nums[j], nums[i], i = nums[i+1], nums[j], i + 1
+            j += 1
             
-            # parition the array
-            for x in range(i+1, j+1):
-                if nums[x] < pivot:
-                    if x == k + 1:
-                        nums[k] = nums[x]
-                    else:
-                        nums[k], nums[x] = nums[x], nums[k+1]
-                    k = k + 1
-            
-            # put back the pivot
-            nums[k] = pivot
-            
-            # check if the pivot is the n - Kth largest element. Readjust otherwise
-            if k == K:
-                return nums[k]
-            elif k > K:
-                j = k - 1
-            else:
-                i = k + 1
-                
-        return nums[i]
+        nums[i] = pivot
+        if i == k:
+            return pivot
+        elif i < k:
+            return self.quickselect(nums, i+1, high, k)
+        else:
+            return self.quickselect(nums, low, i-1, k)
+        
