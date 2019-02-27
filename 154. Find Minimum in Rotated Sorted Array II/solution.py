@@ -1,17 +1,16 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        return self.myFindMin(nums, 0, len(nums)-1)
+        return self.find(nums, 0, len(nums)-1)
+    
+    def find(self, nums, low, high):
+        if high-low <= 1:
+            return min(nums)
         
-    def myFindMin(self, nums, i, j):
-        if j-i <= 1:
-            return min(nums[i:j+1])
+        mid = (high+low)//2
+        if nums[low] == nums[high]:
+            return min(self.find(nums, low, mid), self.find(nums, mid+1, high))
+                       
+        if mid < high:
+            return min(nums[mid], self.find(nums, low, mid-1))
         else:
-            mid = (i+j)//2
-            
-            if nums[i] == nums[j]:
-                return min(self.myFindMin(nums, i, mid-1), self.myFindMin(nums, mid, j-1))
-            
-            if nums[mid] <= nums[j]:
-                return min(nums[mid], self.myFindMin(nums, i, mid-1))
-            else:
-                return min(nums[i], self.myFindMin(nums, mid+1, j))
+            return min(nums[low], self.find(nums, mid+1, high))
