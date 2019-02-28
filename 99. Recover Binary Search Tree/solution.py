@@ -7,32 +7,27 @@
 
 class Solution:
     def __init__(self):
-        self.first = None
-        self.second = None
-        self.prev = None
+        self.nodes = []
         
-    def recoverTree(self, root):
+    def recoverTree(self, root: TreeNode) -> None:
         """
-        :type root: TreeNode
-        :rtype: void Do not return anything, modify root in-place instead.
+        Do not return anything, modify root in-place instead.
         """
-        self.inorder(root)
-        self.first.val, self.second.val = self.second.val, self.first.val
+        self.inorder(None, root)
+        node1 = self.nodes.pop()
+        node2 = self.nodes.pop()
+        node1.val, node2.val = node2.val, node1.val
+
         
-    def inorder(self, root):
-        if not root:
-            return 
+    def inorder(self, prev, node):
+        if not node:
+            return prev
         
-        self.inorder(root.left)
-        if self.prev:
-            if self.prev.val > root.val:
-                if self.first:
-                    self.second = root
-                else:
-                    self.first = self.prev
-                    self.second = root
-        self.prev = root
-        self.inorder(root.right)
-        
-        
-            
+        prev = self.inorder(prev, node.left)
+        if prev and prev.val > node.val:
+            if self.nodes:
+                self.nodes[1] = node
+            else:
+                self.nodes.append(prev)
+                self.nodes.append(node)
+        return self.inorder(node, node.right)
