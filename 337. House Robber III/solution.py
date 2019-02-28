@@ -11,27 +11,20 @@ class Solution:
         :type root: TreeNode
         :rtype: int
         """
-        return max(self.myrob(root))
-        
-    def myrob(self, root):
         if not root:
-            return 0, 0
+            return 0
+        return max(self.myRob(root))
         
-        if root.left:
-            wleft, woleft = self.myrob(root.left)
+    def myRob(self, root):
+        if root.left and root.right:
+            wl, wol = self.myRob(root.left)
+            wr, wor = self.myRob(root.right)
+            return root.val + wol + wor, max(wr + wol, wl+wor, wl+wr, wor+wol)
+        elif root.left and not root.right:
+            wl, wol = self.myRob(root.left)
+            return root.val + wol, max(wol, wl)
+        elif root.right and not root.left:
+            wr, wor = self.myRob(root.right)
+            return root.val + wor, max(wor, wr)
         else:
-            wleft, woleft = 0, 0
-            
-        if root.right:
-            wright, woright = self.myrob(root.right)
-        else:
-            wright, woright = 0, 0        
-            
-        # loot with root
-        wroot = root.val + woleft + woright
-        
-        # loot without root
-        woroot = max(wleft+wright, wleft+woright, woleft+wright, woleft+woright)
-        
-        return wroot, woroot
-            
+            return root.val, 0
