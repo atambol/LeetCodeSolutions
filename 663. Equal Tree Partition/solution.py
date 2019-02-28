@@ -6,61 +6,51 @@
 #         self.right = None
 
 class Solution:
-    def checkEqualTree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
-        if not root:
+    def __init__(self):
+        self.half = None
+        self.equal = False
+        
+    def checkEqualTree(self, root: TreeNode) -> bool:
+        # get the total weight
+        total = self.getTotal(root)
+                
+        # get the half
+        if total%2 == 1:
             return False
         
-        stack = []
-        node = root
-        total = 0
+        self.half = total//2
         
-        while node or stack:
+        # check if the mid point exists
+        self.checkTotal(root)
+        
+        return self.equal
+                
+    def getTotal(self, node):
+        stack = []
+        total = 0
+        while stack or node:
             if node:
                 total += node.val
                 stack.append(node.right)
                 node = node.left
             else:
                 node = stack.pop()
-        
-        if total%2 == 1:
-            return False
-        
-        half = total/2
-        _, status = self.dfs(root, half)
-        return status
+                
+        return total
     
-    def dfs(self, root, target):
-        if root.left and root.right:
-            left, status = self.dfs(root.left, target)
-            if status:
-                return None, status
-            right, status = self.dfs(root.right, target)
-            if status:
-                return None, status
-            if left == target or right == target:
-                return None, True
-            else:
-                return left + right + root.val, False
-        elif not root.left and root.right:
-            right, status = self.dfs(root.right, target)
-            if status:
-                return None, status
-            if right == target:
-                return None, True  
-            else:
-                return root.val + right, False
-        elif root.left and not root.right:
-            left, status = self.dfs(root.left, target)
-            if status:
-                return None, status
-            if left == target:
-                return None, True 
-            else:
-                return root.val + left, False
-        else:
-            return root.val, False
+    def checkTotal(self, node):
+        if not node:
+            return None
+        
+        totals = []
+        if node.left:
+            totals.append(self.checkTotal(node.left))
+        
+        if node.right:
+            totals.append(self.checkTotal(node.right))
             
+        if self.half in totals:
+            self.equal = True
+            
+        totals.append(node.val)
+        return sum(totals)
