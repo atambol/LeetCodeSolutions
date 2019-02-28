@@ -1,39 +1,45 @@
-class Solution:
-    def searchRange(self, nums: 'List[int]', target: 'int') -> 'List[int]':
-        return self.search(nums, target, 0, len(nums)-1)
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        if not nums:
+            return [-1, -1]
+        sol = self.search(nums, target, 0, len(nums)-1)
+        if not sol:
+            return [-1, -1]
+        else:
+            if len(sol) == 1:
+                return [sol[0], sol[0]]
+            else:
+                return sol
         
     def search(self, nums, target, low, high):
-        sol = [-1, -1]
-        # base condition
-        if low > high:
+        if high - low == 0:
+            if nums[low] == target:
+                return [low]
+            else:
+                []
+        if high - low <= 1:
+            sol = []
+            if nums[low] == target:
+                sol.append(low)
+            if nums[high] == target:
+                sol.append(high)
             return sol
         
-        # only one element between the indices
-        elif low == high:
-            if nums[low] == target:
-                sol[0] = low
-                sol[1] = low
-            return sol
+        sol = []
+        mid = (low+high)//2
+        if nums[mid] == target:
+            sol.append(mid)
+            sol.extend(self.search(nums, target, low, mid-1))
+            sol.extend(self.search(nums, target, mid+1, high))
+            return [min(sol), max(sol)]
+        elif nums[mid] < target:
+            return self.search(nums, target, mid+1, high)
         else:
-            # calculate mid
-            mid = (low+high)//2
+            return self.search(nums, target, low, mid-1)
+
             
-            # if mid is the target, look both sides
-            if nums[mid] == target:
-                sol1 = self.search(nums, target, low, mid-1)
-                sol2 = self.search(nums, target, mid+1, high)
-                sol = [mid, mid]
-                if sol1[0] != -1:
-                    sol[0] = sol1[0]
-                if sol2[1] != -1:
-                    sol[1] = sol2[1]
-                return sol
-            
-            # mid is less than target, look right
-            elif nums[mid] < target:
-                return self.search(nums, target, mid+1, high)
-            
-            # mid is greater than target, look left
-            else:
-                return self.search(nums, target, low, mid-1)
-                    
