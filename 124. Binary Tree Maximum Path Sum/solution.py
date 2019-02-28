@@ -6,38 +6,28 @@
 #         self.right = None
 
 class Solution:
-    def maxPathSum(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        maxSum, maxPath = self.mymaxPathSum(root)
-        return maxSum
-    
-    def mymaxPathSum(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        # not child
-        if not root.left and not root.right:
-            return root.val, root.val
-        # only right child
+    def maxPathSum(self, root: TreeNode) -> int:
+        path, max = self.myPathSum(root)
+        return max
+        
+    def myPathSum(self, root):
+        if root.left and root.right:
+            lpath, lmax = self.myPathSum(root.left)
+            rpath, rmax = self.myPathSum(root.right)
+            maxCand = [lmax, rmax, lpath, rpath, lpath+root.val, rpath+root.val, root.val, lpath+root.val+rpath]
+            pathCand = [lpath+root.val, rpath+root.val, root.val]
+            return max(pathCand), max(maxCand)
+        elif root.left and not root.right:
+            lpath, lmax = self.myPathSum(root.left)
+            maxCand = [lmax, lpath, lpath+root.val, root.val]
+            pathCand = [lpath+root.val, root.val]
+            return max(pathCand), max(maxCand)
         elif not root.left and root.right:
-            rSum, rPath = self.mymaxPathSum(root.right)
-            maxPath = max(rPath+root.val, root.val)
-            maxSum = max(rSum, maxPath)
-            return maxSum, maxPath
-        # only left child
-        elif not root.right and root.left:
-            lSum, lPath = self.mymaxPathSum(root.left)
-            maxPath = max(lPath+root.val, root.val)
-            maxSum = max(lSum, maxPath)
-            return maxSum, maxPath
-        # both child
+            rpath, rmax = self.myPathSum(root.right)
+            maxCand = [rmax, rpath, rpath+root.val, root.val]
+            pathCand = [rpath+root.val, root.val]
+            return max(pathCand), max(maxCand)
         else:
-            rSum, rPath = self.mymaxPathSum(root.right)
-            lSum, lPath = self.mymaxPathSum(root.left)
-            maxPath = max(lPath+root.val, rPath+root.val, root.val)
-            maxSum = max(lSum, rSum, lPath+root.val+rPath, maxPath)
-            return maxSum, maxPath
+            return root.val, root.val
+        
+    
