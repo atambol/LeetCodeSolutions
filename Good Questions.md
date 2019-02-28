@@ -65,6 +65,7 @@
 - [x] 215. Kth Element in an Array
 - [x] 452. Minimum Number of Arrows to Burst Balloons
 - [x] 154. Find Minimum in Rotated Sorted Array II
+- [x] 904. Fruit Into Baskets
 
 ## Dynamic Programming
 - [x] 516. Longest Palindromic Subsequence
