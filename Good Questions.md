@@ -9,7 +9,6 @@
 - [x] 145. Binary Tree Postorder Traversal - iterative method
 - [x] 285. Inorder Successor in BST
 - [x] 404. Sum of Left Leaves
-- [ ] 250. Count Univalue Subtrees
 - [ ] 545. Boundary of Binary Tree
 - [x] 337. House Robber III
 - [x] 222. Count Complete Tree Nodes
