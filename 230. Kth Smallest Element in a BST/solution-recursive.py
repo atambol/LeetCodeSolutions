@@ -6,35 +6,19 @@
 #         self.right = None
 
 class Solution:
-    def kthSmallest(self, root, k):
-        """
-        :type root: TreeNode
-        :type k: int
-        :rtype: int
-        """
-        k, node = self.mykthSmallest(root, k)
-        return node.val
-        
-    def mykthSmallest(self, root, k):
-        """
-        :type root: TreeNode
-        :type k: int
-        :rtype: int, int
-        """
-        # edge case
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        x, y = self.inorder(root, k)
+        return x
+    
+    def inorder(self, root, k):
         if not root:
-            return k, None
+            return None, k
         
-        # look left
-        k, node = self.mykthSmallest(root.left, k)
-        if node:
-            return k, node
-        
-        # look at root
-        k -= 1
-        
+        left, k = self.inorder(root.left, k)
         if not k:
-            return k, root
+            return left, k
+        k-=1
+        if not k:
+            return root.val, k
         
-        # look right
-        return self.mykthSmallest(root.right, k)
+        return self.inorder(root.right, k)
