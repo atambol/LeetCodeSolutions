@@ -1,28 +1,26 @@
 # Definition for a binary tree node.
-# class TreeNode(object):
+# class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
-    def inorderSuccessor(self, root, p):
-        """
-        :type root: TreeNode
-        :type p: TreeNode
-        :rtype: TreeNode
-        """
+class Solution:
+    def inorderSuccessor(self, root: 'TreeNode', p: 'TreeNode') -> 'TreeNode':
         node = root
-        succ = None
-        while node and node != p:
+        parent = None
+        while node and node.val != p.val:
             if node.val < p.val:
                 node = node.right
             else:
-                succ = node
+                parent = node
                 node = node.left
-        
-        if node and node.right:
-            succ = node.right
-            while succ.left:
-                succ = succ.left
-        return succ
+                
+        if not node.right:
+            return parent
+        else:
+            node = node.right
+            
+            while node.left:
+                node = node.left
+            return node
