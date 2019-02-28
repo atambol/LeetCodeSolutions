@@ -6,27 +6,24 @@
 #         self.right = None
 
 class Solution:
-    def countNodes(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        # edge case
+    def countNodes(self, root: TreeNode) -> int:
         if not root:
             return 0
         
         left = self.getDepth(root.left)
         right = self.getDepth(root.right)
-        
         if left == right:
-            return 2 ** left + self.countNodes(root.right)
+            return self.countNodes(root.right) + 2**left
         else:
-            return 2 ** right + self.countNodes(root.left)
+            return self.countNodes(root.left) + 2**right
         
-    def getDepth(self, root):
-        d = 0
-        while root:
-            root = root.left
-            d += 1
+    def getDepth(self, node):
+        if not node:
+            return 0
+        
+        count = 0
+        while node:
+            count += 1
+            node = node.left
             
-        return d
+        return count
