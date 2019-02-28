@@ -6,65 +6,43 @@
 #         self.right = None
 
 class Solution:
-    def deleteNode(self, root, key):
-        """
-        :type root: TreeNode
-        :type key: int
-        :rtype: TreeNode
-        """
-        # edge case
-        if not root:
-            return root
+    def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
+        # insert dummy root
+        dummy = TreeNode(sys.maxsize)
+        dummy.left = root
+        root = dummy
         
-        # attach a dummy head
-        node = TreeNode(sys.maxsize)
-        node.left = root
-        root = node
-        
-        # find the key in the tree
-        prev = node
-        node = root
+        # find the node
+        node = root.left
+        prev = root
         while node and node.val != key:
             prev = node
-            if key > node.val:
+            if node.val < key:
                 node = node.right
             else:
                 node = node.left
-                
-        # node not found
+        
         if not node:
             return root.left
-
-        # remove the node
-        target = node
-        child = None
         
-        # arrange the subtree as a BST
-        # both children present
+        # remove the node
+        child = None
         if node.left and node.right:
-            node = node.left
-            while node.right:
-                node = node.right
-            node.right = target.right
-            child = target.left
-            
-        # left child present
+            left = node.left
+            node2 = node.right
+            while node2.left:
+                node2 = node2.left
+            node2.left = left
+            child = node.right
         elif node.left and not node.right:
             child = node.left
-            
-        # right child present
-        elif not node.left and node.right:
+        else:
             child = node.right
             
-        # no children
-        else:
-            pass
-        
-        # attach the remaining subtree to the parent of target
-        if prev.left == target:
+        # attach the child to prev
+        if prev.left == node:
             prev.left = child
         else:
             prev.right = child
             
         return root.left
-                
