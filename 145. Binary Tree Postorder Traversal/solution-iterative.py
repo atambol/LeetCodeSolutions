@@ -6,28 +6,24 @@
 #         self.right = None
 
 class Solution:
-    def postorderTraversal(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[int]
-        """
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
         stack = []
-        visited = 1
-        visiting = 0
-        sol = []
         node = root
+        postorder = []
+        right = 2
+        left = 1
         while node or stack:
             if node:
-                stack.append((node, visiting))
+                stack.append((node, left))
                 node = node.left
+                
             else:
                 node, status = stack.pop()
-                if status == visiting:
-                    stack.append((node, visited))
+                if status == left:
+                    stack.append((node, right))
                     node = node.right
                 else:
-                    sol.append(node.val)
+                    postorder.append(node.val)
                     node = None
                     
-        return sol
-                    
+        return postorder
