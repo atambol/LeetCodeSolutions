@@ -13,12 +13,9 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
-        # serialization converts the tree into preorder traversal
-        # the tree is always considered full
-        # if a node has any child as null, that child is replaced with a #
-        # this way the deserialization can happen with just one traversal
         if not root:
             return ""
+        
         preorder = []
         stack = []
         node = root
@@ -30,51 +27,44 @@ class Codec:
             else:
                 preorder.append("#")
                 node = stack.pop()
+                
+        return ".".join(preorder)
+        
 
-        # print("/".join(preorder))
-        return "/".join(preorder)
-    
     def deserialize(self, data):
         """Decodes your encoded data to tree.
         
         :type data: str
         :rtype: TreeNode
         """
-        left = 0
-        right = 1
-        
         if not data:
             return None
         
-        preorder = data.split("/")
+        preorder = data.split(".")
         preorder.reverse()
-        stack = []
-        root = None
+        root = TreeNode(int(preorder.pop()))
+        left = 1
+        right = 2
+        stack = [(root, left)]
         while preorder:
-            # extract a value and create a node
             val = preorder.pop()
             if val == "#":
-                node = None
+                node, status = stack.pop()
+                if status == left:
+                    stack.append((node, right))
             else:
-                node = TreeNode(val)
-                
-            # attach it to the left or right of parent
-            if stack:
-                parent, side = stack.pop()
-                if side == left:
+                node = TreeNode(int(val))
+                parent, status = stack.pop()
+                if status == left:
                     parent.left = node
                     stack.append((parent, right))
                 else:
                     parent.right = node
-            else:
-                root = node
-            
-            # save the node into stack
-            if node:
-                stack.append((node, left))
                     
+                stack.append((node, left))
+                
         return root
-            
+                
 
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()
