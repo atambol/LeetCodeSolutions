@@ -69,7 +69,6 @@
 
 ## Dynamic Programming
 - [x] 516. Longest Palindromic Subsequence
-- [x] 139. Word Break
 - [x] 322. Coin Change
 - [x] 518. Coin Change 2
 - [x] 53. Maximum Subarray
@@ -95,6 +94,7 @@
 ## Backtracking
 - [x] 51. N-Queens
 - [x] 267. Palindrome Permutation II
+- [x] 140. Word Break II
 
 ## Design
 - [x] 362. Design Hit Counter
