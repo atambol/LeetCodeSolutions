@@ -6,9 +6,8 @@
 - [x] 124. Binary Tree Maximum Path Sum
 - [x] 776. Split BST
 - [x] 450. Delete Node in a BST
-- [x] 145. Binary Tree Postorder Traversal - iterative method
+- [x] 145. Binary Tree Postorder Traversal
 - [x] 285. Inorder Successor in BST
-- [x] 404. Sum of Left Leaves
 - [ ] 545. Boundary of Binary Tree
 - [x] 337. House Robber III
 - [x] 222. Count Complete Tree Nodes
@@ -27,33 +26,22 @@
 - [x] 142. Linked List Cycle II
 - [x] 817. Linked List Components
 
-## Graph
-- [x] 207. Course Schedule
-- [x] 210. Course Schedule II
-- [x] 547. Friend Circles
-- [x] 133. Clone Graph
-- [x] 399. Evaluate Division
-- [x] 261. Graph Valid Tree
-- [ ] 863. All Nodes Distance K in Binary Tree
-- [ ] 310. Minimum Height Trees
-- [x] 323. Number of Connected Components in an Undirected Graph
-- [x] 684. Redundant Connection
+## String
+- [x] 3. Longest Substring Without Repeating Characters
+- [x] 5. Longest Palindromic Substring
+- [x] 22. Generate Parentheses
+- [x] 692. Top K Frequent Words
 
 ## Array
 - [x] 41. First Missing Positive
 - [x] 31. Next Permutation
 - [x] 34. Find First and Last Position of Element in Sorted Array
-- [x] 3. Longest Substring Without Repeating Characters
-- [x] 5. Longest Palindromic Substring
-- [x] 22. Generate Parentheses
 - [x] 56. Merge Intervals
 - [x] 33. Search in Rotated Sorted Array
 - [x] 739. Daily Temperatures
 - [x] 15. 3Sum
 - [x] 16. 3Sum Closest
 - [x] 11. Container With Most Water
-- [x] 692. Top K Frequent Words
-- [ ] 489. Robot Room Cleaner
 - [ ] 724. Find Pivot Index
 - [x] 54. Spiral Matrix
 - [x] 731. My Calendar II
@@ -66,6 +54,19 @@
 - [x] 452. Minimum Number of Arrows to Burst Balloons
 - [x] 154. Find Minimum in Rotated Sorted Array II
 - [x] 904. Fruit Into Baskets
+
+## Backtracking/DFS
+- [x] 51. N-Queens
+- [x] 267. Palindrome Permutation II
+- [x] 140. Word Break II
+- [ ] 489. Robot Room Cleaner
+
+## Heap
+- [x] 703. Kth Largest Element in a Stream
+- [x] 621. Task Scheduler
+- [ ] 218. The Skyline Problem
+- [x] 272. Closest Binary Search Tree Value II
+- [x] 253. Meeting Rooms II
 
 ## Dynamic Programming
 - [x] 516. Longest Palindromic Subsequence
@@ -84,17 +85,17 @@
 - [x] 123. Best Time to Buy and Sell Stock III
 - [x] 84. Largest Rectangle in Histogram
 
-## Heap
-- [x] 703. Kth Largest Element in a Stream
-- [x] 621. Task Scheduler
-- [ ] 218. The Skyline Problem
-- [x] 272. Closest Binary Search Tree Value II
-- [x] 253. Meeting Rooms II
-
-## Backtracking
-- [x] 51. N-Queens
-- [x] 267. Palindrome Permutation II
-- [x] 140. Word Break II
+## Graph
+- [x] 207. Course Schedule
+- [x] 210. Course Schedule II
+- [x] 547. Friend Circles
+- [x] 133. Clone Graph
+- [x] 399. Evaluate Division
+- [x] 261. Graph Valid Tree
+- [ ] 863. All Nodes Distance K in Binary Tree
+- [ ] 310. Minimum Height Trees
+- [x] 323. Number of Connected Components in an Undirected Graph
+- [x] 684. Redundant Connection
 
 ## Design
 - [x] 362. Design Hit Counter
