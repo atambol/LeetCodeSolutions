@@ -105,12 +105,11 @@
 208. Implement Trie -Prefix Tree
 722. Remove Comments
 
-## Algorithms
-Prim's algorithm
-Kruskal's algorithm
-Dijikstra's algorithm
-Insertion sort
-Selection sort
-Quick sort
-Merge sort
-Quick Select algorithm
+## Common Algorithms
+1. Prim's algorithm
+2. Kruskal's algorithm
+3. Dijikstra's algorithm
+4. Insertion sort
+5. Selection sort
+6. Quick sort
+7. Merge sort
