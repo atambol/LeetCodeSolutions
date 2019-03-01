@@ -11,21 +11,22 @@ class Solution:
         :type n: int
         :rtype: ListNode
         """
-        node = ListNode(None)
-        node.next = head
-        head = node
-        
-        # run the pointer for n times
-        while n:
-            node = node.next
-            n -= 1
-            
-        # run another pointer behind it
+        # dummy head
+        ptr = ListNode(None)
+        ptr.next = head
+        head = ptr
         prev = head
-        while node.next:
-            prev = prev.next
-            node = node.next
+        ptr = head.next
+        
+        # create difference of n
+        while n:
+            n -= 1
+            ptr = ptr.next
             
-        # remove the node
+        # run two pointers
+        while ptr:
+            ptr = ptr.next
+            prev = prev.next
+            
         prev.next = prev.next.next
         return head.next
