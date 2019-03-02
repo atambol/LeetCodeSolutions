@@ -67,6 +67,7 @@
 
 ## Backtracking/DFS
 ```
+39. Combination Sum
 51. N-Queens
 267. Palindrome Permutation II
 140. Word Break II
