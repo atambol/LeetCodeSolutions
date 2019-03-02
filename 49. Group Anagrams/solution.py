@@ -4,14 +4,12 @@ class Solution:
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        sol = {}
-        
-        for s in strs:        
-            key = "".join(sorted(s))
-            if key in sol:
-                sol[key].append(s)
+        map = {}
+        for s in strs:
+            s_sorted = "".join(sorted(s))
+            if s_sorted in map:
+                map[s_sorted].append(s)
             else:
-                sol[key] = [s]
-            
-        return list(sol.values())
-            
+                map[s_sorted] = [s]
+        
+        return [map[a] for a in map]
