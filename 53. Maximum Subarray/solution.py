@@ -6,14 +6,12 @@ class Solution:
         """
         # edge case
         if not nums:
-            return None
+            return 0
         
-        # two sum variables
-        maxSum = nums[0]
-        curSum = nums[0]
-        
+        running_sum = nums[0]
+        max_sum = nums[0]
         for num in nums[1:]:
-            curSum = max(curSum+num, num)
-            maxSum = max(maxSum, curSum)
+            running_sum = max(num, running_sum+num)
+            max_sum = max(max_sum, running_sum)
             
-        return maxSum
+        return max_sum
