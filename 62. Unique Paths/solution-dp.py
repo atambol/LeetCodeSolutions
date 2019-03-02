@@ -1,35 +1,24 @@
 class Solution:
-    def uniquePaths(self, m, n):
-        """
-        :type m: int
-        :type n: int
-        :rtype: int
-        """
-        # edge cases
+    def uniquePaths(self, m: int, n: int) -> int:
+        # edge 
         if not m or not n:
             return 0
         
-        if m == 1 or n == 1:
-            return 1
-        
-        # create a dp matrix
-        dp = []
+        # construct the matrix
+        matrix = []
         for i in range(m):
-            dp.append([0]*n)
+            matrix.append([0]*n)
+        matrix[0][0] = 1    
         
-        # one way to reach the first cell
-        dp[0][0] = 1
-        
-        # find ways for other cells
-        for i in range(m):
-            for j in range(n):
-                up = 0
-                if i - 1 >= 0:
-                    up = dp[i-1][j]
-                left = 0
-                if j - 1 >= 0:
-                    left = dp[i][j-1]
-                    
-                dp[i][j] = left + up + dp[i][j]
-                
-        return dp[-1][-1]
+        for i in range(1, m):
+            matrix[i][0] = matrix[i-1][0]
+            
+        for i in range(1, n):
+            matrix[0][i] = matrix[0][i-1]
+
+        # dynamic programming
+        for i in range(1, m):
+            for j in range(1, n):
+                matrix[i][j] = matrix[i][j-1] + matrix[i-1][j]
+
+        return matrix[-1][-1]
