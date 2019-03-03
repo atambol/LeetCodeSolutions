@@ -1,13 +1,12 @@
 class Solution:
-    def simplifyPath(self, path):
-        """
-        :type path: str
-        :rtype: str
-        """
-        pathSplit = path.split("/")
+    def simplifyPath(self, path: str) -> str:
+        if not str:
+            return ""
+        
         stack = []
-        for p in pathSplit:
-            if not p or p == ".":
+        paths = path.split("/")
+        for p in paths:
+            if not p or p == '.':
                 continue
             elif p == "..":
                 if stack:
@@ -15,5 +14,6 @@ class Solution:
             else:
                 stack.append(p)
                 
-        return "/" + "/".join(stack)
-                
+        s = "/".join(stack)
+        return "/"+s
+            
