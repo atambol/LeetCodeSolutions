@@ -1,32 +1,35 @@
 class Solution:
-    def minDistance(self, word1, word2):
-        """
-        :type word1: str
-        :type word2: str
-        :rtype: int
-        """
-        word1 = "#" + word1
-        word2 = "#" + word2
-        m = len(word1)
-        n = len(word2)
-        dp = []
-        for i in range(m):
-            dp.append([0]*n)
-            
-        for i in range(m):
-            dp[i][0] = i
-
-        for j in range(n):
-            dp[0][j] = j
-            
-        for i in range(1, m):
-            for j in range(1, n):
-                if word1[i] == word2[j]:
-                    dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]-1)
-                else:
-                    dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])
-                    
-        return dp[-1][-1]        
-            
+    def minDistance(self, word1: str, word2: str) -> int:
+        l1 = len(word1)
+        l2 = len(word2)
         
-                
+        # edge cases
+        if not l1:
+            return l2
+        if not l2:
+            return l1
+        
+        # dp grid
+        dp = []
+        for i in range(l1+1):
+            dp.append([0]*(l2+1))
+            
+        for i in range(l1+1):
+            dp[i][0] = i
+        
+        for i in range(l2+1):
+            dp[0][i] = i
+            
+        # insert a dummy character to the start
+        word1 = "."+word1
+        word2 = "."+word2
+        
+        # find the edit distance
+        for i in range(1, l1+1):
+            for j in range(1, l2+1):
+                if word1[i] == word2[j]:
+                    dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]-1) + 1
+                else:
+                    dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1
+                    
+        return dp[-1][-1]
