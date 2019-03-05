@@ -4,17 +4,24 @@
 * Check for empty list
 
 ## Trees
-* Iterative - use explicit stacks to store state - faster but trciky
-* Recursive - use internal function call stack - slower but easy - think about what to handle on one node
+* Iterative 
+* Recursive 
 * Check for empty tree node
+* 4 case technique for binary tree children
 
 ## Strings
 * Check case sensitivity
 * Check encoding
 
 ## Arrays
-* Two pointer technique (i = 0, j = n-1)
+* Two pointer technique
 * DFS
 
 ## Dynamic programming
 * Tabulate the previous results and construct new results using them
+
+## Graphs
+* DFS
+* BFS
+* Disjoint set datastructure
+* visited set
