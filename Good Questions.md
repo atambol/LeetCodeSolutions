@@ -64,6 +64,7 @@
 452. Minimum Number of Arrows to Burst Balloons
 154. Find Minimum in Rotated Sorted Array II
 904. Fruit Into Baskets
+973. K Closest Points to Origin
 ```
 
 ## Backtracking/DFS
