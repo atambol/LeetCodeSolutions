@@ -6,51 +6,41 @@
 #         self.right = None
 
 class Solution:
-    def __init__(self):
-        self.half = None
-        self.equal = False
-        
     def checkEqualTree(self, root: TreeNode) -> bool:
-        # get the total weight
-        total = self.getTotal(root)
-                
-        # get the half
-        if total%2 == 1:
+        if not root:
             return False
         
-        self.half = total//2
+        # find total of the tree at root
+        total = self.getTotal(root)
+        if total % 2 == 1:
+            return False
         
-        # check if the mid point exists
-        self.checkTotal(root)
+        half = total//2
         
-        return self.equal
-                
-    def getTotal(self, node):
-        stack = []
-        total = 0
-        while stack or node:
-            if node:
-                total += node.val
-                stack.append(node.right)
-                node = node.left
-            else:
-                node = stack.pop()
-                
-        return total
-    
-    def checkTotal(self, node):
-        if not node:
-            return None
+        # check if half sum is found
+        equal, total = self.checkEqual(root.right, half)
+        if equal:
+            return equal
+        equal, total = self.checkEqual(root.left, half)
+        return equal
         
-        totals = []
-        if node.left:
-            totals.append(self.checkTotal(node.left))
+    def getTotal(self, root):
+        if not root:
+            return 0
+        else:
+            return self.getTotal(root.left) + self.getTotal(root.right) + root.val
         
-        if node.right:
-            totals.append(self.checkTotal(node.right))
-            
-        if self.half in totals:
-            self.equal = True
-            
-        totals.append(node.val)
-        return sum(totals)
+    def checkEqual(self, root, half):
+        if not root:
+            return False, 0
+        
+        total = root.val
+        equal, total1 = self.checkEqual(root.left, half)
+        if equal:
+            return equal, None
+        equal, total2 = self.checkEqual(root.right, half)
+        if equal:
+            return equal, None
+        
+        total += total1 + total2
+        return total == half, total
