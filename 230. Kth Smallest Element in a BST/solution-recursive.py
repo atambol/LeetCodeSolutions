@@ -6,19 +6,26 @@
 #         self.right = None
 
 class Solution:
+    def __init__(self):
+        self.k = 0
+        
     def kthSmallest(self, root: TreeNode, k: int) -> int:
-        x, y = self.inorder(root, k)
-        return x
-    
-    def inorder(self, root, k):
+        self.k = k
+        return self.inorder(root)
+        
+    def inorder(self, root):
         if not root:
-            return None, k
+            return None
         
-        left, k = self.inorder(root.left, k)
-        if not k:
-            return left, k
-        k-=1
-        if not k:
-            return root.val, k
+        val = self.inorder(root.left)
+        if val != None:
+            return val
         
-        return self.inorder(root.right, k)
+        self.k -= 1
+        if not self.k:
+            return root.val
+        
+        return self.inorder(root.right)
+        
+        
+        
