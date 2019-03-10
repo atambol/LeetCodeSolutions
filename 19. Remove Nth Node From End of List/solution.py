@@ -5,28 +5,24 @@
 #         self.next = None
 
 class Solution:
-    def removeNthFromEnd(self, head, n):
-        """
-        :type head: ListNode
-        :type n: int
-        :rtype: ListNode
-        """
-        # dummy head
-        ptr = ListNode(None)
-        ptr.next = head
-        head = ptr
-        prev = head
-        ptr = head.next
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        # attach a dummy node
+        node = ListNode(None)
+        node.next = head
+        head = node
         
-        # create difference of n
-        while n:
+        # two runners
+        fptr = head.next
+        while fptr and n:
             n -= 1
-            ptr = ptr.next
+            fptr = fptr.next
             
-        # run two pointers
-        while ptr:
-            ptr = ptr.next
-            prev = prev.next
+        sptr = head
+        while fptr:
+            sptr = sptr.next
+            fptr = fptr.next
             
-        prev.next = prev.next.next
+        # remove the node
+        sptr.next = sptr.next.next
         return head.next
+        
