@@ -7,42 +7,50 @@
 
 class Solution:
     def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
-        # insert dummy root
+        # edge case
+        if not root:
+            return root
+        
+        # attach a dummy root
         dummy = TreeNode(sys.maxsize)
         dummy.left = root
-        root = dummy
+        prev = dummy
         
         # find the node
-        node = root.left
-        prev = root
+        node = root
+
         while node and node.val != key:
             prev = node
             if node.val < key:
                 node = node.right
-            else:
+            elif node.val > key:
                 node = node.left
-        
+
+        # check if found
         if not node:
-            return root.left
+            return root
         
+        # adjust subtrees
+        left = node.left
+        right = node.right
+        subtree = None
+        if right:
+            subtree = right
+            if left:
+                ptr = right
+                while ptr.left:
+                    ptr = ptr.left
+                ptr.left = left
+        else:
+            subtree = left
+            
         # remove the node
-        child = None
-        if node.left and node.right:
-            left = node.left
-            node2 = node.right
-            while node2.left:
-                node2 = node2.left
-            node2.left = left
-            child = node.right
-        elif node.left and not node.right:
-            child = node.left
-        else:
-            child = node.right
-            
-        # attach the child to prev
         if prev.left == node:
-            prev.left = child
+            prev.left = subtree
         else:
-            prev.right = child
+            prev.right = subtree
             
-        return root.left
+        return dummy.left
+                
+            
+        
