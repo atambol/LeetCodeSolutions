@@ -1,36 +1,16 @@
 class Solution:
-    def longestPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
-        sol = ""
-        
-        # expand around index
+    def longestPalindrome(self, s: str) -> str:
+        pali = ""
         for i in range(len(s)):
-            j = i - 1
-            k = i + 1
-            while j >= 0 and k < len(s) and s[j] == s[k]:
-                j -= 1
-                k += 1
-            
-            j += 1
-            k -= 1
-            if k - j + 1 > len(sol):
-                sol = s[j:k+1]
+            for j in [i-1, i]:
+                k = i + 1
+                while j >= 0 and k < len(s) and s[j] == s[k]:
+                    j -= 1
+                    k += 1
                 
-        # expand around center
-        for i in range(len(s)):
-            j = i
-            k = i + 1
-            
-            while j >= 0 and k < len(s) and s[j] == s[k]:
-                j -= 1
-                k += 1
-            
-            j += 1
-            k -= 1
-            if k - j + 1 > len(sol):
-                sol = s[j:k+1]
+                j += 1
+                if len(pali) < k-j:
+                    pali = s[j:k]
+                    
+        return pali
                 
-        return sol
