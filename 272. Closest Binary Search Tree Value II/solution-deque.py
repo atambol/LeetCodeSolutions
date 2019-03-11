@@ -6,26 +6,22 @@
 #         self.right = None
 
 class Solution:
-    def closestKValues(self, root: 'TreeNode', target: 'float', k: 'int') -> 'List[int]':
-        if not k or not root:
-            return []
-
+    def closestKValues(self, root: TreeNode, target: float, k: int) -> List[int]:
+        # O(n) time complexity
         deq = collections.deque()
-        self.kSelect(deq, root, target, k)
+        self.kselect(root, deq, target, k)
         return list(deq)
     
-    def kSelect(self, deq, root, target, k):
+    def kselect(self, root, deq, target, k):
         if not root:
-            return
+            return deq
         
-        self.kSelect(deq, root.left, target, k)
-        
+        self.kselect(root.left, deq, target, k)
         if len(deq) == k:
-            if abs(target - root.val) < abs(deq[0] - target):
+            if abs(deq[0] - target) > abs(root.val - target):
                 deq.popleft()
                 deq.append(root.val)
         else:
             deq.append(root.val)
-            
-        self.kSelect(deq, root.right, target, k)
-        
+                
+        self.kselect(root.right, deq, target, k)
