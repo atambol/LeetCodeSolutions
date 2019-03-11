@@ -16,18 +16,25 @@ class Codec:
         if not root:
             return ""
         
-        preorder = []
+        postorder = []
         stack = []
         node = root
+        left = 1
+        right = 2
         while node or stack:
             if node:
-                preorder.append(str(node.val))
-                stack.append(node.right)
+                stack.append((node, left))
                 node = node.left
             else:
-                node = stack.pop()
-                
-        return ".".join(preorder)
+                node, status = stack.pop()
+                if status == left:
+                    stack.append((node, right))
+                    node = node.right
+                else:
+                    postorder.append(str(node.val))
+                    node = None
+        return "#".join(postorder)
+        
 
     def deserialize(self, data):
         """Decodes your encoded data to tree.
@@ -38,25 +45,23 @@ class Codec:
         if not data:
             return None
         
-        preorder = data.split(".")
-        preorder.reverse()
-        root = TreeNode(int(preorder.pop()))
+        postorder = data.split("#")
+        root = TreeNode(int(postorder.pop()))
         stack = [root]
-        while preorder:
-            node = TreeNode(int(preorder.pop()))
-            parent = stack.pop()
-            if node.val < parent.val:
-                parent.left = node
-                stack.append(parent)
+        while postorder:
+            node = TreeNode(int(postorder.pop()))
+            if node.val > stack[-1].val:
+                stack[-1].right = node
             else:
-                while stack and stack[-1].val < node.val:
+                parent = stack.pop()
+                while stack and stack[-1].val > node.val:
                     parent = stack.pop()
                     
-                parent.right = node
+                parent.left = node
+                
             stack.append(node)
-        return root
             
-
+        return root
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()
 # codec.deserialize(codec.serialize(root))
