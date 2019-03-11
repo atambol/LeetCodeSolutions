@@ -6,25 +6,19 @@
 #         self.right = None
 
 class Solution:
-    def rob(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
+    def rob(self, root: TreeNode) -> int:
         if not root:
             return 0
-        return max(self.myRob(root))
         
-    def myRob(self, root):
-        if root.left and root.right:
-            wl, wol = self.myRob(root.left)
-            wr, wor = self.myRob(root.right)
-            return root.val + wol + wor, max(wr + wol, wl+wor, wl+wr, wor+wol)
-        elif root.left and not root.right:
-            wl, wol = self.myRob(root.left)
-            return root.val + wol, max(wol, wl)
-        elif root.right and not root.left:
-            wr, wor = self.myRob(root.right)
-            return root.val + wor, max(wor, wr)
-        else:
-            return root.val, 0
+        return max(self.traverse(root))
+    
+    def traverse(self, root):
+        if not root:
+            return 0,0 
+        
+        wl, wol = self.traverse(root.left)
+        wr, wor = self.traverse(root.right)
+
+        wme = wol + wor + root.val
+        wome = max(wol + wor, wl + wr, wor + wl, wr + wol)
+        return wme, wome
