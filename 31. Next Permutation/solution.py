@@ -4,38 +4,35 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         # edge case
-        if not nums:
-            return
+        if len(nums) < 2:
+            return 
         
-        # find the first decreasing order from left
-        n = len(nums) - 1
-        i = n-1
+        # look for a decreasing order from right
+        i = len(nums) - 2
         while i >= 0 and nums[i] >= nums[i+1]:
             i -= 1
             
-        # edge case - nums is largest
+        # i runs below 0
         if i < 0:
             nums.reverse()
             return
         
-        # find the next just largest number to nums[i]
-        j = i + 1
-        k = i
-        maxNum = sys.maxsize
-        while j <= n:
-            if nums[j] > nums[i] and nums[j] <= maxNum:
-                maxNum = nums[j]
+        # look for the next largest numbers
+        j = i+1
+        k = j
+        n = nums[j]
+        while j < len(nums):
+            if n >= nums[j] > nums[i]:
                 k = j
+                n = nums[j]
             j += 1
             
-        # exchange the numbers
+        # swap and reverse
         nums[i], nums[k] = nums[k], nums[i]
-        
-        # reverse the numbers i onwards
-        i = i+1
-        j = n
+        i = i + 1
+        j = len(nums) - 1
         while i < j:
             nums[i], nums[j] = nums[j], nums[i]
-            i += 1
+            i = i + 1
             j -= 1
             
