@@ -6,44 +6,36 @@ class Solution:
         :rtype: int
         """
         # calculate frequency
-        f = {}
-        for task in tasks:
-            try:
-                f[task] += 1
-            except KeyError:
-                f[task] = 1
+        map = {}
+        for t in tasks:
+            if t in map:
+                map[t] += 1
+            else:
+                map[t] = 1
                 
-        # create a heap
+        # create heap for freq
         heap = []
-        for task, freq in f.items():
-            heapq.heappush(heap, (-freq, task))
+        for t, f in map.items():
+            heapq.heappush(heap, -f)
             
-        # print(heap)
-        # consume tasks
+        aux = []
         count = 0
         while heap:
-            aux = []
             i = 0
-            
-            # consume top priority tasks first
-            while heap and i <= n:
-                f, t = heapq.heappop(heap)
-                if f + 1 < 0:
-                    aux.append((f+1, t))
+            while i <= n and heap:
+                f = heapq.heappop(heap)
+                f += 1
+                if f:
+                    aux.append(f)
                 i += 1
-            
-            if not aux:
-                count += i
+                
+            if aux:
+                count += n+1
             else:
-                count += n + 1
+                count += i
                 
-            # rearrange tasks from aux to heap
-            for tup in aux:
-                heapq.heappush(heap, tup)
-                
+            while aux:
+                heapq.heappush(heap, aux.pop())
+            
+        
         return count
-                
-            
-                
-            
-            
