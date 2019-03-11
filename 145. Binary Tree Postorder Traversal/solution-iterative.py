@@ -7,16 +7,18 @@
 
 class Solution:
     def postorderTraversal(self, root: TreeNode) -> List[int]:
-        stack = []
-        node = root
         postorder = []
-        right = 2
+        if not root:
+            return postorder
+        
+        node = root
+        stack = []
         left = 1
+        right = 2
         while node or stack:
             if node:
                 stack.append((node, left))
                 node = node.left
-                
             else:
                 node, status = stack.pop()
                 if status == left:
@@ -25,5 +27,5 @@ class Solution:
                 else:
                     postorder.append(node.val)
                     node = None
-                    
+        
         return postorder
