@@ -1,58 +1,48 @@
 class Solution:
     def __init__(self):
         self.graph = {}
-        self.unvisited = 0
-        self.visiting = 1
         self.visited = 2
-        self.status = None
+        self.visiting = 1
+        self.unvisited = 0
         
-    def findOrder(self, numCourses, prerequisites):
-        """
-        :type numCourses: int
-        :type prerequisites: List[List[int]]
-        :rtype: List[int]
-        """
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         # create graph
-        for c in range(numCourses):
-            self.graph[c] = set()
+        for i in range(numCourses):
+            self.graph[i] = set()
             
         for c, p in prerequisites:
             self.graph[c].add(p)
             
-        # perform dfs and get the order
+        # dfs
         order = []
-        self.status = [0]*numCourses
-        
-        for c in range(numCourses):
-            if self.status[c] == self.unvisited:
-                suborder = self.dfs(c)
-                if not suborder:
-                    return suborder
-                order.extend(suborder)
-        
+        status = [self.unvisited]*numCourses
+        for i in range(numCourses):
+            if status[i] == self.unvisited:
+                sol = self.dfs(i, status)
+                if not sol:
+                    return sol
+                order.extend(sol)
+                
         return order
     
-    def dfs(self, course):
-        # mark visiting
-        self.status[course] = self.visiting
-        order = []
+    def dfs(self, course, status):
+        if status[course] == self.visiting:
+            return []
         
-        # find order for each preqreq of this course
-        for prereq in self.graph[course]:
-            # prereq cannot be taken with the course
-            if self.status[prereq] == self.visiting:
-                return []
-            
-            # add the order of prereq
-            if self.status[prereq] == self.unvisited:
-                suborder = self.dfs(prereq)
-                if not suborder:
-                    return []
+        status[course] = self.visiting
+        
+        sol = []
+        for prerequisite in self.graph[course]:
+            if status[prerequisite] == self.visited:
+                continue
                 
-                order.extend(suborder)
-                
-        # mark visited
-        self.status[course] = self.visited        
-        order.append(course)
-        return order
+            sub = self.dfs(prerequisite, status)
+            if not sub:
+                return sub
+            sol.extend(sub)
             
+        sol.append(course)
+        status[course] = self.visited
+        return sol
+                
+                
