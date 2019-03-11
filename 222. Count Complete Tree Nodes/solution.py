@@ -10,20 +10,15 @@ class Solution:
         if not root:
             return 0
         
-        left = self.getDepth(root.left)
-        right = self.getDepth(root.right)
+        left = self.get_depth(root.left)
+        right = self.get_depth(root.right)
         if left == right:
-            return self.countNodes(root.right) + 2**left
+            return 2 ** left + self.countNodes(root.right)
         else:
-            return self.countNodes(root.left) + 2**right
+            return 2 ** right + self.countNodes(root.left)
         
-    def getDepth(self, node):
-        if not node:
+    def get_depth(self, root):
+        if not root:
             return 0
         
-        count = 0
-        while node:
-            count += 1
-            node = node.left
-            
-        return count
+        return 1 + self.get_depth(root.left)
