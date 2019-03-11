@@ -7,20 +7,22 @@
 
 class Solution:
     def inorderSuccessor(self, root: 'TreeNode', p: 'TreeNode') -> 'TreeNode':
-        node = root
+        # reach the node
         parent = None
+        node = root
         while node and node.val != p.val:
-            if node.val < p.val:
-                node = node.right
-            else:
+            if node.val > p.val:
                 parent = node
                 node = node.left
+            else:
+                node = node.right
                 
-        if not node.right:
-            return parent
-        else:
+        # get the successor
+        if node.right:
             node = node.right
-            
             while node.left:
                 node = node.left
+                
             return node
+        else:
+            return parent
