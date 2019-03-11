@@ -1,58 +1,52 @@
 class Node:
     def __init__(self):
         self.chars = [None]*26
-        self.end = False
+        self.eow = False
 
 class Trie:
-
     def __init__(self):
         """
         Initialize your data structure here.
         """
-        self.trie = Node()
+        self.ptr = Node()
 
-    def insert(self, word):
+    def insert(self, word: str) -> None:
         """
         Inserts a word into the trie.
-        :type word: str
-        :rtype: void
         """
-        ptr = self.trie
-        for w in word:
-            i = ord(w) - ord('a')
+        ptr = self.ptr
+        for char in word:
+            i = ord(char) - ord('a')
             if not ptr.chars[i]:
                 ptr.chars[i] = Node()
             ptr = ptr.chars[i]
-        ptr.end = True
+        ptr.eow = True
+            
 
-    def search(self, word):
+    def search(self, word: str) -> bool:
         """
         Returns if the word is in the trie.
-        :type word: str
-        :rtype: bool
         """
-        ptr = self.trie
-        for w in word:
-            i = ord(w) - ord('a')
+        ptr = self.ptr
+        for char in word:
+            i = ord(char) - ord('a')
             if not ptr.chars[i]:
                 return False
             ptr = ptr.chars[i]
-        return ptr.end   
+        return ptr.eow
 
-    def startsWith(self, prefix):
+    def startsWith(self, prefix: str) -> bool:
         """
         Returns if there is any word in the trie that starts with the given prefix.
-        :type prefix: str
-        :rtype: bool
         """
-        ptr = self.trie
-        for w in prefix:
-            i = ord(w) - ord('a')
+        ptr = self.ptr
+        for char in prefix:
+            i = ord(char) - ord('a')
             if not ptr.chars[i]:
                 return False
             ptr = ptr.chars[i]
-        return True 
-
+        return True
+        
 
 # Your Trie object will be instantiated and called as such:
 # obj = Trie()
