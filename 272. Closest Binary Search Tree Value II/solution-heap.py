@@ -8,23 +8,19 @@
 class Solution:
     def closestKValues(self, root: TreeNode, target: float, k: int) -> List[int]:
         heap = []
-        stack = []
         node = root
-        while stack or node:
+        stack = []
+        while node or stack:
             if node:
-                if len(heap) < k:
-                    heapq.heappush(heap, (-abs(target-node.val), node.val))
+                diff = abs(target-node.val)
+                if len(heap) == k:
+                    if diff < -heap[0][0]:
+                        heapq.heappushpop(heap, (-diff, node.val))
                 else:
-                    if -heap[0][0] > abs(node.val - target):
-                        heapq.heappushpop(heap, (-abs(target-node.val), node.val))
-                        
+                    heapq.heappush(heap, (-diff, node.val))
                 stack.append(node.right)
                 node = node.left
             else:
                 node = stack.pop()
-        
-        sol = []
-        for tup in heap:
-            sol.append(tup[1])
-            
-        return sol
+                
+        return [x[1] for x in heap]
