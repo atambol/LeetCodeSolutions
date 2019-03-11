@@ -28,8 +28,8 @@ class Codec:
                 preorder.append("#")
                 node = stack.pop()
                 
-        return ".".join(preorder)
-        
+        return "/".join(preorder)
+                
 
     def deserialize(self, data):
         """Decodes your encoded data to tree.
@@ -40,7 +40,7 @@ class Codec:
         if not data:
             return None
         
-        preorder = data.split(".")
+        preorder = data.split("/")
         preorder.reverse()
         root = TreeNode(int(preorder.pop()))
         left = 1
@@ -65,7 +65,6 @@ class Codec:
                 
         return root
                 
-
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()
 # codec.deserialize(codec.serialize(root))
