@@ -5,23 +5,16 @@
 #         self.end = e
 
 class Solution:
-    def minMeetingRooms(self, intervals):
-        """
-        :type intervals: List[Interval]
-        :rtype: int
-        """
-        if not intervals:
-            return 0
-        
+    def minMeetingRooms(self, intervals: List[Interval]) -> int:
+        intervals.sort(key=lambda x: (x.start, x.end))
         heap = []
-        intervals.sort(key=lambda x: x.start)
         
-        rooms = 0
+        count = 0
         for i in intervals:
             while heap and heap[0] <= i.start:
                 heapq.heappop(heap)
                 
             heapq.heappush(heap, i.end)
-            rooms = max(rooms, len(heap))
+            count = max(count, len(heap))
             
-        return rooms
+        return count
