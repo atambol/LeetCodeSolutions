@@ -1,22 +1,17 @@
 class Solution:
     def getModifiedArray(self, length: int, updates: List[List[int]]) -> List[int]:
-        # edge case
-        if not length:
-            return []
+        state = [0]*length
+        ops = [0]*(length+1)
         
-        arr = [0]*length
-        delta = [0]*(length+1)
-        
-        # maintain start and end of inc 
-        for start, end, inc in updates:
-            delta[start] += inc
-            delta[end+1] -= inc
-            
-        # calculate running sum, O(n)
+        # gather operations
+        for x, y, z in updates:
+            ops[x] += z
+            ops[y+1] -= z
+                
+        # perform running sum
         total = 0
         for i in range(length):
-            total += delta[i]
-            arr[i] = total
+            total += ops[i]
+            state[i] = total
             
-        return arr
-        
+        return state
