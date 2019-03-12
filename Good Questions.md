@@ -90,6 +90,10 @@
 ## Dynamic Programming
 ```
 516. Longest Palindromic Subsequence
+72. Edit Distance
+122. Best Time to Buy and Sell Stock II
+123. Best Time to Buy and Sell Stock III
+84. Largest Rectangle in Histogram
 322. Coin Change
 518. Coin Change 2
 53. Maximum Subarray
@@ -100,10 +104,6 @@
 213. House Robber II
 63. Unique Paths II
 713. Subarray Product Less Than K
-72. Edit Distance
-122. Best Time to Buy and Sell Stock II
-123. Best Time to Buy and Sell Stock III
-84. Largest Rectangle in Histogram
 ```
 
 ## Graph
