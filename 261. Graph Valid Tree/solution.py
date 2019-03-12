@@ -1,44 +1,46 @@
 class Solution:
     def __init__(self):
         self.graph = {}
-        self.visited = None
-    def validTree(self, n, edges):
-        """
-        :type n: int
-        :type edges: List[List[int]]
-        :rtype: bool
-        """
-        # create a graph representation
+        self.status = []
+        self.unvisited = 0
+        self.visiting = 1
+        self.visited = 2
+        
+        
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:        
+        # create a graph
         for i in range(n):
             self.graph[i] = set()
             
-        for x, y in edges:
-            self.graph[x].add(y)
-            self.graph[y].add(x)
+        for a, b in edges:
+            self.graph[a].add(b)
+            self.graph[b].add(a)
             
-        # create a visited set
-        self.visited = [False]*n
-        
-        # perform dfs from one node
-        isCycle = self.dfs(0, None)
-        
-        # check for cycle
-        if isCycle:
+        # dfs over all edges and check for cycle
+        self.status = [self.unvisited]*n
+        cycle = self.dfs(0)
+        if cycle:
             return False
         
         # check for forest
-        if self.visited.count(True) == n:
-            return True
-        else:
-            return False
+        return self.status.count(self.visited) == n
+
         
-    def dfs(self, node, parent):
-        self.visited[node] = True
+    def dfs(self, node):
+        if self.status[node] == self.visiting:
+            return True
+        elif self.status[node] == self.visited:
+            return False
+        else:
+            self.status[node] = self.visiting
+
         for neigh in self.graph[node]:
-            if neigh != parent:
-                if self.visited[neigh]:
-                    return True
-                else:
-                    self.dfs(neigh, node)
-                    
+            self.graph[neigh].remove(node)
+            cycle = self.dfs(neigh)
+            if cycle:
+                return True
+
+        self.status[node] = self.visited
         return False
+        
+        
