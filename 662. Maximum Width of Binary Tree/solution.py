@@ -1,28 +1,25 @@
 # Definition for a binary tree node.
-# class TreeNode(object):
+# class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
-    def widthOfBinaryTree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        queue = [(root, 0)]
+class Solution:
+    def widthOfBinaryTree(self, root: TreeNode) -> int:
         width = 0
+        queue = [(root, 0)]
         while queue:
-            newqueue = []
-            ws = []
-            for node, w in queue:
-                if node.left:
-                    newqueue.append((node.left, 2*w))
-                if node.right:
-                    newqueue.append((node.right, 2*w+1))
-                ws.append(w)
-            queue = newqueue
-            width = max(width, max(ws) - min(ws) + 1)
+            widths = []
+            nqueue = []
+            for n, w in queue:
+                widths.append(w)
+                if n.left:
+                    nqueue.append((n.left, w*2))
+                if n.right:
+                    nqueue.append((n.right, w*2 + 1))
+                    
+            width = max(width, abs(min(widths)-max(widths))+1)
+            queue = nqueue
         return width
-            
+                    
