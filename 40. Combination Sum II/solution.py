@@ -4,34 +4,24 @@ class Solution:
         if not candidates or not target:
             return []
         
-        # backtrack
+        # sort and backtrack
         candidates.sort()
         return self.backtrack(candidates, target, 0)
         
-    def backtrack(self, candidates, target, index):
+    def backtrack(self, candidates, target, n):
         sol = []
-        
-        # range over each candidate starting from index
-        for i in range(index, len(candidates)):
-            c = candidates[i]
-            
-            # terminal case - failure
-            if target < c:
-                return sol
-            
-            # terminal case - success
-            elif target == c:
-                sol.append([c])
-                return sol
-            
-            else:
-                # prevent repeated solutions
-                if i != index and c == candidates[i-1]:
+        for i in range(n, len(candidates)):
+            if target - candidates[i] == 0:
+                sol.append([candidates[i]])
+                break
+            elif target > candidates[i]:
+                if i != n and candidates[i-1] == candidates[i]:
                     continue
                     
-                # keep searching
-                for s in self.backtrack(candidates, target-c, i+1):
-                    sol.append([c]+s)
-            
+                sub = self.backtrack(candidates, target-candidates[i], i+1)
+                for s in sub:
+                    sol.append([candidates[i]] + s)
+            else:
+                break
+                
         return sol
-            
