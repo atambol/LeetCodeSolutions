@@ -1,62 +1,47 @@
 class Solution:
-    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int: 
-        # edge case
-        if beginWord == endWord or not wordList or endWord not in wordList:
-            return 0
+    def __init__(self):
+        self.graph = {}
         
-        # create a graph with neighbouring nodes of 1 edit difference
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        # create a graph
         wordList.append(beginWord)
-        graph = {}
-        for word in wordList:
-            graph[word] = []
-        
+        for w in wordList:
+            self.graph[w] = []
+            
         for i in range(len(wordList)):
             for j in range(i+1, len(wordList)):
                 if self.isOneEdit(wordList[i], wordList[j]):
-                    graph[wordList[i]].append(wordList[j])
-                    graph[wordList[j]].append(wordList[i])
-
-        # unidirectional BFS
-        # maintain visited set
-        visited = set()  
-        q = [beginWord]
+                    self.graph[wordList[i]].append(wordList[j])
+                    self.graph[wordList[j]].append(wordList[i])
+        
+        # bfs to end word
+        visited = set()
+        return self.bfs(visited, [beginWord], endWord)
+    
+    def bfs(self, visited, queue, end):
         count = 1
-        while q:
-            # bfs on q1
-            newq = []
-            for node in q:
-                # should not revisit in this BFS
+        while queue:
+            newqueue = []
+            for node in queue:
                 if node in visited:
                     continue
-                    
-                # found overlap
-                if node == endWord:
+                if node == end:
                     return count
-                
-                # mark visited
                 visited.add(node)
-                
-                # add neighbours
-                newq.extend(graph[node])
-            q = newq
+                newqueue.extend(self.graph[node])
             count += 1
-            
+            queue = []
+            for node in newqueue:
+                if node not in visited:
+                    queue.append(node)
         return 0
             
-        
-    def isOneEdit(self, word1, word2):
-        i = 0
-        edits = 0
-        
-        while i < len(word1):
-            if word1[i] != word2[i]:
-                edits += 1
-                if edits > 1:
+    def isOneEdit(self, w1, w2):
+        diff = 0
+        for i in range(len(w1)):
+            if w2[i] != w1[i]:
+                diff += 1
+                if diff > 1:
                     return False
-            i += 1
                 
-        if edits == 1:
-            return True
-        else:
-            return False
-        
+        return True
