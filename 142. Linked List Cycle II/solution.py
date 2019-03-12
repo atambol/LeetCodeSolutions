@@ -10,27 +10,29 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
+        # edge condition
+        if not head or not head.next:
+            return None
+        
+        # detect cycle
         fptr = head
         sptr = head
-        
-        # find cycle
         cycle = False
-        while fptr and fptr.next:
+        while fptr and fptr.next and not cycle:
             fptr = fptr.next.next
             sptr = sptr.next
+            cycle = fptr == sptr
             
-            if fptr == sptr:
-                cycle = True
-                break
-                
         if not cycle:
             return None
         
-        # find the beginning of cycle
+        # detect start
         fptr = head
-        while sptr != fptr:
+        while fptr != sptr:
             fptr = fptr.next
             sptr = sptr.next
             
         return sptr
+        
+            
         
