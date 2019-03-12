@@ -134,7 +134,7 @@
 ```
 1. Prim's algorithm
 2. Kruskal's algorithm
-3. Dijikstra's algorithm
+3. Dijkstra's algorithm
 4. Insertion sort
 5. Selection sort
 6. Quick sort
