@@ -7,51 +7,32 @@ class Node:
         self.right = right
 """
 class Solution:
-    def treeToDoublyList(self, root):
-        """
-        :type root: Node
-        :rtype: Node
-        """
-        # edge cases
+    def treeToDoublyList(self, root: 'Node') -> 'Node':
         if not root:
-            return root
-        
-        # transform and get the edge nodes
-        left, right = self.transform(root)
-        
-        # tie up the edges
+            return None
+        left, right = self.convert(root)
         left.left = right
         right.right = left
-        
-        # return head
         return left
-
         
-    def transform(self, root):
-        # both children present
-        if root.left and root.right:
-            left1, left2 = self.transform(root.left)
-            right1, right2 = self.transform(root.right)
-            left2.right = root
-            root.left = left2
-            right1.left = root
-            root.right = right1
-            return left1, right2
-        
-        # only left
-        elif root.left and not root.right:
-            left1, left2 = self.transform(root.left)
-            left2.right = root
-            root.left = left2
-            return left1, root
-        
-        # only right
-        elif not root.left and root.right:
-            right1, right2 = self.transform(root.right)
-            right1.left = root
-            root.right = right1
-            return root, right2
-        
-        # childless
-        else:
+    def convert(self, root):
+        if not root.left and not root.right:
             return root, root
+        elif root.left and not root.right:
+            left, right = self.convert(root.left)
+            right.right = root
+            root.left = right
+            return left, root
+        elif root.right and not root.left:
+            left, right = self.convert(root.right)
+            left.left = root
+            root.right = left
+            return root, right
+        else:
+            lleft, lright = self.convert(root.left)
+            rleft, rright = self.convert(root.right)
+            lright.right = root
+            root.left = lright
+            rleft.left = root
+            root.right = rleft
+            return lleft, rright
