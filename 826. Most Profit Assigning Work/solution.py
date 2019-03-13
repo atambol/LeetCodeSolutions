@@ -1,39 +1,29 @@
 class Solution:
-    def maxProfitAssignment(self, difficulty, profit, worker):
-        """
-        :type difficulty: List[int]
-        :type profit: List[int]
-        :type worker: List[int]
-        :rtype: int
-        """
-        # edge cases
-        if not profit:
-            return 0
-        
-        if not worker:
-            return 0
-        
-        # create a list of list
-        tup = [[d, p] for d, p in zip(difficulty, profit)]
-        
-        # sort by difficulty
-        tup.sort(key=lambda x: (x[0], x[1]))
-        
-        # propagate the maximum profit
-        for i in range(1, len(tup)):
-            tup[i][1] = max(tup[i][1], tup[i-1][1])
+    def maxProfitAssignment(self, difficulty: List[int], profit: List[int], workers: List[int]) -> int:
+        # combine
+        tups = []
+        for d, p in zip(difficulty, profit):
+            tups.append([d, p])
             
-        # sort the workers
-        worker.sort()
+        # sort by difficulty
+        tups.sort(key=lambda x: (x[0], x[1]))
         
-        # calculate the profit
+        # bubble up the max profit
+        for i in range(1, len(tups)):
+            tups[i][1] = max(tups[i-1][1], tups[i][1])
+
+        # sort the workers
+        workers.sort()
+        
+        # calculate the profits
         profit = 0
-        while worker:
-            while tup and worker[-1] < tup[-1][0]:
-                tup.pop()
+        while workers and tups:
+            while tups and workers[-1] < tups[-1][0]:
+                tups.pop()
                 
-            if tup:
-                profit += tup[-1][1]
-            worker.pop()
+            if tups:
+                profit += tups[-1][1]
                 
+            workers.pop()
+            
         return profit
