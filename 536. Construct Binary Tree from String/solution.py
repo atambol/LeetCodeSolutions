@@ -6,44 +6,40 @@
 #         self.right = None
 
 class Solution:
-    def str2tree(self, s: 'str') -> 'TreeNode':
-        # edge cases
+    def str2tree(self, s: str) -> TreeNode:
+        # edge case
         if not s:
             return None
         
-        # vars
+        # extract nodes
+        stack = []
         left = 1
         right = 2
         done = 3
-        stack = []
-        
-        # loop over the string
+        num = []
         i = 0
         while i < len(s):
-            # start of nums
             if s[i] == "(":
                 pass
-            
-            # pop and attach
             elif s[i] == ")":
-                child, _ = stack.pop()
+                node, _ = stack.pop()
                 parent, status = stack.pop()
                 if status == left:
-                    parent.left = child
+                    parent.left = node
                     stack.append((parent, right))
                 else:
-                    parent.right = child
+                    parent.right = node
                     stack.append((parent, done))
                     
-            # create a node
             else:
-                num = [s[i]]
-                while i + 1 < len(s) and s[i+1] not in "()":
+                j = i
+                while i + 1 < len(s) and s[i + 1] not in "()":
                     i += 1
-                    num.append(s[i])
-                    
-                node = TreeNode("".join(num))
+                val = s[j:i+1]
+                node = TreeNode(val)
                 stack.append((node, left))
             i += 1
-            
+                
         return stack[0][0]
+                
+                
