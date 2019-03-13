@@ -6,51 +6,46 @@
 #         self.right = None
 
 class Solution:
-    def findLeaves(self, root: 'TreeNode') -> 'List[List[int]]':
-        # create a map from child to parent
-        map = {root: None}
-        node = root
+    def findLeaves(self, root: TreeNode) -> List[List[int]]:
+        # construct a map from child to parent
+        parent = {}
         stack = []
+        node = root
         leaves = []
-        while node or stack:
+        while stack or node:
             if node:
+                is_leaf = True
                 if node.left:
-                    map[node.left] = node
+                    is_leaf = False
+                    parent[node.left] = node
                 if node.right:
-                    map[node.right] = node
-                    
-                if not node.left and not node.right:
+                    is_leaf = False
+                    parent[node.right] = node
+                if is_leaf:
                     leaves.append(node)
-                    
                 stack.append(node.right)
                 node = node.left
             else:
-                while stack and not node:
-                    node = stack.pop()
-                    
-        # extract leaves
+                node = stack.pop()
+                
+        # collect leaves and remove
         sol = []
         while leaves:
             s = []
             newleaves = []
             for leaf in leaves:
-                # add leaf to s
                 s.append(leaf.val)
-                
-                # update parent
-                parent = map[leaf]
-                if parent:
-                    if parent.left and parent.left == leaf:
-                        parent.left = None
-                    elif parent.right and parent.right == leaf:
-                        parent.right = None
+                if leaf in parent:
+                    p = parent[leaf]
+                    if p.left == leaf:
+                        p.left = None
+                    elif p.right == leaf:
+                        p.right = None
 
-                    # check if parent is a leaf
-                    if not parent.left and not parent.right:
-                        newleaves.append(parent)
-                    
-            leaves = newleaves
+                    if not p.left and not p.right:
+                        newleaves.append(p)
+
             sol.append(s)
+            leaves = newleaves
+        
         return sol
-            
-                    
