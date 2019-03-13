@@ -6,50 +6,50 @@
 #         self.right = None
 
 class Solution:
-    def findClosestLeaf(self, root: 'TreeNode', k: 'int') -> 'int':
-        # edge cases
-        if not root.left and not root.right:
-            return root.val
-        
-        # convert the tree to graph
-        # Two edge cases - 
-        # 1) root with only one subtree: handled by adding a None element to its neighbours
-        # 2) leaf node == k: catch early when creating graph
-        graph = {root.val: set([None])} # 1
+    def findClosestLeaf(self, root: TreeNode, k: int) -> int:
+        # convert the tree into a graph
+        graph = {}
         stack = []
         node = root
+        leaves = set()
         while node or stack:
             if node:
-                if node.val == k and not node.left and not node.right: # 2
-                    return node.val
+                if not node.val in graph:
+                    graph[node.val] = set()
                 
+                is_leaf = True
                 if node.left:
+                    is_leaf = False
                     graph[node.val].add(node.left.val)
-                    graph[node.left.val] = set([node.val])
+                    graph[node.left.val] = set()
+                    graph[node.left.val].add(node.val)
                 if node.right:
+                    is_leaf = False
                     graph[node.val].add(node.right.val)
-                    graph[node.right.val] = set([node.val])
+                    graph[node.right.val] = set()
+                    graph[node.right.val].add(node.val)
+                    
+                if is_leaf:
+                    leaves.add(node.val)
                     
                 stack.append(node.right)
                 node = node.left
             else:
-                while stack and not node:
-                    node = stack.pop()
-
-        # bfs until a node is found with no neighbours other than parent
+                node = stack.pop()
+                
+        # bfs from k
         queue = [k]
         while queue:
-            newqueue = []
+            newqueue = set()
             for node in queue:
-                if not graph[node]:
+                if node in leaves:
                     return node
                 else:
                     for neigh in graph[node]:
-                        if neigh != None:   # handled due to #1
-                            graph[neigh].remove(node)
-                            newqueue.append(neigh)
-                        
-            queue = newqueue
-        
-        
+                        graph[neigh].remove(node)
+                        newqueue.add(neigh)
+            queue = newqueue           
+        return
+
                     
+                
