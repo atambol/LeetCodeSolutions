@@ -10,29 +10,22 @@ class Solution(object):
         :type lists: List[ListNode]
         :rtype: ListNode
         """
-        '''
-        This solution picks the node with least val from the top of each list and appends that to a new list. This solution takes a very long time.
-        '''
+        # create a heap of size k - number of lists
+        heap = []
+        for l in lists:
+            if l:
+                heapq.heappush(heap, (l.val, l))
+            
+        # extract and pushback
         head = ListNode(None)
         node = head
-        listEmpty = False
-        
-        while not listEmpty:
-            n = -1
-            leastVal = sys.maxsize
-            
-            for i in range(len(lists)):
-                if lists[i] and lists[i].val < leastVal:
-                    n = i
-                    leastVal = lists[i].val
-            
-            if n == -1:
-                listEmpty = True
-            else:
-                node.next = lists[n]
-                lists[n] = lists[n].next
-                node = node.next
-                node.next = None
+        while heap:
+            _, l = heapq.heappop(heap)
+            node.next = l
+            node = node.next
+            l = l.next
+            node.next = None
+            if l:
+                heapq.heappush(heap, (l.val, l))
                 
         return head.next
-            
