@@ -1,38 +1,33 @@
-class Solution(object):
-    def kClosest(self, points, K):
-        """
-        :type points: List[List[int]]
-        :type K: int
-        :rtype: List[List[int]]
-        """
-        # calculate the distance of all points from origin
+class Solution:
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        # calculate distance - O(n) time and O(n) space
         arr = []
         for x, y in points:
-            dist=x*x + y*y
-            arr.append((dist, (x,y)))
+            d = x*x + y*y
+            arr.append((d, (x, y)))
 
-        # perform quick select on the points
+        # use quickselect with random pivot selection - O(n)
         self.quickselect(arr, 0, len(arr)-1, K)
-        return [x[1] for x in arr[:K]]
-    
-    def quickselect(self, arr, low, high, target):
+        return [p for d, p in arr[:K]]
+
+    def quickselect(self, arr, low, high, k):
         if low == high:
-            return
-        
-        # pivot is random element in current window
+            return 
+
         pivot = random.randint(low, high)
-        arr[low], arr[pivot] = arr[pivot], arr[low]
-        x = arr[low]
+        arr[pivot], arr[low] = arr[low], arr[pivot]
+        tmp = arr[low]
         pivot = low
+
+        # sort around pivot
         for i in range(low, high+1):
-            if arr[i] < x:
-                arr[i], arr[pivot], pivot = arr[pivot+1], arr[i], pivot+1
-                
-        arr[pivot] = x
-        if pivot == target:
+            if arr[i][0] < tmp[0]:
+                arr[pivot], arr[i], pivot = arr[i], arr[pivot+1], pivot + 1
+
+        arr[pivot] = tmp
+        if pivot == k:
             return
-        elif pivot < target:
-            return self.quickselect(arr, pivot + 1, high, target)
+        elif pivot < k:
+            self.quickselect(arr, pivot+1, high, k)
         else:
-            return self.quickselect(arr, low, pivot - 1, target)
-        
+            self.quickselect(arr, low, pivot-1, k)
