@@ -1,42 +1,37 @@
-# Definition for singly-linked list with a random pointer.
-# class RandomListNode(object):
-#     def __init__(self, x):
-#         self.label = x
-#         self.next = None
-#         self.random = None
-
-class Solution(object):
-    # visited dictionary from old node to new node
-    def __init__(self):
-        self.visited = {}
-        
-    def copyRandomList(self, head):
-        """
-        :type head: RandomListNode
-        :rtype: RandomListNode
-        """
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, next, random):
+        self.val = val
+        self.next = next
+        self.random = random
+"""
+class Solution:
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        # edge case
         if not head:
-            return None
+            return head
         
-        # maintain two head pointers
-        head1 = head
-        head2 = RandomListNode(0)
-        prev = head2
-        
-        # traverse nodes using the next pointer only and recreate the linked list
-        while head:
-            node = RandomListNode(head.label)
-            self.visited[head] = node
-            prev.next = node
-            prev = node
-            head = head.next
+        # create and save nodes
+        clone = {}
+        h = Node(None, None, None)
+        old = head
+        new = h
+        while old:
+            new.next = Node(old.val, None, None)
+            new = new.next
+            clone[old] = new
+            old = old.next
             
-        # using the visited dictionary, update the random pointers in new list
-        head = head1
-        while head:
-            if head.random:
-                node = self.visited[head]
-                node.random = self.visited[head.random]
-            head = head.next
+        # attach nodes
+        old = head
+        new = h.next
+        while old:
+            if old.next:
+                new.next = clone[old.next]
+            if old.random:
+                new.random = clone[old.random]
+            old = old.next
+            new = new.next
             
-        return head2.next
+        return h.next
