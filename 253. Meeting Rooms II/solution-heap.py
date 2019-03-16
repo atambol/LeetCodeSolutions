@@ -6,15 +6,18 @@
 
 class Solution:
     def minMeetingRooms(self, intervals: List[Interval]) -> int:
-        intervals.sort(key=lambda x: (x.start, x.end))
         heap = []
+        # sort the intervals list
+        intervals.sort(key = lambda x: (x.start, x.end))
         
+        # push the end times into the heap 
         count = 0
         for i in intervals:
             while heap and heap[0] <= i.start:
                 heapq.heappop(heap)
-                
+        
             heapq.heappush(heap, i.end)
             count = max(count, len(heap))
             
         return count
+        
