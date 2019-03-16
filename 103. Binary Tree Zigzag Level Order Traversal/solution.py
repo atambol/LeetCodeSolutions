@@ -6,41 +6,33 @@
 #         self.right = None
 
 class Solution:
-    def zigzagLevelOrder(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[List[int]]
-        """
-        queue = []
-        sol = []
-        rev = False
+    def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
+        levelOrder = []
         
-        if root:
-            queue.append(root)
-            
-            while queue:
-                newQueue = []
-                levelSol = []
-                
-                # visit every node in current queue
-                for node in queue:
-                    # Add its value to solution and append its children for next level
-                    levelSol.append(node.val)
-                    if node.left:
-                        newQueue.append(node.left)
-                    if node.right:
-                        newQueue.append(node.right)
+        # edge cases
+        if not root:
+            return levelOrder
 
-                # reverse the solution to form zig zag
-                if levelSol:
-                    if rev:
-                        sol.append(levelSol[::-1])
-                        rev = False
-                    else:    
-                        sol.append(levelSol)
-                        rev = True
-                
-                # update queue for next order
-                queue = newQueue
+        # level order traversal
+        queue = [root]
+        rev = False
+        while queue:
+            newqueue = []
+            level = []
+            for node in queue:
+                if node.left:
+                    newqueue.append(node.left)
+                if node.right:
+                    newqueue.append(node.right)
+                level.append(node.val)
                     
-        return sol
+            if rev:
+                level.reverse()
+                rev = False
+            else:
+                rev = True
+                
+            levelOrder.append(level)    
+            queue = newqueue
+                
+        return levelOrder
