@@ -82,6 +82,7 @@
 
 ## Heap
 ```
+295. Find Median from Data Stream
 703. Kth Largest Element in a Stream
 621. Task Scheduler
 218. The Skyline Problem
