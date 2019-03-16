@@ -33,12 +33,13 @@
 
 ## String
 ```
+79. Word Search
+212. Word Search II
 443. String Compression
 394. Decode String
 3. Longest Substring Without Repeating Characters
 5. Longest Palindromic Substring
 22. Generate Parentheses
-79. Word Search
 692. Top K Frequent Words
 ```
 
