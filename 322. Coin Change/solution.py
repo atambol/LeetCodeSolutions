@@ -1,42 +1,29 @@
 class Solution:
-    def coinChange(self, coins, amount):
-        """
-        :type coins: List[int]
-        :type amount: int
-        :rtype: int
-        """
+    def coinChange(self, coins: List[int], amount: int) -> int:
         # edge cases
-        if not coins:
-            return -1
-        
         if not amount:
             return 0
         
-        if amount < 0:
+        if not coins or amount < 0 or amount < min(coins):
             return -1
         
-        minDeno = min(coins)
-        if minDeno > amount:
-            return -1
+        # dp
+        change = [0]*(amount+1)
+        coins.sort()
         
-        # dynamic programming
-        dp = [-1]*(minDeno)
-        dp[0] = 0
-        
-        for i in range(minDeno, amount+1):
-            change = sys.maxsize
-            for c in coins:
-                if i - c == 0:
-                    change = 1
-                    break
+        for i in range(1, amount+1):
+            minChange = sys.maxsize
+            for coin in coins:
+                if i - coin < 0:
+                    continue
+                elif i - coin == 0:
+                    minChange = 1
                 else:
-                    if i -c >= 0 and dp[i-c] > 0:
-                        change = min(change, dp[i-c] + 1)
-                    
-            if change == sys.maxsize:
-                dp.append(-1)
-            else:
-                dp.append(change)
-                
-        return dp[-1]
-        
+                    if change[i-coin] != -1:
+                        minChange = min(1 + change[i-coin], minChange)
+                        
+            if minChange == sys.maxsize:
+                minChange = -1
+            change[i] = minChange
+            
+        return change[-1]
