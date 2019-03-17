@@ -24,7 +24,7 @@
 * DFS
 * BFS
 * Disjoint set datastructure
-`
+```python
 class DSD:
     def __init__(self):
         self.parents = {}
@@ -65,7 +65,7 @@ class DSD:
         # new parent adopts old parent
         self.children[newparent].add(oldparent)
         self.parents[oldparent] = newparent
-`
+```
 * Visited set
 * Toplogical sort
   * modified DFS - maintain three states (unvisited, visiting and visited)
