@@ -1,48 +1,43 @@
 class Solution:
-    def __init__(self):
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # DFS coloring method for topological sorting
         self.graph = {}
         self.visited = 2
         self.visiting = 1
         self.unvisited = 0
+        self.status = [self.unvisited]*numCourses
         
-    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         # create graph
-        for i in range(numCourses):
-            self.graph[i] = set()
+        for course in range(numCourses):
+            self.graph[course] = set()
             
-        for c, p in prerequisites:
-            self.graph[c].add(p)
+        for course, prereq in prerequisites:
+            self.graph[course].add(prereq)
             
-        # dfs
-        order = []
-        status = [self.unvisited]*numCourses
-        for i in range(numCourses):
-            if status[i] == self.unvisited:
-                sol = self.dfs(i, status)
-                if not sol:
-                    return sol
-                order.extend(sol)
+        # perform dfs on each unvisited vertex
+        self.sort = collections.deque()
+        for course in range(numCourses):
+            if self.status[course] == self.unvisited:
+                cycle = self.dfs(course)
+                if cycle:
+                    return []
                 
-        return order
-    
-    def dfs(self, course, status):
-        if status[course] == self.visiting:
-            return []
+        return list(self.sort)
+                
+    def dfs(self, course):
+        # check status
+        if self.status[course]== self.visiting:
+            return True
+        if self.status[course] == self.visited:
+            return False
+        self.status[course] = self.visiting
         
-        status[course] = self.visiting
+        # visit every prereq for this course
+        for prereq in self.graph[course]:
+            cycle = self.dfs(prereq)
+            if cycle:
+                return True
         
-        sol = []
-        for prerequisite in self.graph[course]:
-            if status[prerequisite] == self.visited:
-                continue
-                
-            sub = self.dfs(prerequisite, status)
-            if not sub:
-                return sub
-            sol.extend(sub)
-            
-        sol.append(course)
-        status[course] = self.visited
-        return sol
-                
-                
+        self.sort.append(course)
+        self.status[course] = self.visited
+        return False
