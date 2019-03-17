@@ -24,6 +24,48 @@
 * DFS
 * BFS
 * Disjoint set datastructure
+`
+class DSD:
+    def __init__(self):
+        self.parents = {}
+        self.children = {}
+        
+    def makeset(self, node):
+        self.parents[node] = node
+        self.children[node] = set([node])
+        
+    def find(self, node):
+        return self.parents[node]
+    
+    def union(self, node1, node2):
+        parent1 = self.find(node1)
+        parent2 = self.find(node2)
+        # implies no union (cycle)
+        if parent1 == parent2:
+            return False
+        
+        # adopt children of parent with least number of children
+        if len(self.children[parent1]) < len(self.children[parent2]):
+            self.update(parent1, parent2)
+        else:
+            self.update(parent2, parent1)
+        
+        # union successful
+        return True
+    
+    def update(self, oldparent, newparent):
+        # new parent adopts children of old parent
+        for child in self.children[oldparent]:
+            self.parents[child] = newparent
+            self.children[newparent].add(child)
+            
+        # old parent does not have any children anymore
+        self.children[oldparent] = set()
+        
+        # new parent adopts old parent
+        self.children[newparent].add(oldparent)
+        self.parents[oldparent] = newparent
+`
 * Visited set
 * Toplogical sort
   * modified DFS - maintain three states (unvisited, visiting and visited)
