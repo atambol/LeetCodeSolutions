@@ -1,25 +1,23 @@
 class Solution:
-    def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
+    def isValid(self, s: str) -> bool:
         stack = []
         map = {
             "{":"}",
-            "(":")",
-            "[":"]"
+            "[":"]",
+            "(":")"
         }
-
+        
         for t in s:
             if t in map:
                 stack.append(t)
             else:
                 if not stack:
                     return False
-                else:
-                    para = stack.pop()
-                    if map[para] != t:
-                        return False
-                    
-        return not stack
+                o = stack.pop()
+                if map[o] != t:
+                    return False
+                
+        if stack:
+            return False
+        
+        return True
