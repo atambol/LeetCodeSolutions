@@ -1,6 +1,6 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        # DFS coloring method for topological sorting
+        # DFS coloring method for topological sorting, O(V+E)
         self.graph = {}
         self.visited = 2
         self.visiting = 1
