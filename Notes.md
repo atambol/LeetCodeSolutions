@@ -25,8 +25,8 @@
 * BFS
 * Disjoint set datastructure - useful for checking connected components, finding cycles in undirected graph etc
 ```python
-# m operations on DSD with n makeset operations
-# Amortized time complexity per operation is O(alpha(n)), near constant; alpha(n) is inverse ackerman function < 5
+# Using 2 optimisations - path compression and union by rank
+# Amortized time complexity per operation is O(alpha(n)) which is near constant
 class DSD:
     def __init__(self):
         self.parents = {}
