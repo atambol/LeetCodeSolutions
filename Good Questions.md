@@ -33,6 +33,7 @@
 
 ## String
 ```
+424. Longest Repeating Character Replacement
 79. Word Search
 212. Word Search II
 443. String Compression
