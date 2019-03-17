@@ -7,54 +7,56 @@
 
 class Solution:
     def boundaryOfBinaryTree(self, root: TreeNode) -> List[int]:
-        sol = []
+        boundary = []
+        # edge case
         if not root:
-            return sol
-
-        sol.append(root.val)
-
-        # left
+            return boundary
+        boundary.append(root.val)
+        
+        # check left
         left = []
-        if root.left:
-            node = root.left
-            while node:
-                left.append(node.val)
-                if node.left:
-                    node = node.left
-                else:
-                    node = node.right
-
+        node = root.left
+        while node:
+            left.append(node.val)
+            if node.left:
+                node = node.left
+            else:
+                node = node.right
+                
+        if left:
             left.pop()
-        sol.extend(left)
-
-        # bottom
+        boundary.extend(left)
+        
+        # check bottom
+        bottom = []
         stack = [root.right]
         node = root.left
         while node or stack:
             if node:
                 if not node.left and not node.right:
-                    sol.append(node.val)
+                    bottom.append(node.val)
                     node = None
                 else:
                     stack.append(node.right)
                     node = node.left
             else:
                 node = stack.pop()
-
-        # right
+                
+        boundary.extend(bottom)
+        
+        # check right
         right = []
-        if root.right:
-            node = root.right
-            while node:
-                right.append(node.val)
-                if node.right:
-                    node = node.right
-                else:
-                    node = node.left
-
+        node = root.right
+        while node:
+            right.append(node.val)
+            if node.right:
+                node = node.right
+            else:
+                node = node.left
+                
+        if right:
             right.pop()
-            right.reverse()
-
-        sol.extend(right)
-
-        return sol
+        right.reverse()
+        boundary.extend(right)
+        
+        return boundary
