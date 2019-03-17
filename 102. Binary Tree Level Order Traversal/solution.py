@@ -11,29 +11,21 @@ class Solution:
         :type root: TreeNode
         :rtype: List[List[int]]
         """
-        queue = []
         sol = []
-        rev = False
+        if not root:
+            return sol
         
-        if root:
-            queue.append(root)
+        queue = [root]
+        while queue:
+            level = []
+            newqueue = []
+            for node in queue:
+                level.append(node.val)
+                if node.left:
+                    newqueue.append(node.left)
+                if node.right:
+                    newqueue.append(node.right)
+            sol.append(level)
+            queue = newqueue
             
-            while queue:
-                newQueue = []
-                levelSol = []
-                
-                # visit every node in current queue
-                for node in queue:
-                    # Add its value to solution and append its children for next level
-                    levelSol.append(node.val)
-                    if node.left:
-                        newQueue.append(node.left)
-                    if node.right:
-                        newQueue.append(node.right)
-
-                sol.append(levelSol)
-                
-                # update queue for next order
-                queue = newQueue
-                    
-        return sol
+            return sol
