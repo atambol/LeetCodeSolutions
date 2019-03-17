@@ -13,27 +13,22 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
-        if not root:
-            return ""
+        preorder = []
         
-        postorder = []
+        # edge case
+        if not root:
+            return preorder
+        
         stack = []
-        node = root
-        left = 1
-        right = 2
-        while node or stack:
-            if node:
-                stack.append((node, left))
-                node = node.left
+        while root or stack:
+            if root:
+                preorder.append(str(root.val))
+                stack.append(root.right)
+                root = root.left
             else:
-                node, status = stack.pop()
-                if status == left:
-                    stack.append((node, right))
-                    node = node.right
-                else:
-                    postorder.append(str(node.val))
-                    node = None
-        return "#".join(postorder)
+                root = stack.pop()
+                
+        return "#".join(preorder)
         
 
     def deserialize(self, data):
@@ -42,26 +37,29 @@ class Codec:
         :type data: str
         :rtype: TreeNode
         """
+        # edge case
         if not data:
             return None
         
-        postorder = data.split("#")
-        root = TreeNode(int(postorder.pop()))
+        preorder = data.split("#")
+        preorder.reverse()
+        root = TreeNode(int(preorder.pop()))
         stack = [root]
-        while postorder:
-            node = TreeNode(int(postorder.pop()))
-            if node.val > stack[-1].val:
-                stack[-1].right = node
+        while preorder:
+            node = TreeNode(int(preorder.pop()))
+            parent = stack.pop()
+            if parent.val > node.val:
+                parent.left = node
+                stack.append(parent)
             else:
-                parent = stack.pop()
-                while stack and stack[-1].val > node.val:
+                while stack and stack[-1].val < node.val:
                     parent = stack.pop()
                     
-                parent.left = node
-                
+                parent.right = node
             stack.append(node)
             
         return root
+
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()
 # codec.deserialize(codec.serialize(root))
