@@ -23,21 +23,26 @@
 ## Graphs
 * DFS
 * BFS
-* Disjoint set datastructure
+* Disjoint set datastructure - useful for checking connected components, finding cycles in undirected graph etc
 ```python
+# m operations on DSD with n makeset operations
+# Overall time complexity = O(m + nlogn)
 class DSD:
     def __init__(self):
         self.parents = {}
         self.children = {}
         
-    def makeset(self, node):
+    def makeset(self, node): 
+        # O(1) time complexity
         self.parents[node] = node
         self.children[node] = set([node])
         
     def find(self, node):
+        # O(1) time complexity
         return self.parents[node]
     
     def union(self, node1, node2):
+        # O(n) time complexity
         parent1 = self.find(node1)
         parent2 = self.find(node2)
         # implies no union (cycle)
@@ -66,8 +71,7 @@ class DSD:
         self.children[newparent].add(oldparent)
         self.parents[oldparent] = newparent
 ```
-* Visited set
 * Toplogical sort
   * modified DFS - maintain three states (unvisited, visiting and visited)
-  * Kahn's algorithm - maintain in-degrees of vertices
+  * Kahn's algorithm - maintain in-degrees of vertices (BFS like)
 * Complexity of BFS and DFS is O(V+E) for adjacency list and O(V^2) for adjacency matrix representation
