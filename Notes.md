@@ -26,7 +26,7 @@
 * Disjoint set datastructure - useful for checking connected components, finding cycles in undirected graph etc
 ```python
 # m operations on DSD with n makeset operations
-# Overall time complexity = O(m + nlogn)
+# Amortized time complexity per operation is O(alpha(n)), near constant; alpha(n) is inverse ackerman function < 5
 class DSD:
     def __init__(self):
         self.parents = {}
@@ -42,7 +42,7 @@ class DSD:
         return self.parents[node]
     
     def union(self, node1, node2):
-        # O(n) time complexity
+        # O(logn) time complexity
         parent1 = self.find(node1)
         parent2 = self.find(node2)
         # implies no union (cycle)
@@ -50,6 +50,7 @@ class DSD:
             return False
         
         # adopt children of parent with least number of children
+        # optimisation 1 = union by rank
         if len(self.children[parent1]) < len(self.children[parent2]):
             self.update(parent1, parent2)
         else:
@@ -59,7 +60,9 @@ class DSD:
         return True
     
     def update(self, oldparent, newparent):
+        # optimisation 2 = path compression
         # new parent adopts children of old parent
+        # children directly point to the new parent
         for child in self.children[oldparent]:
             self.parents[child] = newparent
             self.children[newparent].add(child)
