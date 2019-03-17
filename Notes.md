@@ -24,7 +24,8 @@
 * DFS
 * BFS
 * Disjoint set datastructure
-* visited set
+* Visited set
 * Toplogical sort
   * modified DFS - maintain three states (unvisited, visiting and visited)
   * Kahn's algorithm - maintain in-degrees of vertices
+* Complexity of BFS and DFS is O(V+E) for adjacency list and O(V^2) for adjacency matrix representation
