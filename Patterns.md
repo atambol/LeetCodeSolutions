@@ -25,3 +25,6 @@
 * BFS
 * Disjoint set datastructure
 * visited set
+* Toplogical sort
+  * modified DFS - maintain three states (unvisited, visiting and visited)
+  * Kahn's algorithm - maintain in-degrees of vertices
