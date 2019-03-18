@@ -3,8 +3,7 @@ class Solution:
         heap = []
         for num in nums:
             if len(heap) == k:
-                if heap[0] < num:
-                    heapq.heappushpop(heap, num)
+                heapq.heappushpop(heap, num)
             else:
                 heapq.heappush(heap, num)
                 
