@@ -14,6 +14,7 @@
 * Check encoding
 
 ## Arrays
+* Sliding Window
 * Two pointer technique
 * DFS
 
