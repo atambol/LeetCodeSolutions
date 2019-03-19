@@ -33,6 +33,7 @@
 
 ## String
 ```
+76. Minimum Window Substring
 763. Partition Labels
 424. Longest Repeating Character Replacement
 79. Word Search
