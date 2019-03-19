@@ -74,6 +74,7 @@
 
 ## Backtracking/DFS
 ```
+694. Number of Distinct Islands
 39. Combination Sum
 40. Combination Sum II
 51. N-Queens
