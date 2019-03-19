@@ -5,24 +5,20 @@
 #         self.end = e
 
 class Solution:
-    def merge(self, intervals):
-        """
-        :type intervals: List[Interval]
-        :rtype: List[Interval]
-        """
+    def merge(self, intervals: List[Interval]) -> List[Interval]:
         # edge case
         if not intervals:
             return intervals
         
-        # sort by start time
-        intervals.sort(key=lambda x: x.start)
+        # sort the intervals by start position
+        intervals.sort(key=lambda x: (x.start, x.end))
         
-        # merge overlaps
-        sol = [intervals[0]]
+        merged = [intervals[0]]
         for i in intervals[1:]:
-            if i.start <= sol[-1].end:
-                sol[-1].end = max(i.end, sol[-1].end)
-            else:
-                sol.append(i)
+            if i.start <= merged[-1].end:
+                merged[-1].end = max(merged[-1].end, i.end)
                 
-        return sol
+            else:
+                merged.append(i)
+                
+        return merged
