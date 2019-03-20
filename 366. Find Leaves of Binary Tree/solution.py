@@ -7,45 +7,48 @@
 
 class Solution:
     def findLeaves(self, root: TreeNode) -> List[List[int]]:
-        # construct a map from child to parent
-        parent = {}
+        rev = {}
         stack = []
         node = root
+        rev[root] = None
         leaves = []
-        while stack or node:
+        
+        # create a reverse lookup
+        # get leaf nodes
+        while node or stack:
             if node:
-                is_leaf = True
                 if node.left:
-                    is_leaf = False
-                    parent[node.left] = node
+                    rev[node.left] = node
                 if node.right:
-                    is_leaf = False
-                    parent[node.right] = node
-                if is_leaf:
+                    rev[node.right] = node
+                if not node.left and not node.right:
                     leaves.append(node)
+                    
                 stack.append(node.right)
                 node = node.left
             else:
                 node = stack.pop()
                 
-        # collect leaves and remove
+        # extract nodes
         sol = []
         while leaves:
-            s = []
+            sub = []
             newleaves = []
             for leaf in leaves:
-                s.append(leaf.val)
-                if leaf in parent:
-                    p = parent[leaf]
-                    if p.left == leaf:
-                        p.left = None
-                    elif p.right == leaf:
-                        p.right = None
-
-                    if not p.left and not p.right:
-                        newleaves.append(p)
-
-            sol.append(s)
+                sub.append(leaf.val)
+                parent = rev[leaf]
+                if parent:
+                    if parent.left == leaf:
+                        parent.left = None
+                    else:
+                        parent.right = None
+                        
+                    if not parent.left and not parent.right:
+                        newleaves.append(parent)
+                        
             leaves = newleaves
-        
+            sol.append(sub)
+            
         return sol
+        
+                
