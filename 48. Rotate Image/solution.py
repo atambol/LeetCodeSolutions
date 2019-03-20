@@ -1,23 +1,15 @@
 class Solution:
-    def rotate(self, matrix: 'List[List[int]]') -> 'None':
+    def rotate(self, matrix: List[List[int]]) -> None:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        # edge case
-        n = len(matrix)
-        if n < 2:
+        if not matrix or not matrix[0]:
             return
         
-        # transpose the matrix
-        for i in range(n):
-            for j in range(i+1, n):
+        for i in range(len(matrix)):
+            for j in range(i+1,len(matrix[0])):
                 matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
                 
-        # reverse the rows
-        for i in range(n):
-            j = 0
-            k = n-1
-            while j < k:
-                matrix[i][j], matrix[i][k] = matrix[i][k], matrix[i][j]
-                j += 1
-                k -= 1
+        for m in matrix:
+            m.reverse()
+                
