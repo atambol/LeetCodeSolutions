@@ -1,26 +1,34 @@
 class Solution:
-    def setZeroes(self, matrix):
+    def setZeroes(self, matrix: List[List[int]]) -> None:
         """
-        :type matrix: List[List[int]]
-        :rtype: void Do not return anything, modify matrix in-place instead.
+        Do not return anything, modify matrix in-place instead.
         """
-        m = len(matrix)
-        n = len(matrix[0])
+        n = len(matrix)
+        if not n:
+            return 
         
-        for i in range(m):
-            for j in range(n):
+        m = len(matrix[0])
+        if not m:
+            return
+        
+        for i in range(n):
+            for j in range(m):
                 if matrix[i][j] == 0:
-                    for k in range(n):
-                        if matrix[i][k]:
-                            matrix[i][k] = '#'
-                            
-                    for k in range(m):
-                        if matrix[k][j]:
-                            matrix[k][j] = '#'
-                            
+                    self.mark(matrix, i, j, n, m)
+                    
+        for i in range(n):
+            for j in range(m):
+                if matrix[i][j] == "#":
+                    matrix[i][j] = 0
+                    
+        
+    def mark(self, matrix, x, y, n, m):
+        for i in range(n):
+            if matrix[i][y] != 0:
+                matrix[i][y] = "#"
         
         for i in range(m):
-            for j in range(n):
-                if matrix[i][j] == '#':
-                    matrix[i][j] = 0
-                            
+            if matrix[x][i] != 0:
+                matrix[x][i] = "#"
+                
+                
