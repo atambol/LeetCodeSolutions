@@ -10,42 +10,35 @@ class Solution(object):
         :type head1, head1: ListNode
         :rtype: ListNode
         """
-        # Edge cases
-        if not headA or not headB:
-            return None
         
-        # Get list lengths
-        lenA = self.getLength(headA)
-        lenB = self.getLength(headB)
+        p1 = headA
+        p2 = headB
         
-        # identify lists based on length
-        diff = abs(lenA - lenB)
-        if (lenA > lenB):
-            node1 = headA
-            node2 = headB
-        else:
-            node1 = headB
-            node2 = headA
-            
-        # traverse the larger list until the difference is matched
-        while diff:
-            diff -= 1
-            node1 = node1.next
-            
-        # traverse both lists to identify coinciding node
-        while node1 and node2:
-            if node1 == node2:
-                return node1
+        pass1A = False
+        pass1B = False
+        
+        while p1 != p2 or not pass1A or not pass1B:
+            if not p1:
+                if not pass1A:
+                    pass1A = True
+                    p1 = headB
+                else:
+                    return None
             else:
-                node1 = node1.next
-                node2 = node2.next
+                p1 = p1.next
+                    
+            if not p2:
+                if not pass1B:
+                    pass1B = True
+                    p2 = headA
+                else:
+                    return None
+            else:
+                p2 = p2.next
                 
-        return None
-    
-    
-    def getLength(self, head):
-        l = 0
-        while (head):
-            head = head.next
-            l += 1
-        return l
+        if p1 == p2:
+            return p1
+        else:
+            return None
+                
+            
