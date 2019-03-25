@@ -1,43 +1,49 @@
-class Solution:
-    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        # DFS coloring method for topological sorting, O(V+E)
-        self.graph = {}
+class Solution(object):
+    def findOrder(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: List[int]
+        """
+        self.graph= {}
+        self.unvisited = 0
         self.visited = 2
         self.visiting = 1
-        self.unvisited = 0
-        self.status = [self.unvisited]*numCourses
+        self.status = [False]*numCourses
         
-        # create graph
-        for course in range(numCourses):
-            self.graph[course] = set()
+        for c in range(numCourses):
+            self.graph[c] = set()
             
-        for course, prereq in prerequisites:
-            self.graph[course].add(prereq)
+        for c, p in prerequisites:
+            self.graph[c].add(p)
             
-        # perform dfs on each unvisited vertex
-        self.sort = collections.deque()
-        for course in range(numCourses):
-            if self.status[course] == self.unvisited:
-                cycle = self.dfs(course)
-                if cycle:
+        sol = []
+        for c in range(numCourses):
+            if self.status[c] == self.unvisited:
+                s = self.dfs(c)
+                if not s:
                     return []
+                sol.extend(s)
                 
-        return list(self.sort)
-                
+        return sol
+    
     def dfs(self, course):
-        # check status
-        if self.status[course]== self.visiting:
-            return True
-        if self.status[course] == self.visited:
-            return False
+        if self.status[course] == self.visiting:
+            return []
+        
         self.status[course] = self.visiting
-        
-        # visit every prereq for this course
-        for prereq in self.graph[course]:
-            cycle = self.dfs(prereq)
-            if cycle:
-                return True
-        
-        self.sort.append(course)
+        sol = []
+        for p in self.graph[course]:
+            if self.status[p] == self.visited:
+                continue
+                
+            s = self.dfs(p)
+            if not s:
+                return s
+            
+            sol.extend(s)
+        sol.append(course)
+            
         self.status[course] = self.visited
-        return False
+        return sol
+                
