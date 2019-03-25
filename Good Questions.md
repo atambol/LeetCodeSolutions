@@ -98,6 +98,7 @@
 
 ## Dynamic Programming
 ```
+221. Maximal Square
 516. Longest Palindromic Subsequence
 72. Edit Distance
 122. Best Time to Buy and Sell Stock II
