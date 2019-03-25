@@ -1,48 +1,41 @@
-class Solution:
-    def __init__(self):
-        self.sol = []
-        
+class Solution(object):
     def solveNQueens(self, n):
         """
         :type n: int
         :rtype: List[List[str]]
         """
-        config = []
-        self.backtrack(n, config)
+        config = set()
+        self.sol = []
+        self.backtrack(config, n)
         return self.sol
-    
-    def backtrack(self, n, config):
+        
+    def backtrack(self, config, n):
         if len(config) == n:
-            self.saveConfig(n, config)
+            self.saveState(config)
         else:
-            for i in range(n):
-                isSafe = self.checkSafe(config, i)
-                if isSafe:
-                    config.append(i)
-                    self.backtrack(n, config)
-                    config.pop()
+            i = len(config)
+            for j in range(n):
+                if self.safeState(config, i, j):
+                    config.add((i,j))
+                    self.backtrack(config, n)
+                    config.remove((i, j))
                     
-    def checkSafe(self, config, y):
-        x = len(config)
-        for i in range(len(config)):
-            if i == x or y == config[i]:
+    def safeState(self, config, i, j):
+        for x, y in config:
+            if abs(x-i) == abs(y-j) or x == i or y == j:
                 return False
-            if abs(i-x) == abs(config[i]-y):
-                return False
-        
-        return True    
+            
+        return True
     
-    def saveConfig(self, n, config):
+    def saveState(self, config):
         sol = []
-        for i in range(n):
-            sol.append(["."]*n)
-            
         for i in range(len(config)):
-            sol[i][config[i]] = "Q"
-            
-        sol2 = []
-        for i in range(n):
-            sol2.append("".join(sol[i]))
-            
-        self.sol.append(sol2)
-        
+            s = []
+            for j in range(len(config)):
+                if (i, j) in config:
+                    s.append("Q")
+                else:
+                    s.append(".")
+                    
+            sol.append("".join(s))
+        self.sol.append(sol)
