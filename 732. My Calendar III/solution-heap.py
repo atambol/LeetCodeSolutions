@@ -17,6 +17,10 @@ class MyCalendarThree:
             heapq.heappush(heap, self.intervals[i][1])
             count = max(count, len(heap))
         return count
+    
+        # complexity
+        # k = max number of overlaps, n = number of intervals
+        # O(klogk*n + nlogn)
             
         
 
