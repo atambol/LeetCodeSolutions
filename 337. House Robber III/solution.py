@@ -10,15 +10,13 @@ class Solution:
         if not root:
             return 0
         
-        return max(self.traverse(root))
-    
-    def traverse(self, root):
-        if not root:
-            return 0,0 
+        return max(self.myRob(root))
         
-        wl, wol = self.traverse(root.left)
-        wr, wor = self.traverse(root.right)
-
-        wme = wol + wor + root.val
-        wome = max(wol + wor, wl + wr, wor + wl, wr + wol)
-        return wme, wome
+    def myRob(self, root):
+        if not root:
+            return 0, 0
+        
+        wl, wol = self.myRob(root.left)
+        wr, wor = self.myRob(root.right)
+        
+        return root.val + wol + wor, max(wol, wl) + max(wor, wr)
