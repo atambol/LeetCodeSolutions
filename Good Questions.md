@@ -51,6 +51,7 @@
 ## Array
 ```
 370. Range Addition
+223. Rectangle Area
 41. First Missing Positive
 31. Next Permutation
 34. Find First and Last Position of Element in Sorted Array
