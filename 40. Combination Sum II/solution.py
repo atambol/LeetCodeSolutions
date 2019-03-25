@@ -1,27 +1,33 @@
-class Solution:
-    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        # edge case
-        if not candidates or not target:
-            return []
+class Solution(object):
+    def combinationSum2(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
         
-        # sort and backtrack
+        sol = []
+        if not candidates:
+            return sol
         candidates.sort()
         return self.backtrack(candidates, target, 0)
-        
-    def backtrack(self, candidates, target, n):
+    
+    def backtrack(self, candidates, target, start):
         sol = []
-        for i in range(n, len(candidates)):
-            if target - candidates[i] == 0:
+
+        for i in range(start, len(candidates)):
+            diff = target - candidates[i]
+            if diff < 0:
+                break
+            elif diff == 0:
                 sol.append([candidates[i]])
                 break
-            elif target > candidates[i]:
-                if i != n and candidates[i-1] == candidates[i]:
+            else:
+                if i > start and candidates[i] == candidates[i-1]:
                     continue
-                    
-                sub = self.backtrack(candidates, target-candidates[i], i+1)
+                sub = self.backtrack(candidates, diff, i+1)
                 for s in sub:
                     sol.append([candidates[i]] + s)
-            else:
-                break
-                
+                    
         return sol
+                
