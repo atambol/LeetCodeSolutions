@@ -1,41 +1,39 @@
-class Solution:
-    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        # Kahn's algorithm, O(V+E) space and time
-        # create graph and note the in-degrees
-        graph = {}
-        indegree = {}
-        for course in range(numCourses):
-            graph[course] = set()
-            indegree[course] = 0
+class Solution(object):
+    def findOrder(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: List[int]
+        """
+        self.graph = {}
+        self.deq = collections.deque()
+        self.inDegree = {}
+        
+        for c in range(numCourses):
+            self.graph[c] = set()
+            self.inDegree[c] = 0
             
-        for course, prereq in prerequisites:
-            graph[course].add(prereq)
-            indegree[prereq] += 1
+        for c, p in prerequisites:
+            self.graph[c].add(p)
+            self.inDegree[p] += 1
             
-        # get all vertices with indegree of 0
-        deq = collections.deque()
-        for course in range(numCourses):
-            if not indegree[course]:
-                deq.append(course)
+        for c, d in self.inDegree.items():
+            if not d:
+                self.deq.append(c)
                 
-        # visit all the vertex in deq and create topological sort
-        visited = [False]*numCourses
         sort = []
-        while deq:
-            # mark visited
-            course = deq.popleft()
-            sort.append(course)
-            visited[course] = True
-            
-            # update indegree of prereqs and add to deq if indegree is 0
-            for prereq in graph[course]:
-                indegree[prereq] -= 1
-                if not indegree[prereq]:
-                    deq.append(prereq)
+        while self.deq:
+            c = self.deq.popleft()
+            sort.append(c)
+            for p in self.graph[c]:
+                self.inDegree[p] -= 1
+                if not self.inDegree[p]:
+                    self.deq.append(p)
                     
-        # check if any unvisited node left (implies cycle)
-        if visited.count(True) != numCourses:
+        if len(sort) != numCourses:
             return []
         else:
             sort.reverse()
             return sort
+            
+        
