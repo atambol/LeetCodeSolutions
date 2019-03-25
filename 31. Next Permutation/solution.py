@@ -5,34 +5,31 @@ class Solution:
         """
         # edge case
         if len(nums) < 2:
-            return 
+            return
         
-        # look for a decreasing order from right
-        i = len(nums) - 2
-        while i >= 0 and nums[i] >= nums[i+1]:
+        # find first decreasing order from right
+        n = len(nums) - 1
+        i = n-1
+        while i >= 0:
+            if nums[i] < nums[i+1]:
+                break
             i -= 1
             
-        # i runs below 0
-        if i < 0:
+        if i == -1:
             nums.reverse()
             return
         
-        # look for the next largest numbers
-        j = i+1
-        k = j
-        n = nums[j]
-        while j < len(nums):
-            if n >= nums[j] > nums[i]:
+        # look for smallest number larger than nums[i] from i to right
+        k = i+1
+        for j in range(i+2, n+1):
+            if nums[k] >= nums[j] > nums[i]:
                 k = j
-                n = nums[j]
-            j += 1
-            
-        # swap and reverse
-        nums[i], nums[k] = nums[k], nums[i]
-        i = i + 1
-        j = len(nums) - 1
+                
+        # exchange and reverse
+        nums[k], nums[i] = nums[i], nums[k]
+        i += 1
+        j = n
         while i < j:
-            nums[i], nums[j] = nums[j], nums[i]
-            i = i + 1
+            nums[j], nums[i] = nums[i], nums[j]
+            i += 1
             j -= 1
-            
