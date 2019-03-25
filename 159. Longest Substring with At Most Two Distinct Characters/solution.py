@@ -1,24 +1,25 @@
-class Solution:
-    def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
-        if len(s) < 3:
-            return len(s)
-        
-        distinct = {}
-        l, r = 0, 0
-        count = 0
-        while r < len(s):
-            if s[r] not in distinct:
-                distinct[s[r]] = 0
-            distinct[s[r]] += 1
-                     
-            r += 1
-            
-            while len(distinct) > 2:
-                distinct[s[l]] -= 1
-                if not distinct[s[l]]:
-                    distinct.pop(s[l])
-                l += 1
+class Solution(object):
+    def lengthOfLongestSubstringTwoDistinct(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        unique = {}
+        i = 0
+        j = 0
+        l = 0
+        while j < len(s):
+            if s[j] not in unique:
+                unique[s[j]] = 0
+            unique[s[j]] += 1
+            j += 1
+            if len(unique) > 2:
+                unique[s[i]] -= 1
+                if not unique[s[i]]:
+                    unique.pop(s[i])
                     
-            count = max(count, r - l)
+                i += 1
+                
+            l = max(l, j-i)
             
-        return count
+        return l
