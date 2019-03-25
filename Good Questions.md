@@ -34,6 +34,7 @@
 ## String
 ```
 76. Minimum Window Substring
+224. Basic Calculator
 763. Partition Labels
 340. Longest Substring with At Most K Distinct Characters
 424. Longest Repeating Character Replacement
