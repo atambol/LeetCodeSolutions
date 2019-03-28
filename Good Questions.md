@@ -50,6 +50,7 @@
 
 ## Array
 ```
+229. Majority Element II
 370. Range Addition
 223. Rectangle Area
 41. First Missing Positive
