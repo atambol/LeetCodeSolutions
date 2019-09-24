@@ -10,23 +10,17 @@ class Solution {
     
     public void backtrack(int[] candidates, int target, int pos, List<List<Integer>> sol, List<Integer> subsol) {
         if (target == 0) {
-            List<Integer> newSubsol = new ArrayList<Integer>();
-            newSubsol.addAll(subsol);
-            sol.add(newSubsol);
+            sol.add(new ArrayList<Integer>(subsol));
             return;
         }
-        
-        if (target < 0) {
-            return;
-        }
-        
-        List<Integer> newSubsol = new ArrayList<Integer>();
-        newSubsol.addAll(subsol);
         
         for (int i = pos; i < candidates.length; i++) {
-            newSubsol.add(candidates[i]);
-            backtrack(candidates, target-candidates[i], i, sol, newSubsol);
-            newSubsol.remove(newSubsol.size()-1);
+            if (target-candidates[i] < 0) {
+                return;
+            }
+            subsol.add(candidates[i]);
+            backtrack(candidates, target-candidates[i], i, sol, subsol);
+            subsol.remove(subsol.size()-1);
         }
     }
 }
