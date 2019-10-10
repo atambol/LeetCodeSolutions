@@ -17,10 +17,7 @@ class Solution {
         PriorityQueue<Project> potentialProjects = new PriorityQueue<Project>(n, new Comparator<Project>() {
     public int compare(Project p, Project q) {
         if (p.capital == q.capital) {
-            if (p.output == q.output) {
-                return p.profit - q.profit;
-            }
-            return q.output - p.output;
+            return p.profit - q.profit;
         }
         
         return p.capital - q.capital;
@@ -48,7 +45,7 @@ class Solution {
                 doableProjects.add(project);
             }
             
-            // finish one project
+            // complete one project
             if (!doableProjects.isEmpty()) {
                 W += doableProjects.poll().profit;
             } else {
@@ -62,12 +59,10 @@ class Solution {
     class Project {
         private int profit;
         private int capital;
-        private int output;
         
         public Project(int p, int c) {
             profit = p;
             capital = c;
-            output = p-c;
         }
     }
 }
