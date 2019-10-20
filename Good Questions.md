@@ -50,6 +50,7 @@
 
 ## Array
 ```
+554. Brick Wall
 229. Majority Element II
 370. Range Addition
 223. Rectangle Area
