@@ -75,8 +75,8 @@
 452. Minimum Number of Arrows to Burst Balloons
 154. Find Minimum in Rotated Sorted Array II
 904. Fruit Into Baskets
-973. K Closest Points to Origin
 406. Queue Reconstruction by Height
+378. Kth Smallest Element in a Sorted Matrix
 ```
 
 ## Backtracking/DFS
@@ -100,6 +100,7 @@
 218. The Skyline Problem
 272. Closest Binary Search Tree Value II
 253. Meeting Rooms II
+973. K Closest Points to Origin
 ```
 
 ## Dynamic Programming
