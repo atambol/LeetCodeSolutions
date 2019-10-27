@@ -71,6 +71,7 @@ class Solution {
             }
         }
         
+        // Combine all the strings on the same level
         return String.join("", str);
     }
 
