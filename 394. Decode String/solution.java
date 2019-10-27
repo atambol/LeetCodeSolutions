@@ -3,15 +3,15 @@ class Solution {
         /***
         The problem consists of parsing string s based on various cases. Parsing is straightforward.
         Storing encoded_string and its corresponding count k is the challenge in this problem.
-        We store k and encoded_string in the same str list. k is used as a delimiter as well as multiplier. 
-        All the string occurring after a k need to be repeated k times. When extracting from str for 
+        We store k and encoded_string in the same strList. k is used as a delimiter as well as multiplier. 
+        All the string occurring after a k need to be repeated k times. When extracting from strList for 
         concatenation, continue until k is encountered. Then concatenate all the strings extracted and 
         repeat it k times. This way, there is no need to keep track of which encoded_string is associated 
         with which k.
         ***/
         
         // this list will store all the intermediate terms that are extracted as well as their repeat count
-        List<String> str = new ArrayList<String>();
+        List<String> strList = new ArrayList<String>();
         int k;
         String tmp;
         
@@ -24,20 +24,20 @@ class Solution {
             if (s.charAt(i) == ']') {
                 // create a buffer to store all the strings extracted from str until k is encountered or str is empty
                 List<String> buffer = new ArrayList<String>();
-                while (!str.isEmpty() && !Character.isDigit(str.get(str.size()-1).charAt(0))) {
-                    buffer.add(0, str.remove(str.size()-1));
+                while (!strList.isEmpty() && !Character.isDigit(strList.get(strList.size()-1).charAt(0))) {
+                    buffer.add(0, strList.remove(strList.size()-1));
                 }
                 
                 // if k is encountered, extract it and multiply the concatenated strings in buffer by it
-                // add it to the str list
-                if (!str.isEmpty() && Character.isDigit(str.get(str.size()-1).charAt(0))) {
-                    k = Integer.valueOf(str.remove(str.size() - 1));
+                // add it to strList
+                if (!strList.isEmpty() && Character.isDigit(strList.get(strList.size()-1).charAt(0))) {
+                    k = Integer.valueOf(strList.remove(strList.size() - 1));
                     tmp = multiplyString(String.join("", buffer), k);
-                    str.add(tmp);
+                    strList.add(tmp);
                 } 
-                // add the concatenated buffer to str list
+                // add the concatenated buffer to strList
                 else {
-                    str.add(String.join("", buffer));
+                    strList.add(String.join("", buffer));
                 }
                 
                 i++;
@@ -56,7 +56,7 @@ class Solution {
                     num.append(Character.toString(s.charAt(i)));
                     i++;
                 }
-                str.add(num.toString());
+                strList.add(num.toString());
             } 
             
             // case 4 : other characters
@@ -67,12 +67,12 @@ class Solution {
                     i++;
                 }
                 
-                str.add(s.substring(j, i));
+                strList.add(s.substring(j, i));
             }
         }
         
         // Combine all the strings on the same level
-        return String.join("", str);
+        return String.join("", strList);
     }
 
     public String multiplyString(String s, int c) {
