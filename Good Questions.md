@@ -134,13 +134,13 @@
 261. Graph Valid Tree
 863. All Nodes Distance K in Binary Tree
 310. Minimum Height Trees
-323. Number of Connected Components in an Undirected Graph
 ```
 
 ## Disjoint Set DataStructure
 ```
 737. Sentence Similarity II
 684. Redundant Connection
+323. Number of Connected Components in an Undirected Graph
 ```
 
 ## Design
