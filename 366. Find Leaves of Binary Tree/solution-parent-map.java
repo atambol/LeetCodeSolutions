@@ -7,6 +7,8 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+// 0(n) time complexity
 class Solution {
     public List<List<Integer>> findLeaves(TreeNode root) {
         List<List<Integer>> allLeaves = new ArrayList<List<Integer>>();
