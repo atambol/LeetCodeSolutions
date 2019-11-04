@@ -151,6 +151,7 @@
 146. LRU Cache
 208. Implement Trie -Prefix Tree
 722. Remove Comments
+642. Design Search Autocomplete System
 ```
 
 ## Common Algorithms
