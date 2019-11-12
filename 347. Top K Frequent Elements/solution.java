@@ -1,46 +1,45 @@
 class Solution {
-    public List<Integer> topKFrequent(int[] nums, int k) {
-        // get freq
-        HashMap<Integer, Integer> freq = new HashMap<Integer, Integer>();
-        for (int i = 0; i < nums.length; i++) {
-            if (freq.containsKey(nums[i])) {
-                freq.put(nums[i], freq.get(nums[i]) + 1);
-            } else {
-                freq.put(nums[i], 1);
+    public List<String> topKFrequent(String[] words, int k) {
+        Map<String, Integer> freq = new HashMap<String, Integer>();
+        for (String word: words) {
+            if (!freq.containsKey(word)) {
+                freq.put(word, 0);
             }
+            freq.put(word, freq.get(word)+1);
         }
         
-        // create a heap of size k
-        Freq f;
-        PriorityQueue<Freq> heap = new PriorityQueue<Freq>(k, (a,b) -> a.count - b.count);
-        for (Map.Entry<Integer,Integer> entry : freq.entrySet()) {
-            f = new Freq(entry.getKey(), entry.getValue());
-            if (heap.size() < k) {
-                heap.add(f);
+        PriorityQueue<Node> heap = new PriorityQueue<>(freq.size(), new Comparator<Node> () {
+            @Override
+            public int compare(Node n1, Node n2) {
+                if (n1.count == n2.count) {
+                    return n2.word.compareTo(n1.word);
+                } else {
+                    return n1.count - n2.count;
+                }
             }
-            else if (heap.peek().count < f.count ) {
+        });
+        for (Map.Entry<String,Integer> entry : freq.entrySet())  {
+            heap.add(new Node(entry.getValue(), entry.getKey()));
+            while (heap.size() > k) {
                 heap.poll();
-                heap.add(f);
             }
         }
         
-        // extract the elements
-        List<Integer> sol = new ArrayList<Integer>(heap.size());
+        List<String> sol = new ArrayList<String>();
         while (!heap.isEmpty()) {
-            f = heap.poll();
-            sol.add(f.num);
+            sol.add(heap.poll().word);
         }
-        
+        Collections.reverse(sol);
         return sol;
     }
     
-    class Freq {
-        int num;
+    class Node {
         int count;
+        String word;
         
-        public Freq(int n, int f) {
-            num = n;
-            count = f;
+        public Node(int c, String w) {
+            count = c;
+            word = w;
         }
     }
 }
