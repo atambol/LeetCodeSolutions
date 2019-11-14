@@ -1,6 +1,6 @@
 class Solution {
     public String findLongestWord(String s, List<String> d) {
-        // sort the list d by size
+        // sort the list d by largest size first and lexicographically next
         Collections.sort(d, new Comparator<String>() {
             @Override
             public int compare(String s, String t) {
@@ -9,13 +9,13 @@ class Solution {
                 } else if (t.length() > s.length()) {
                     return 1;
                 } else {
-                    return s.compareTo(t); // check
+                    return s.compareTo(t);
                 }
             }
         });
         
+        // pick a word and look for it in s
         for(String word: d) {
-            // System.out.println(e);
             int i = 0;
             for (int j = 0; j < s.length(); j++) {
                 if (s.charAt(j) == word.charAt(i)) {
