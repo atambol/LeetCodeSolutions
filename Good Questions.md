@@ -47,6 +47,7 @@
 5. Longest Palindromic Substring
 22. Generate Parentheses
 692. Top K Frequent Words
+524. Longest Word in Dictionary through Deleting
 ```
 
 ## Array
