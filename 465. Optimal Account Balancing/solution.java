@@ -12,7 +12,7 @@ class Solution {
             amountMap.put(ower, amountMap.getOrDefault(ower, 0) - amount);
         }
         
-        // get all the amountMap
+        // get all the amounts
         int[] amounts = new int[amountMap.size()];
         int i = 0;
         for (int val: amountMap.values()) {
@@ -35,7 +35,7 @@ class Solution {
         
         // recurse
         int minTransaction = Integer.MAX_VALUE;
-        // int amount;
+
         for (int i = id + 1; i < amounts.length; i++) {
             if (amounts[i] * amounts[id] < 0) {
                 amounts[i] += amounts[id];
