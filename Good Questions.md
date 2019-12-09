@@ -57,6 +57,7 @@
 
 ## Array
 ```
+456. 132 Pattern
 554. Brick Wall
 229. Majority Element II
 370. Range Addition
