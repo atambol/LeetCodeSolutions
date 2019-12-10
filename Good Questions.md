@@ -1,6 +1,7 @@
 ## Hard
 ```
 465. Optimal Account Balancing
+759. Employee Free Time
 ```
 
 ## Trees
