@@ -2,6 +2,7 @@
 ```
 465. Optimal Account Balancing
 759. Employee Free Time
+1192. Critical Connections in a Network
 ```
 
 ## Trees
