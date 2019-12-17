@@ -1,6 +1,6 @@
 class Solution {
     public int unvisited = -1;
-    public Set<Integer>[] graph;
+    public List<Integer>[] graph;
     public int[] visited;
     public List<List<Integer>> criticalEdges;
     
@@ -46,10 +46,10 @@ class Solution {
         return visited;
     }
     
-    public Set<Integer>[] getGraph(int n, List<List<Integer>> connections) {
-        Set<Integer>[] graph = new HashSet[n];
+    public List<Integer>[] getGraph(int n, List<List<Integer>> connections) {
+        List<Integer>[] graph = new ArrayList[n];
         for (int i = 0; i < n; i++) {
-            graph[i] = new HashSet<Integer>();
+            graph[i] = new ArrayList<Integer>();
         }
         
         int x, y;
