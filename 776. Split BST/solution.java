@@ -9,18 +9,20 @@
  */
 class Solution {
     public TreeNode[] splitBST(TreeNode root, int V) {
-        if (root == null) 
-            return new TreeNode[]{null, null};
-        else if (root.val > V) {
-            TreeNode[] left = splitBST(root.left, V);
-            root.left = left[1];
-            left[1] = root;
-            return left;
-        } else {
+        if (root == null){
+            return new TreeNode[] {null, null};
+        }
+        
+        if (root.val <= V) {
             TreeNode[] right = splitBST(root.right, V);
             root.right = right[0];
             right[0] = root;
             return right;
+        } else {
+            TreeNode[] left = splitBST(root.left, V);
+            root.left = left[1];
+            left[1] = root;
+            return left;
         }
     }
 }
