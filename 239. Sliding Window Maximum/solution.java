@@ -1,39 +1,36 @@
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         // edge case
-        if (nums.length == 0 || k == 0) {
-            return new int[0];
+        if (k == 0 || nums.length == 0) {
+            return new int[]{};
         }
         
+        LinkedList<Integer> buffer = new LinkedList<>();
         int[] sol = new int[nums.length - k + 1];
-        Deque<Integer> deque = new LinkedList<Integer>();
+        int ptr = 0;
+        int i;
         
-        // get the first window
-        int i = 0;
-        while (i < k) {
-            while (!deque.isEmpty() && (nums[deque.peekLast()] < nums[i])) {
-                deque.pollLast();
+        // fill first m elements
+        for (i = 0; i < k; i++) {
+            while (!buffer.isEmpty() && nums[buffer.getLast()] < nums[i]) {
+                buffer.removeLast();
             }
-            
-            deque.addLast(i++);
+            buffer.addLast(i);
         }
+        sol[ptr++] = nums[buffer.getFirst()];
         
-        // save solution for first window
-        int j = 0;
-        sol[j++] = nums[deque.peekFirst()];
-        
-        // keep the window moving
-        while (i < nums.length) {            
-            while (!deque.isEmpty() && (deque.peekFirst() + k <= i)) {
-                deque.pollFirst();
+        // fill the next batches
+        for (i = k; i < nums.length; i++) {
+            while (!buffer.isEmpty() && i - buffer.getFirst() >= k) {
+                buffer.removeFirst();
             }
             
-            while (!deque.isEmpty() && (nums[deque.peekLast()] < nums[i])) {
-                deque.pollLast();
+            while (!buffer.isEmpty() && nums[buffer.getLast()] < nums[i]) {
+                buffer.removeLast();
             }
             
-            deque.addLast(i++);
-            sol[j++] = nums[deque.peekFirst()];
+            buffer.addLast(i);
+            sol[ptr++] = nums[buffer.getFirst()];
         }
         
         return sol;
