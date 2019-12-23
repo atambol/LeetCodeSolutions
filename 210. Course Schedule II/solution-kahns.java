@@ -1,65 +1,66 @@
 class Solution {
+    private int visited = 2;
+    private int visiting = 1;
+    private int unvisited = 0;
+    
     public int[] findOrder(int numCourses, int[][] prerequisites) {
-        int[] order = new int[numCourses];
-        int ptr = 0;
-
-        // initialise indegree and graph to null
-        Integer[] inDegree = new Integer[numCourses];
-        List<Integer>[] graph = new List[numCourses];
-        for (Integer course = 0; course < numCourses; course++) {
-            graph[course] = new ArrayList<Integer>();
-            inDegree[course] = 0;
-        }
+        Map<Integer, List<Integer>> graph = new HashMap<Integer, List<Integer>>();
+        int[] inDegree = new int[numCourses];
         
-        // read prereq and update
-        for (int i = 0; i < prerequisites.length; i++) {
-            // graph course -> prereqs
-            graph[prerequisites[i][0]].add(prerequisites[i][1]);
-            
-            // calculate in-degree
-            inDegree[prerequisites[i][1]]++;
-        }
+        // get graph and indegree 
+        setGraphAndIndegree(numCourses, prerequisites, graph, inDegree);
         
-        // zero indegree list
-        Deque<Integer> deque = new LinkedList<Integer>(); 
-        for (int course = 0; course < numCourses; course++) {
-            if (inDegree[course] == 0) {
-                deque.add(course);
+        // solution
+        int[] topSort = new int[numCourses];
+        int index = numCourses-1;
+        
+        // get 0 indegree node
+        List<Integer> zeroIndegree = new ArrayList<Integer>();
+        for (int i = 0; i < numCourses; i++) {
+            if (inDegree[i] == 0) {
+                zeroIndegree.add(i);
             }
         }
-         
-        int course;
         
-        while (!deque.isEmpty()) {
-            course = deque.removeFirst();
-            for (Integer prereq: graph[course]) {
+        // run through all zeroIndegree vertices
+        int course;
+        int count = 0;
+        while (!zeroIndegree.isEmpty()) {
+            course = zeroIndegree.remove(0);
+            count++;
+            topSort[index--] = course;
+            List<Integer> adjList = graph.get(course);
+            for (int prereq: adjList) {
                 inDegree[prereq]--;
                 if (inDegree[prereq] == 0) {
-                    deque.add(prereq);
+                    zeroIndegree.add(prereq);
                 }
             }
-            order[ptr] = course;
-            ptr++;
+        }
+
+        // cannot complete courses
+        if (count != numCourses) {
+            return new int[0];
         }
         
-        if (ptr != numCourses) {
-            return new int[0];
-        } else {
-            reverse(order);
-            return order;
-        }
+        return topSort;
     }
     
-    public void reverse(int[] order) {
-        int i = 0;
-        int j = order.length - 1;
-        int tmp;
-        while (i < j) {
-            tmp = order[i];
-            order[i] = order[j];
-            order[j] = tmp;
-            i++;
-            j--;
+    public Map<Integer, List<Integer>> setGraphAndIndegree(int numCourses, 
+                                               int[][] prerequisites,
+                                               Map<Integer, List<Integer>> graph,
+                                               int[] inDegree) {
+        for (int i = 0; i < numCourses; i++) {
+            graph.put(i, new ArrayList<Integer>());
+            inDegree[i] = 0;
         }
+        
+        List<Integer> adjList;
+        for (int[] edge: prerequisites) {
+            adjList = graph.get(edge[0]);
+            adjList.add(edge[1]);
+            inDegree[edge[1]]++;
+        }
+        return graph;
     }
 }
