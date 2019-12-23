@@ -1,8 +1,4 @@
 class Solution {
-    private int visited = 2;
-    private int visiting = 1;
-    private int unvisited = 0;
-    
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         Map<Integer, List<Integer>> graph = new HashMap<Integer, List<Integer>>();
         int[] inDegree = new int[numCourses];
