@@ -1,47 +1,25 @@
 class Solution {
     public int coinChange(int[] coins, int amount) {
-        if (coins.length == 0) {
-            return -1;
-        }
-        
-        if (amount == 0) {
-            return 0;
-        }
-        
+        Set<Integer> coinSet = new HashSet<Integer>();
         Arrays.sort(coins);
-        int[] dp = new int[amount + 1];
-        if (coins[0] > amount) {
-            return -1;
-        }
-                
-        int minValue;
-        int i = 0;
-        dp[0] = 0;
-        i++;
+        int[] dp = new int[amount+1];
         
-        while (i < coins[0]) {
-            dp[i] = 0;
-            i++;
-        }
-        
-        while (i <= amount) {
-            minValue = Integer.MAX_VALUE;
-            for (int j = 0; j < coins.length; j++) {
-                if (i - coins[j] == 0) {
-                    minValue = 1;
-                }
-                if (i - coins[j] > 0 && dp[i - coins[j]] > 0) {
-                    minValue = Math.min(minValue, dp[i - coins[j]] + 1);
+        for (int i = 1; i < amount+1; i++) {
+            int maxCoins = Integer.MAX_VALUE;
+            for (int coin: coins) {
+                if (i - coin >= 0 && dp[i-coin] >= 0) {
+                    maxCoins = Math.min(maxCoins, dp[i-coin] + 1);
+                } else if (i - coin < 0) {
+                    break;
                 }
             }
-            if (minValue == Integer.MAX_VALUE) {
+            if (maxCoins == Integer.MAX_VALUE) {
                 dp[i] = -1;
             } else {
-                dp[i] = minValue;
+                dp[i] = maxCoins;
             }
-            i++;
         }
         
-        return dp[i-1];
+        return dp[amount];
     }
 }
