@@ -1,41 +1,28 @@
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
+        Set<Integer> visited = new HashSet<Integer>();
+        return backtrack(nums, visited);
+    }
+    
+    public List<List<Integer>> backtrack(int[] nums, Set<Integer> visited) {
         List<List<Integer>> sol = new ArrayList<List<Integer>>();
-        int n = nums.length;
-        boolean[] visited = new boolean[n];
-        for (int i = 0; i < n; i++) {
-            visited[i] = false;
-        }
-        
-        List<Integer> subSol;
-        for (int i = 0; i < n; i++) {
-            visited[i] = true;
-            subSol = new ArrayList<Integer>();
-            subSol.add(nums[i]);
-            backtrack(nums, visited, n, subSol, sol);
-            visited[i] = false;
+        if (nums.length == visited.size()) {
+            sol.add(new ArrayList<Integer>());
+            return sol;
+        } else {
+            for (int num: nums) {
+                if (!visited.contains(num)) {
+                    visited.add(num);
+                    List<List<Integer>> subSol = backtrack(nums, visited);
+                    for (List<Integer> s: subSol) {
+                        s.add(num);
+                        sol.add(s);
+                    }
+                    visited.remove(num);
+                }
+            }
         }
         
         return sol;
-    }
-    
-    public void backtrack(int[] nums, boolean[] visited, int n, 
-                          List<Integer> subSol, List<List<Integer>> sol) {
-        if (subSol.size() == n) {
-            sol.add(subSol);
-            return;
-        }
-        
-        List<Integer> subSubSol;
-        for (int i = 0 ; i < n; i++) {
-            if (!visited[i]) {
-                visited[i] = true;
-                subSubSol = new ArrayList<Integer>(subSol);
-                subSubSol.add(nums[i]);
-                backtrack(nums, visited, n, subSubSol, sol);
-                visited[i] = false;
-            }
-
-        }
     }
 }
