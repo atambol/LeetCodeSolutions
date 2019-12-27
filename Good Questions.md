@@ -151,6 +151,7 @@
 
 ## Disjoint Set DataStructure
 ```
+1135. Connecting Cities With Minimum Cost
 737. Sentence Similarity II
 684. Redundant Connection
 323. Number of Connected Components in an Undirected Graph
