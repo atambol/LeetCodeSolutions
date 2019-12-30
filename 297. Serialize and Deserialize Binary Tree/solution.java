@@ -8,28 +8,30 @@
  * }
  */
 public class Codec {
-
+    private String none = "#";
+    private String separator = ",";
+    
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
         if (root == null) {
             return new String("");
         }
         
-        List<String> sol = new ArrayList<String>();
-        Stack<TreeNode> stack = new Stack<TreeNode>();
-        
-        while (root != null || !stack.isEmpty()) {
-            if (root != null) {
-                sol.add(String.valueOf(root.val));
-                stack.add(root.right);
-                root = root.left;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = root;
+        List<String> sol = new ArrayList<>();
+        while (!stack.isEmpty() || node != null) {
+            if (node != null) {
+                sol.add(Integer.toString(node.val));
+                stack.add(node.right);
+                node = node.left;
             } else {
-                sol.add("#");
-                root = stack.pop();
+                sol.add(none);
+                node = stack.pop();
             }
         }
         
-        return String.join(",", sol);
+        return String.join(separator, sol);
     }
 
     // Decodes your encoded data to tree.
@@ -38,46 +40,44 @@ public class Codec {
             return null;
         }
         
-        String[] sol = data.split(",", 0);
-        Stack<Result> stack = new Stack<Result>();
-        int ptr = 0;
-        
-        TreeNode root = new TreeNode(Integer.parseInt(sol[ptr]));
-        Result r;
-        TreeNode node;
-        stack.add(new Result(root));
-        ptr++;
-        while (ptr < sol.length) {
-            if (sol[ptr].equals("#")) {
-                r = stack.pop();
-                if (!r.right) {
-                    r.right = true;
-                    stack.add(r);
+        String[] sol = data.split(separator);
+        TreeNode root = new TreeNode(Integer.parseInt(sol[0]));
+        Node node = new Node(root, false);a
+        Stack<Node> stack = new Stack<>();
+        stack.add(node);
+        for (int i = 1; i < sol.length; i++) {
+            String s = sol[i];
+            if (s.equals(none)) {
+                node = stack.peek();
+                if (node.isLeftDone) {
+                    stack.pop(); 
+                } else {
+                    node.isLeftDone = true;
                 }
             } else {
-                node = new TreeNode(Integer.parseInt(sol[ptr]));
-                r = stack.pop();
-                if (!r.right) {
-                    r.node.left = node;
-                    r.right = true;
-                    stack.add(r);
+                node = stack.peek();
+                if (node.isLeftDone) {
+                    node.treeNode.right = new TreeNode(Integer.parseInt(s));
+                    stack.pop();
+                    stack.add(new Node(node.treeNode.right, false));
                 } else {
-                    r.node.right = node;
+                    node.treeNode.left = new TreeNode(Integer.parseInt(s));
+                    stack.add(new Node(node.treeNode.left, false));
+                    node.isLeftDone = true;
                 }
-                stack.add(new Result(node));
             }
-            ptr++;
         }
+        
         return root;
     }
     
-    class Result {
-        TreeNode node;
-        boolean right;
+    public class Node {
+        public TreeNode treeNode;
+        public boolean isLeftDone;
         
-        public Result(TreeNode n) {
-            right = false;
-            node = n;
+        public Node(TreeNode t, boolean i) {
+            treeNode = t;
+            isLeftDone = i;
         }
     }
 }
