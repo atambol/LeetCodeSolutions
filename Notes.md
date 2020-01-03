@@ -25,6 +25,27 @@
 * DFS
 * BFS
 * Disjoint set datastructure - useful for checking connected components, finding cycles in undirected graph etc
+```java
+class Solution {
+    private int[] parent;
+    public int find(int x) {
+        if (parent[x] == x) {
+            return x;
+        } else {
+            parent[x] = find(parent[x]);
+            return parent[x];
+        }
+    }
+    
+    public void union(int x, int y) {
+        int parentX = find(x);
+        int parentY = find(y);
+        if (parentX != parentY) {
+            parent[parentY] = parentX;
+        }
+    }
+}
+```
 ```python
 # Using 2 optimisations - path compression and union by rank
 # Amortized time complexity per operation is O(alpha(n)) which is near constant
