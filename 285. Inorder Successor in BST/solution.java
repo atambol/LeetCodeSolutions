@@ -9,27 +9,30 @@
  */
 class Solution {
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
-        TreeNode successor = null;
-        
-        // reach the node
-        while (root.val != p.val) {
+        // find the node
+        TreeNode prev = null;
+        while (root != null && root.val != p.val) {
             if (root.val > p.val) {
-                successor = root;
+                prev = root;
                 root = root.left;
             } else {
                 root = root.right;
             }
         }
         
-        // reach the leftmost node in the right subtree if exists
+        // successor
+        if (root == null) {
+            return root;
+        }
+        
         if (root.right != null) {
             root = root.right;
             while (root.left != null) {
                 root = root.left;
             }
-            successor = root;
+            return root;
+        } else {
+            return prev;
         }
-        
-        return successor;
     }
 }
