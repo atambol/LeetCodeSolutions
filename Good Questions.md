@@ -27,13 +27,13 @@
 426. Convert Binary Search Tree to Sorted Doubly Linked List
 742. Closest Leaf in a Binary Tree
 536. Construct Binary Tree from String
-366. Find Leaves of Binary Tree
+~~366. Find Leaves of Binary Tree~~
 662. Maximum Width of Binary Tree
 ```
 
 ## Linked list
 ```
-19. Remove Nth Node From End of List
+~~19. Remove Nth Node From End of List~~
 92. Reverse Linked List II
 25. Reverse Nodes in k-Group
 142. Linked List Cycle II
@@ -159,7 +159,7 @@
 
 ## Design
 ```
-362. Design Hit Counter
+~~362. Design Hit Counter~~
 211. Add and Search Word - Data structure design
 146. LRU Cache
 208. Implement Trie -Prefix Tree
