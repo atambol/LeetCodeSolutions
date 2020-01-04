@@ -33,7 +33,7 @@
 
 ## Linked list
 ```
-[ ] 19. Remove Nth Node From End of List
+[x] 19. Remove Nth Node From End of List
 [ ] 92. Reverse Linked List II
 [ ] 25. Reverse Nodes in k-Group
 [ ] 142. Linked List Cycle II
