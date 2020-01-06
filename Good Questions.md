@@ -9,7 +9,7 @@
 ## Trees
 ```
 [ ] 99. Recover Binary Search Tree
-[ ] 669. Trim a Binary Search Tree
+[x] 669. Trim a Binary Search Tree
 [ ] 663. Equal Tree Partition
 [ ] 230. Kth Smallest Element in a BST
 [ ] 124. Binary Tree Maximum Path Sum
@@ -34,7 +34,7 @@
 ## Linked list
 ```
 [x] 19. Remove Nth Node From End of List
-[ ] 92. Reverse Linked List II
+[x] 92. Reverse Linked List II
 [ ] 25. Reverse Nodes in k-Group
 [ ] 142. Linked List Cycle II
 [ ] 817. Linked List Components
