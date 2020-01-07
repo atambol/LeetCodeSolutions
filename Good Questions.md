@@ -11,7 +11,7 @@
 [ ] 99. Recover Binary Search Tree
 [x] 669. Trim a Binary Search Tree
 [ ] 663. Equal Tree Partition
-[ ] 230. Kth Smallest Element in a BST
+[x] 230. Kth Smallest Element in a BST
 [ ] 124. Binary Tree Maximum Path Sum
 [ ] 776. Split BST
 [ ] 450. Delete Node in a BST
@@ -53,9 +53,9 @@
 [ ] 394. Decode String
 [ ] 3. Longest Substring Without Repeating Characters
 [ ] 5. Longest Palindromic Substring
-[ ] 22. Generate Parentheses
-[ ] 692. Top K Frequent Words
-[ ] 524. Longest Word in Dictionary through Deleting
+[x] 22. Generate Parentheses
+[x] 692. Top K Frequent Words
+[x] 524. Longest Word in Dictionary through Deleting
 ```
 
 ## Array
