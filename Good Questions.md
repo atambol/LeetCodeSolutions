@@ -14,8 +14,8 @@
 [x] 230. Kth Smallest Element in a BST
 [ ] 124. Binary Tree Maximum Path Sum
 [ ] 776. Split BST
-[ ] 450. Delete Node in a BST
-[ ] 145. Binary Tree Postorder Traversal
+[x] 450. Delete Node in a BST
+[x] 145. Binary Tree Postorder Traversal
 [ ] 285. Inorder Successor in BST
 [ ] 510. Inorder Successor in BST II
 [ ] 545. Boundary of Binary Tree
@@ -36,7 +36,7 @@
 [x] 19. Remove Nth Node From End of List
 [x] 92. Reverse Linked List II
 [ ] 25. Reverse Nodes in k-Group
-[ ] 142. Linked List Cycle II
+[x] 142. Linked List Cycle II
 [ ] 817. Linked List Components
 ```
 
@@ -44,7 +44,7 @@
 ```
 [ ] 76. Minimum Window Substring
 [ ] 224. Basic Calculator
-[ ] 763. Partition Labels
+[x] 763. Partition Labels
 [ ] 340. Longest Substring with At Most K Distinct Characters
 [ ] 424. Longest Repeating Character Replacement
 [ ] 79. Word Search
@@ -52,7 +52,7 @@
 [ ] 443. String Compression
 [ ] 394. Decode String
 [ ] 3. Longest Substring Without Repeating Characters
-[ ] 5. Longest Palindromic Substring
+[x] 5. Longest Palindromic Substring
 [x] 22. Generate Parentheses
 [x] 692. Top K Frequent Words
 [x] 524. Longest Word in Dictionary through Deleting
@@ -60,7 +60,7 @@
 
 ## Array
 ```
-[ ] 456. 132 Pattern
+[x] 456. 132 Pattern
 [ ] 554. Brick Wall
 [ ] 229. Majority Element II
 [ ] 370. Range Addition
@@ -69,9 +69,9 @@
 [ ] 31. Next Permutation
 [ ] 34. Find First and Last Position of Element in Sorted Array
 [ ] 56. Merge Intervals
-[ ] 33. Search in Rotated Sorted Array
+[x] 33. Search in Rotated Sorted Array
 [ ] 739. Daily Temperatures
-[ ] 15. 3Sum
+[x] 15. 3Sum
 [ ] 16. 3Sum Closest
 [ ] 11. Container With Most Water
 [ ] 724. Find Pivot Index
@@ -97,7 +97,7 @@
 [ ] 40. Combination Sum II
 [ ] 51. N-Queens
 [ ] 267. Palindrome Permutation II
-[ ] 140. Word Break II
+[x] 140. Word Break II
 [ ] 489. Robot Room Cleaner
 ```
 
@@ -110,7 +110,7 @@
 [ ] 621. Task Scheduler
 [ ] 218. The Skyline Problem
 [ ] 272. Closest Binary Search Tree Value II
-[ ] 253. Meeting Rooms II
+[x] 253. Meeting Rooms II
 [ ] 973. K Closest Points to Origin
 ```
 
@@ -140,7 +140,7 @@
 [ ] 127. Word Ladder
 [ ] 207. Course Schedule
 [ ] 210. Course Schedule II
-[ ] 547. Friend Circles
+[x] 547. Friend Circles
 [ ] 133. Clone Graph
 [ ] 399. Evaluate Division
 [ ] 261. Graph Valid Tree
