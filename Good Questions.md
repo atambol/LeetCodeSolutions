@@ -152,7 +152,7 @@
 ## Disjoint Set DataStructure
 ```
 [ ] 1135. Connecting Cities With Minimum Cost
-[ ] 737. Sentence Similarity II
+[x] 737. Sentence Similarity II
 [ ] 684. Redundant Connection
 [ ] 323. Number of Connected Components in an Undirected Graph
 ```
@@ -162,7 +162,7 @@
 [x] 362. Design Hit Counter
 [ ] 211. Add and Search Word - Data structure design
 [ ] 146. LRU Cache
-[ ] 208. Implement Trie -Prefix Tree
+[x] 208. Implement Trie -Prefix Tree
 [ ] 722. Remove Comments
 [ ] 642. Design Search Autocomplete System
 ```
